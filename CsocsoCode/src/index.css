@@ -4,12 +4,9 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  justify-content: center;
-  background-color: #e7e7e7;
+  background-color: #d0d0d0;
 }
 
 
