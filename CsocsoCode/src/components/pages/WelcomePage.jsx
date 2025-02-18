@@ -1,4 +1,51 @@
+import { useEffect, useState } from "react";
+
+
+import kep1 from "../../../public/kep1.png";
+import kep2 from "../../../public/kep2.png";
+import kep3 from "../../../public/kep3.png";
+import kep4 from "../../../public/kep4.png";
+import kep5 from "../../../public/kep5.png";
+
+
 export function WelcomePage() {
+
+    let [slideShowPicture,setSlideShowPicture] = useState(kep1)
+    let [pictureCounter,setPictureCounter] = useState(1);
+
+    useEffect(()=> {
+        let pictureCounterIncreaser = setInterval(() =>{
+            if (pictureCounter == 5) {
+                setPictureCounter(1)
+            }else{
+                setPictureCounter((prevPictureCounter) => prevPictureCounter + 1)
+            }
+        },4000)
+
+        switch (pictureCounter) {
+            case 1:
+                setSlideShowPicture(kep1)
+                break;
+            case 2:
+                setSlideShowPicture(kep2)
+                break;
+            case 3:
+                setSlideShowPicture(kep3)
+            break;
+            case 4:
+                setSlideShowPicture(kep4)
+            break;
+            case 5:
+                setSlideShowPicture(kep5)
+            break;
+            default:
+                break;
+        }
+
+        return () => clearInterval(pictureCounterIncreaser)
+
+    },[pictureCounter])
+
     return(
         <>
             {/*Header*/}
@@ -13,11 +60,7 @@ export function WelcomePage() {
 
             {/*Slider*/}
             <div className="w-full h-[450px]">
-            <div><img src=""/></div>
-            <div><img src=""/></div>
-            <div><img src=""/></div>
-            <div><img src=""/></div>
-            <div><img src=""/></div>
+            <div><img src={slideShowPicture}/></div>
             </div>
         </>
     )
