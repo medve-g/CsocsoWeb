@@ -60,7 +60,10 @@ export function WelcomePage() {
 
             {/*Slider*/}
             <div className="w-full h-[450px]">
-            <div><img src={slideShowPicture}/></div>
+                <div className="w-full h-full">
+                    <img className="h-full w-full" src={slideShowPicture}/>
+                    &bull;
+                </div>
             </div>
         </>
     )
