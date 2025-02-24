@@ -60,9 +60,15 @@ export function WelcomePage() {
 
             {/*Slider*/}
             <div className="w-full h-[450px]">
-                <div className="w-full h-full">
+                <div className="w-full h-full relative">
                     <img className="h-full w-full" src={slideShowPicture}/>
-                    &bull;
+                    <div className="skibidi flex text-4xl stroke-2 w-24 justify-between absolute bottom-3 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                        <button id="sliderBtn" className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
+                        <button id="sliderBtn" className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
+                        <button id="sliderBtn" className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
+                        <button id="sliderBtn" className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
+                        <button id="sliderBtn" className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
+                    </div>
                 </div>
             </div>
         </>
