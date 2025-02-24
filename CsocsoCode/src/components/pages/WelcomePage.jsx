@@ -6,37 +6,52 @@ import kep2 from "../../../public/kep2.png";
 import kep3 from "../../../public/kep3.png";
 import kep4 from "../../../public/kep4.png";
 import kep5 from "../../../public/kep5.png";
+import logo from "../../../public/logo.png";
 
 
 export function WelcomePage() {
 
-    let [slideShowPicture,setSlideShowPicture] = useState(kep1)
+    let [sliderPictureButtons, setSliderPictureButtons] = useState(null)
+    let [slideShowPicture,setSlideShowPicture] = useState(kep1);
     let [pictureCounter,setPictureCounter] = useState(1);
 
     useEffect(()=> {
+        /*setSliderPictureButtons(document.querySelectorAll("#sliderBtn1"))
+        console.log(sliderPictureButtons)*/
+        let asdasd = document.querySelectorAll("#sliderBtn");
         let pictureCounterIncreaser = setInterval(() =>{
             if (pictureCounter == 5) {
                 setPictureCounter(1)
             }else{
                 setPictureCounter((prevPictureCounter) => prevPictureCounter + 1)
             }
-        },4000)
+        },7000)
 
         switch (pictureCounter) {
             case 1:
                 setSlideShowPicture(kep1)
+                asdasd[0].classList.add("bg-white")
+                asdasd[4].classList.remove("bg-white")
                 break;
             case 2:
                 setSlideShowPicture(kep2)
+                asdasd[1].classList.add("bg-white")
+                asdasd[0].classList.remove("bg-white")
                 break;
             case 3:
                 setSlideShowPicture(kep3)
+                asdasd[2].classList.add("bg-white")
+                asdasd[1].classList.remove("bg-white")
             break;
             case 4:
                 setSlideShowPicture(kep4)
+                asdasd[3].classList.add("bg-white")
+                asdasd[2].classList.remove("bg-white")
             break;
             case 5:
                 setSlideShowPicture(kep5)
+                asdasd[4].classList.add("bg-white")
+                asdasd[3].classList.remove("bg-white")
             break;
             default:
                 break;
@@ -49,8 +64,8 @@ export function WelcomePage() {
     return(
         <>
             {/*Header*/}
-            <div className="p-5 bg-green-500 h-36 text-white flex justify-between">
-                <div className="bg-black flex items-center w-fit h-fit p-9 cursor-pointer">Logo</div>
+            <div className="p-5 bg-[#5fbe20] h-36 text-white flex justify-between">
+                <div className="inline-block cursor-pointer"><img className="h-full" src={logo} alt="CsocsoLogo" /></div>
                 <div className="flex items-center justify-around">
                     <div className="bg-black flex items-center w-fit h-fit p-3 mr-5 rounded-lg font-bold text-lg cursor-pointer">Rólunk</div>
                     <div className="bg-black flex items-center w-fit h-fit p-3 mr-5 rounded-lg font-bold text-lg cursor-pointer">Versenyek</div>
