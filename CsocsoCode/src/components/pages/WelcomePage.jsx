@@ -27,37 +27,37 @@ export function WelcomePage() {
     }
 
     useEffect(()=> {
-        let asdasd = document.querySelectorAll("#sliderBtn");
+        let sliderButtons = document.querySelectorAll("#sliderBtn");
         switch (pictureCounter) {
             case 1:
                 setSlideShowPicture(kep1)
-                asdasd[0].classList.add("bg-white")
-                asdasd[4].classList.remove("bg-white")
+                sliderButtons[0].classList.add("bg-white")
+                sliderButtons[4].classList.remove("bg-white")
                 break;
             case 2:
                 setSlideShowPicture(kep2)
-                asdasd[1].classList.add("bg-white")
-                asdasd[0].classList.remove("bg-white")
+                sliderButtons[1].classList.add("bg-white")
+                sliderButtons[0].classList.remove("bg-white")
                 break;
             case 3:
                 setSlideShowPicture(kep3)
-                asdasd[2].classList.add("bg-white")
-                asdasd[1].classList.remove("bg-white")
+                sliderButtons[2].classList.add("bg-white")
+                sliderButtons[1].classList.remove("bg-white")
             break;
             case 4:
                 setSlideShowPicture(kep4)
-                asdasd[3].classList.add("bg-white")
-                asdasd[2].classList.remove("bg-white")
+                sliderButtons[3].classList.add("bg-white")
+                sliderButtons[2].classList.remove("bg-white")
             break;
             case 5:
                 setSlideShowPicture(kep5)
-                asdasd[4].classList.add("bg-white")
-                asdasd[3].classList.remove("bg-white")
+                sliderButtons[4].classList.add("bg-white")
+                sliderButtons[3].classList.remove("bg-white")
             break;
             default:
                 setSlideShowPicture(kep1)
-                asdasd[0].classList.add("bg-white")
-                asdasd[4].classList.remove("bg-white")
+                sliderButtons[0].classList.add("bg-white")
+                sliderButtons[4].classList.remove("bg-white")
             break;
         }
 
