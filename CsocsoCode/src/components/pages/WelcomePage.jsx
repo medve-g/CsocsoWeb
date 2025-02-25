@@ -67,7 +67,7 @@ export function WelcomePage() {
             }else{
                 setPictureCounter((prevPictureCounter) => prevPictureCounter + 1)
             }
-        },2000)
+        },7000)
 
         
 
@@ -88,7 +88,7 @@ export function WelcomePage() {
             </div>
 
             {/*Slider*/}
-            <div className="w-full h-[450px]">
+            <div className="w-full h-[600px]">
                 <div className="w-full h-full relative">
                     <img className="h-full w-full" src={slideShowPicture}/>
                     <div className="skibidi flex text-4xl stroke-2 w-24 justify-between absolute bottom-3 left-1/2 -translate-x-1/2 -translate-y-1/2">
