@@ -130,9 +130,6 @@ export function WelcomePage() {
                     </div>
                 </div>
             </section>
-            bello
-            asdfasfs
-            hello
         </>
     )
 }
