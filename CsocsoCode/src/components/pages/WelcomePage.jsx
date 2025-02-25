@@ -31,33 +31,45 @@ export function WelcomePage() {
         switch (pictureCounter) {
             case 1:
                 setSlideShowPicture(kep1)
+                for (let i = 0; i < sliderButtons.length; i++) {
+                    sliderButtons[i].classList.remove("bg-white")
+                }
                 sliderButtons[0].classList.add("bg-white")
-                sliderButtons[4].classList.remove("bg-white")
                 break;
             case 2:
                 setSlideShowPicture(kep2)
+                for (let i = 0; i < sliderButtons.length; i++) {
+                    sliderButtons[i].classList.remove("bg-white")
+                }
                 sliderButtons[1].classList.add("bg-white")
-                sliderButtons[0].classList.remove("bg-white")
                 break;
             case 3:
                 setSlideShowPicture(kep3)
+                for (let i = 0; i < sliderButtons.length; i++) {
+                    sliderButtons[i].classList.remove("bg-white")
+                }
                 sliderButtons[2].classList.add("bg-white")
-                sliderButtons[1].classList.remove("bg-white")
             break;
             case 4:
                 setSlideShowPicture(kep4)
+                for (let i = 0; i < sliderButtons.length; i++) {
+                    sliderButtons[i].classList.remove("bg-white")
+                }
                 sliderButtons[3].classList.add("bg-white")
-                sliderButtons[2].classList.remove("bg-white")
             break;
             case 5:
                 setSlideShowPicture(kep5)
+                for (let i = 0; i < sliderButtons.length; i++) {
+                    sliderButtons[i].classList.remove("bg-white")
+                }
                 sliderButtons[4].classList.add("bg-white")
-                sliderButtons[3].classList.remove("bg-white")
             break;
             default:
                 setSlideShowPicture(kep1)
+                for (let i = 0; i < sliderButtons.length; i++) {
+                    sliderButtons[i].classList.remove("bg-white")
+                }
                 sliderButtons[0].classList.add("bg-white")
-                sliderButtons[4].classList.remove("bg-white")
             break;
         }
 
