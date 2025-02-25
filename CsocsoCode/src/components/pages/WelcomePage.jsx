@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
 
-import kep1 from "../../../public/kep1.png";
-import kep2 from "../../../public/kep2.png";
-import kep3 from "../../../public/kep3.png";
-import kep4 from "../../../public/kep4.png";
-import kep5 from "../../../public/kep5.png";
+import kep1 from "../../../public/kep1.jpg";
+import kep2 from "../../../public/kep2.jpg";
+import kep3 from "../../../public/kep3.jpg";
+import kep4 from "../../../public/kep4.jpg";
+import kep5 from "../../../public/kep5.jpg";
 import logo from "../../../public/logo.png";
 
 
