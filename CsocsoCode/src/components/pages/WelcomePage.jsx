@@ -14,6 +14,7 @@ export function WelcomePage() {
     let [slideShowPicture,setSlideShowPicture] = useState(kep1);
     let [pictureCounter,setPictureCounter] = useState(1);
 
+
     let chooseSliderPicture = (event) =>{
         let numberOfSliderBtn = event.target.value
         if (pictureCounter < numberOfSliderBtn) {
@@ -23,7 +24,6 @@ export function WelcomePage() {
             let calculatedSliderNumber = pictureCounter - numberOfSliderBtn
             setPictureCounter((preValue) => preValue - calculatedSliderNumber)
         }
-        
     }
 
     useEffect(()=> {
