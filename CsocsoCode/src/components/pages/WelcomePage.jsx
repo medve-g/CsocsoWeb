@@ -130,6 +130,7 @@ export function WelcomePage() {
                     </div>
                 </div>
             </section>
+            skibidi
         </>
     )
 }
