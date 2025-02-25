@@ -11,22 +11,23 @@ import logo from "../../../public/logo.png";
 
 export function WelcomePage() {
 
-    let [sliderPictureButtons, setSliderPictureButtons] = useState(null)
     let [slideShowPicture,setSlideShowPicture] = useState(kep1);
     let [pictureCounter,setPictureCounter] = useState(1);
 
-    useEffect(()=> {
-        /*setSliderPictureButtons(document.querySelectorAll("#sliderBtn1"))
-        console.log(sliderPictureButtons)*/
-        let asdasd = document.querySelectorAll("#sliderBtn");
-        let pictureCounterIncreaser = setInterval(() =>{
-            if (pictureCounter == 5) {
-                setPictureCounter(1)
-            }else{
-                setPictureCounter((prevPictureCounter) => prevPictureCounter + 1)
-            }
-        },7000)
+    let chooseSliderPicture = (event) =>{
+        let numberOfSliderBtn = event.target.value
+        if (pictureCounter < numberOfSliderBtn) {
+            let calculatedSliderNumber = numberOfSliderBtn - pictureCounter;
+            setPictureCounter((preValue) => preValue + calculatedSliderNumber)
+        }else if (pictureCounter > numberOfSliderBtn) {
+            let calculatedSliderNumber = pictureCounter - numberOfSliderBtn
+            setPictureCounter((preValue) => preValue - calculatedSliderNumber)
+        }
+        
+    }
 
+    useEffect(()=> {
+        let asdasd = document.querySelectorAll("#sliderBtn");
         switch (pictureCounter) {
             case 1:
                 setSlideShowPicture(kep1)
@@ -54,8 +55,21 @@ export function WelcomePage() {
                 asdasd[3].classList.remove("bg-white")
             break;
             default:
-                break;
+                setSlideShowPicture(kep1)
+                asdasd[0].classList.add("bg-white")
+                asdasd[4].classList.remove("bg-white")
+            break;
         }
+
+        let pictureCounterIncreaser = setInterval(() =>{
+            if (pictureCounter == 5) {
+                setPictureCounter(1)
+            }else{
+                setPictureCounter((prevPictureCounter) => prevPictureCounter + 1)
+            }
+        },2000)
+
+        
 
         return () => clearInterval(pictureCounterIncreaser)
 
@@ -64,7 +78,7 @@ export function WelcomePage() {
     return(
         <>
             {/*Header*/}
-            <div className="p-5 bg-[#5fbe20] h-36 text-white flex justify-between">
+            <div className="p-5 bg-[#5fbe20] h-32 text-white flex justify-between">
                 <div className="inline-block cursor-pointer"><img className="h-full" src={logo} alt="CsocsoLogo" /></div>
                 <div className="flex items-center justify-around">
                     <div className="bg-black flex items-center w-fit h-fit p-3 mr-5 rounded-lg font-bold text-lg cursor-pointer">Rólunk</div>
@@ -78,11 +92,11 @@ export function WelcomePage() {
                 <div className="w-full h-full relative">
                     <img className="h-full w-full" src={slideShowPicture}/>
                     <div className="skibidi flex text-4xl stroke-2 w-24 justify-between absolute bottom-3 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                        <button id="sliderBtn" className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
-                        <button id="sliderBtn" className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
-                        <button id="sliderBtn" className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
-                        <button id="sliderBtn" className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
-                        <button id="sliderBtn" className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
+                        <button id="sliderBtn" value={1} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
+                        <button id="sliderBtn" value={2} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
+                        <button id="sliderBtn" value={3} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
+                        <button id="sliderBtn" value={4} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
+                        <button id="sliderBtn" value={5} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
                     </div>
                 </div>
             </div>
