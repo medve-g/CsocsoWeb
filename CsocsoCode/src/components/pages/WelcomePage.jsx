@@ -10,6 +10,7 @@ import kep4 from "../../../public/kep4.jpg";
 import kep5 from "../../../public/kep5.jpg";
 import logo from "../../../public/logo.png";
 
+import { Header } from "./Header.jsx";
 // Slider arrow customization
 function NextArrow(props) {
     const { className, style, onClick } = props;
@@ -51,28 +52,78 @@ export function WelcomePage() {
     let [slideShowPicture, setSlideShowPicture] = useState(kep1);
     let [pictureCounter, setPictureCounter] = useState(1);
 
-    let chooseSliderPicture = (event) => {
-        let numberOfSliderBtn = event.target.value;
-        setPictureCounter(numberOfSliderBtn);
-        setSlideShowPicture(eval(`kep${numberOfSliderBtn}`));
+    let chooseSliderPicture = (event) =>{
+        let numberOfSliderBtn = event.target.value
+        if (pictureCounter < numberOfSliderBtn) {
+            let calculatedSliderNumber = numberOfSliderBtn - pictureCounter;
+            setPictureCounter((preValue) => preValue + calculatedSliderNumber)
+        }else if (pictureCounter > numberOfSliderBtn) {
+            let calculatedSliderNumber = pictureCounter - numberOfSliderBtn
+            setPictureCounter((preValue) => preValue - calculatedSliderNumber)
+        }
     }
 
-    useEffect(() => {
+    useEffect(()=> {
         let sliderButtons = document.querySelectorAll("#sliderBtn");
-        sliderButtons.forEach((button, index) => {
-            if (index + 1 === pictureCounter) {
-                button.classList.add("bg-white");
-            } else {
-                button.classList.remove("bg-white");
+        switch (pictureCounter) {
+            case 1:
+                setSlideShowPicture(kep1)
+                for (let i = 0; i < sliderButtons.length; i++) {
+                    sliderButtons[i].classList.remove("bg-white")
+                }
+                sliderButtons[0].classList.add("bg-white")
+                break;
+            case 2:
+                setSlideShowPicture(kep2)
+                for (let i = 0; i < sliderButtons.length; i++) {
+                    sliderButtons[i].classList.remove("bg-white")
+                }
+                sliderButtons[1].classList.add("bg-white")
+                break;
+            case 3:
+                setSlideShowPicture(kep3)
+                for (let i = 0; i < sliderButtons.length; i++) {
+                    sliderButtons[i].classList.remove("bg-white")
+                }
+                sliderButtons[2].classList.add("bg-white")
+            break;
+            case 4:
+                setSlideShowPicture(kep4)
+                for (let i = 0; i < sliderButtons.length; i++) {
+                    sliderButtons[i].classList.remove("bg-white")
+                }
+                sliderButtons[3].classList.add("bg-white")
+            break;
+            case 5:
+                setSlideShowPicture(kep5)
+                for (let i = 0; i < sliderButtons.length; i++) {
+                    sliderButtons[i].classList.remove("bg-white")
+                }
+                sliderButtons[4].classList.add("bg-white")
+            break;
+            default:
+                setSlideShowPicture(kep1)
+                for (let i = 0; i < sliderButtons.length; i++) {
+                    sliderButtons[i].classList.remove("bg-white")
+                }
+                sliderButtons[0].classList.add("bg-white")
+            break;
+        }
+
+        let pictureCounterIncreaser = setInterval(() =>{
+            if (pictureCounter == 5) {
+                setPictureCounter(1)
+            }else{
+                setPictureCounter((prevPictureCounter) => prevPictureCounter + 1)
             }
-        });
+        },7000)
 
-        let pictureCounterIncreaser = setInterval(() => {
-            setPictureCounter((prevCounter) => (prevCounter % 5) + 1);
-        }, 7000);
+        
 
-        return () => clearInterval(pictureCounterIncreaser);
-    }, [pictureCounter]);
+        return () => clearInterval(pictureCounterIncreaser)
+
+    },[pictureCounter])
+
 
     // Hírek
     const adat = [
@@ -92,24 +143,18 @@ export function WelcomePage() {
 
     return (
         <>
-            {/* Header */}
-            <div className="p-5 bg-[#5fbe20] h-32 text-white flex justify-between">
-                <div className="inline-block cursor-pointer"><img className="h-full" src={logo} alt="CsocsoLogo" /></div>
-                <div className="flex items-center justify-around">
-                    <div className="bg-black flex items-center w-fit h-fit p-3 mr-5 rounded-lg font-bold text-lg cursor-pointer">Rólunk</div>
-                    <div className="bg-black flex items-center w-fit h-fit p-3 mr-5 rounded-lg font-bold text-lg cursor-pointer">Versenyek</div>
-                    <div className="bg-black flex items-center w-fit h-fit p-3 mr-5 rounded-lg font-bold text-lg cursor-pointer">Profil</div>
-                </div>
-            </div>
-
+            
+            <Header/>
             {/* Slider */}
-            <div className="w-full h-[600px]">
+            <div className="w-full h-[500px]">
                 <div className="w-full h-full relative">
-                    <img className="h-full w-full cursor-pointer" src={slideShowPicture} />
+                    <img className="h-full w-full" src={slideShowPicture}/>
                     <div className="skibidi flex text-4xl stroke-2 w-24 justify-between absolute bottom-3 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                        {Array.from({ length: 5 }, (_, i) => (
-                            <button key={i} id="sliderBtn" value={i + 1} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
-                        ))}
+                        <button id="sliderBtn" value={1} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
+                        <button id="sliderBtn" value={2} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
+                        <button id="sliderBtn" value={3} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
+                        <button id="sliderBtn" value={4} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
+                        <button id="sliderBtn" value={5} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 bg-gray-400 border-solid border-black border-[1px]"></button>
                     </div>
                 </div>
             </div>
