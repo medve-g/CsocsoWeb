@@ -1,17 +1,40 @@
 import logo from "../../../public/logo.png";
 
+
+
 export function Header(){
+
+    function toggleMobileMenu(menu){
+        menu.classList.toggle('open')
+    
+    }
+
     return(
         <>
         {/* Header */}
-        <div className="bg-green-600 h-20 text-white flex justify-between sticky top-0 z-10">
-                <div className="inline-block cursor-pointer h-auto"><img className="h-full" src={logo} alt="CsocsoLogo" /></div>
-                <div className="p-5 flex items-center justify-around">
-                    <div className="bg-black flex items-center w-fit h-fit p-3 mr-5 rounded-lg font-bold text-lg cursor-pointer">Rólunk</div>
-                    <div className="bg-black flex items-center w-fit h-fit p-3 mr-5 rounded-lg font-bold text-lg cursor-pointer">Versenyek</div>
-                    <div className="bg-black flex items-center w-fit h-fit p-3 mr-5 rounded-lg font-bold text-lg cursor-pointer">Profil</div>
-                </div>
+        <header>
+            <div id="headerlogo"><img src={logo}></img></div>
+            <nav>
+                 <ul>
+                    <li>Kezdőlap</li> 
+                    <li>Versenyek</li>
+                    <li>Rólunk</li>
+                    <li>Profil</li>
+                </ul>
+            </nav>   
+            <div id="mobile-icon" onClick={(e) => toggleMobileMenu(e.currentTarget)}>
+                <div class='bar1'></div>
+                <div class='bar2'></div>
+                <div class='bar3'></div>
+                <ul class='mobile-menu'>
+                    <li>Kezdőlap</li> 
+                    <li>Versenyek</li>
+                    <li>Rólunk</li>
+                    <li>Profil</li>
+                </ul>
             </div>
+           
+        </header>
         </>
     )
 }
