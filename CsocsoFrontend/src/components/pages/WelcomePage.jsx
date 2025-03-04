@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 import kep1 from "../../../public/kep1.jpg";
 import kep2 from "../../../public/kep2.jpg";
@@ -10,24 +13,82 @@ import { Header } from "./Header.jsx";
 import { Footer } from "./Footer.jsx";
 
 
+// News Slider arrow customization
+function NextArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+        <div
+            className={className}
+            style={{ ...style, display: "block", background: 'green-100' }}
+            onClick={onClick}
+        />
+    );
+}
+
+function PrevArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+        <div
+            className={className}
+            style={{ ...style, display: "block", background: 'green-100' }}
+            onClick={onClick}
+        />
+    );
+}
+
 export function WelcomePage() {
 
-    // Slider settings
+    // News Slider settings
+    let SliderSettings = {
+        dots: true,
+        infinite: true,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                }
+            }
+        ],
+
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />
+        
+    };
+
     let [slideShowPicture, setSlideShowPicture] = useState(kep1);
     let [pictureCounter, setPictureCounter] = useState(1);
 
-    let chooseSliderPicture = (event) =>{
+    let chooseSliderPicture = (event) => {
         let numberOfSliderBtn = event.target.value
         if (pictureCounter < numberOfSliderBtn) {
             let calculatedSliderNumber = numberOfSliderBtn - pictureCounter;
             setPictureCounter((preValue) => preValue + calculatedSliderNumber)
-        }else if (pictureCounter > numberOfSliderBtn) {
+        } else if (pictureCounter > numberOfSliderBtn) {
             let calculatedSliderNumber = pictureCounter - numberOfSliderBtn
             setPictureCounter((preValue) => preValue - calculatedSliderNumber)
         }
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         let sliderButtons = document.querySelectorAll("#sliderBtn");
         switch (pictureCounter) {
             case 1:
@@ -56,7 +117,7 @@ export function WelcomePage() {
                 }
                 sliderButtons[2].classList.remove("bg-gray-400")
                 sliderButtons[2].classList.add("bg-white")
-            break;
+                break;
             case 4:
                 setSlideShowPicture(kep4)
                 for (let i = 0; i < sliderButtons.length; i++) {
@@ -65,7 +126,7 @@ export function WelcomePage() {
                 }
                 sliderButtons[3].classList.remove("bg-gray-400")
                 sliderButtons[3].classList.add("bg-white")
-            break;
+                break;
             case 5:
                 setSlideShowPicture(kep5)
                 for (let i = 0; i < sliderButtons.length; i++) {
@@ -74,7 +135,7 @@ export function WelcomePage() {
                 }
                 sliderButtons[4].classList.remove("bg-gray-400")
                 sliderButtons[4].classList.add("bg-white")
-            break;
+                break;
             default:
                 setSlideShowPicture(kep1)
                 for (let i = 0; i < sliderButtons.length; i++) {
@@ -83,32 +144,47 @@ export function WelcomePage() {
                 }
                 sliderButtons[0].classList.remove("bg-gray-400")
                 sliderButtons[0].classList.add("bg-white")
-            break;
+                break;
         }
 
-        let pictureCounterIncreaser = setInterval(() =>{
+        let pictureCounterIncreaser = setInterval(() => {
             if (pictureCounter == 5) {
                 setPictureCounter(1)
-            }else{
+            } else {
                 setPictureCounter((prevPictureCounter) => prevPictureCounter + 1)
             }
-        },7000)
+        }, 7000)
 
-        
+
 
         return () => clearInterval(pictureCounterIncreaser)
 
-    },[pictureCounter])
-    
+    }, [pictureCounter])
+
+    // News
+    const adat = [
+        {
+            image: kep1,
+            title: 'Hír1'
+        },
+        {
+            image: kep2,
+            title: 'Hír2'
+        },
+        {
+            image: kep3,
+            title: 'Hír3'
+        },
+    ];
 
     return (
         <>
-            
-            <Header/>
+
+            <Header />
             {/* Slider */}
             <div className="w-full h-[500px]">
                 <div className="w-full h-full relative">
-                    <img className="h-full w-full" src={slideShowPicture}/>
+                    <img className="h-full w-full" src={slideShowPicture} />
                     <div className="flex text-4xl stroke-2 w-24 justify-between absolute bottom-3 left-1/2 -translate-x-1/2 -translate-y-1/2">
                         <button id="sliderBtn" value={1} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 border-solid border-black border-[1px]"></button>
                         <button id="sliderBtn" value={2} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 border-solid border-black border-[1px]"></button>
@@ -148,8 +224,31 @@ export function WelcomePage() {
                     </div>
                 </div>
             </section>
-            <Footer/>
-            
+
+            {/* News */}
+            <section className="bg-green-100 py-16 px-6 md:px-12 lg:px-24 text-green-900">
+                <div className="max-w-4xl mx-auto text-center">
+                    <h2 className="text-4xl font-bold text-green-700 mb-6">Hírek</h2>
+                </div>
+            </section>
+            <div className='h-screen bg-green-100 pt-10'>
+                <div className='h-{400px} w-3/4 m-auto '>
+                    <Slider {...SliderSettings}>
+                        {adat.map((item, index) => (
+                            <div key={index} className=" bg-white rounded-2xl shadow-xl shadow-black-500/50 w-80 text-center">
+                                <div className="flex justify-center items-center h-40">
+                                    <img src={item.image} className="w-full h-full object-cover block" />
+                                </div>
+                                <div className="p-10 bg-green-600 rounded-b-lg ">
+                                    <p className="font-semibold text-white">{item.title}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </Slider>
+                </div>
+            </div>
+            <Footer />
+
 
         </>
     );

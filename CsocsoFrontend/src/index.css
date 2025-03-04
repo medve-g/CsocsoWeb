@@ -15,17 +15,71 @@ body {
   height: 40px;
 }
 
-/*Slider*/
+/*News Slider*/
 
-.slick-dots {
-  top:100%;
-  pointer-events: none;
-  width: 10px;
+.slick-slide>div{
+  margin: 0 10px;
 }
-.slider-image {
-  width: 100%; 
-  height: 350px; 
-  object-fit:fill;
+
+/*News Slider arrow css */
+.slick-next {
+  position: absolute;
+  right: 10px;
+  background: none !important;
+  border: none !important; 
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.slick-prev {
+  position: absolute;
+  right: 10px;
+  background: none !important;
+  border: none !important;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.slick-next::after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-right: 3px solid rgba(22, 163, 74, 0.7); /* Green-700 color */
+  border-top: 3px solid rgba(22, 163, 74, 0.7);   /* Green-700 color */
+  transform: rotate(45deg); 
+}
+
+.slick-prev::after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-left: 3px solid rgba(22, 163, 74, 0.7); /* Green-700 color */
+  border-bottom: 3px solid rgba(22, 163, 74, 0.7); /* Green-700 color */
+  transform: rotate(45deg); 
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  transform: scale(1.8);
+  opacity: 0.8;
+}
+
+
+.slick-prev::before,
+.slick-next::before {
+  display: none !important;
 }
 
 /*Navbar*/
