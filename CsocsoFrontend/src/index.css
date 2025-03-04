@@ -13,8 +13,6 @@ body {
   background-color: rgba(22, 163, 74, 0.7);
   text-align: center;
   height: 40px;
-  
-
 }
 
 /*Slider*/
@@ -22,6 +20,7 @@ body {
 .slick-dots {
   top:100%;
   pointer-events: none;
+  width: 10px;
 }
 .slider-image {
   width: 100%; 
