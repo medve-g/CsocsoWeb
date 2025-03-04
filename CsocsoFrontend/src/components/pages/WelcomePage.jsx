@@ -29,7 +29,6 @@ export function WelcomePage() {
 
     useEffect(()=> {
         let sliderButtons = document.querySelectorAll("#sliderBtn");
-        console.log(sliderButtons[0])
         switch (pictureCounter) {
             case 1:
                 setSlideShowPicture(kep1)
