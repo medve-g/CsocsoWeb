@@ -8,7 +8,9 @@ body {
   min-height: 100vh;
   background-color: #d0d0d0;
 }
-
+#About-Box{
+  background-color: #A8DCAB;
+}
 #copyright{
   background-color: rgba(22, 163, 74, 0.7);
   text-align: center;
@@ -19,6 +21,10 @@ body {
 
 .slick-slide>div{
   margin: 0 10px;
+}
+#News-Slider-Box{
+  
+ 
 }
 
 /*News Slider arrow css */

@@ -196,7 +196,7 @@ export function WelcomePage() {
             </div>
 
             {/* About */}
-            <section className="bg-green-100 py-16 px-6 md:px-12 lg:px-24 text-green-900">
+            <section id="About-Box"className="py-16 px-6 md:px-12 lg:px-24 text-green-900">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-4xl font-bold text-green-700 mb-6">Rólunk</h2>
                     <p className="text-lg leading-relaxed">
@@ -225,13 +225,14 @@ export function WelcomePage() {
                 </div>
             </section>
 
+
             {/* News */}
-            <section className="bg-green-100 py-16 px-6 md:px-12 lg:px-24 text-green-900">
+            <section id="News-Slider-Box" className="py-16 px-6 md:px-12 lg:px-24 text-green-900">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-4xl font-bold text-green-700 mb-6">Hírek</h2>
                 </div>
             </section>
-            <div className='h-screen bg-green-100 pt-10'>
+            <div id="News-Slider-Box" className='h-[400px] pt-10'>
                 <div className='h-{400px} w-3/4 m-auto '>
                     <Slider {...SliderSettings}>
                         {adat.map((item, index) => (
