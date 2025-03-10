@@ -23,8 +23,7 @@ body {
   margin: 0 10px;
 }
 #News-Slider-Box{
-  
- 
+  background-color: rgba(168, 220, 171, 0.7);
 }
 
 /*News Slider arrow css */
@@ -87,7 +86,6 @@ body {
 .slick-next::before {
   display: none !important;
 }
-
 /*Navbar*/
 #headerlogo{
   width: 7%;

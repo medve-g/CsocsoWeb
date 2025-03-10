@@ -40,7 +40,7 @@ export function WelcomePage() {
 
     // News Slider settings
     let SliderSettings = {
-        dots: true,
+        dots: false,
         infinite: true,
         autoplay: true,
         autoplaySpeed: 2000,
@@ -233,7 +233,7 @@ export function WelcomePage() {
                 </div>
             </section>
             <div id="News-Slider-Box" className='h-[400px] pt-10'>
-                <div className='h-{400px} w-3/4 m-auto '>
+                <div className='h-[400px] w-3/4 m-auto '>
                     <Slider {...SliderSettings}>
                         {adat.map((item, index) => (
                             <div key={index} className=" bg-white rounded-2xl shadow-xl shadow-black-500/50 w-80 text-center">
