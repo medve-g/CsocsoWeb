@@ -6,12 +6,10 @@ export function Header(){
 
     function toggleMobileMenu(menu){
         menu.classList.toggle('open')
-    
     }
 
     return(
         <>
-        {/* Header */}
         <header>
             <div id="headerlogo"><img src={logo}></img></div>
             <nav>

@@ -117,7 +117,10 @@ ul{
 
 ul li{
   padding: 5px;
-  margin-left: 10px;
+  margin-left: 20px;
+  background-color: black;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 ul li span {
@@ -129,8 +132,8 @@ ul li span {
 }
 
 ul li:hover {
-  transform: scale(1.2);
-  transform: 0.3s;
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
 /*Mobile navbar style*/
