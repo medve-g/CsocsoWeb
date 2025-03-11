@@ -93,7 +93,6 @@ export function WelcomePage() {
     return (
         <>
 
-            <Header />
             <ImageSlider/>
             
 

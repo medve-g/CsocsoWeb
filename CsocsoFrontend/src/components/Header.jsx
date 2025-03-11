@@ -1,4 +1,5 @@
 import logo from "../../public/logo.png";
+import {Link} from "react-router-dom"
 
 
 
@@ -10,14 +11,14 @@ export function Header(){
 
     return(
         <>
-        <header>
-            <div id="headerlogo"><img src={logo}></img></div>
+        <header className="min-h-24">
+            <div className="h-fit"><img className="h-24" src={logo}></img></div>
             <nav>
                  <ul>
-                    <li>Kezdőlap</li> 
+                    <Link to="/"><li>Kezdőlap</li></Link> 
                     <li>Versenyek</li>
                     <li>Rólunk</li>
-                    <li>Profil</li>
+                    <Link to="/login"><li>Bejelentkezés</li></Link>
                 </ul>
             </nav>   
             <div id="mobile-icon" onClick={(e) => toggleMobileMenu(e.currentTarget)}>
@@ -25,10 +26,10 @@ export function Header(){
                 <div class='bar2'></div>
                 <div class='bar3'></div>
                 <ul class='mobile-menu'>
-                    <li>Kezdőlap</li> 
+                    <Link to="/"><li>Kezdőlap</li></Link>
                     <li>Versenyek</li>
                     <li>Rólunk</li>
-                    <li>Profil</li>
+                    <Link to="/login"><li>Bejelentkezés</li></Link>
                 </ul>
             </div>
            

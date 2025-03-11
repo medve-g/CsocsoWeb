@@ -87,10 +87,6 @@ body {
   display: none !important;
 }
 /*Navbar*/
-#headerlogo{
-  width: 7%;
-  height: 7%;
-}
 
 header{
   background-color: rgba(22, 163, 74);
@@ -187,16 +183,19 @@ ul li:hover {
   background-color: rgba(22, 163, 74);
 }
 
+.mobile-menu li{
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
 /*Mobile view*/
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 750px) {
   header nav{
     display: none;
   }
   #mobile-icon{
     display: block;
-    margin-right: 15px;
-    margin-top: 15px;
-    margin-bottom: 10px;
+    margin-right: 40px;
   }
   header{
     height: 20%;
@@ -208,8 +207,6 @@ ul li:hover {
   .slider-image {
     height: 150px; 
   }
-
-  
 }
 
 
