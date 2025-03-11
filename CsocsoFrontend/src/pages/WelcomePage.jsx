@@ -3,14 +3,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
-import kep1 from "../../../public/kep1.jpg";
-import kep2 from "../../../public/kep2.jpg";
-import kep3 from "../../../public/kep3.jpg";
-import kep4 from "../../../public/kep4.jpg";
-import kep5 from "../../../public/kep5.jpg";
+import kep1 from "../../public/kep1.jpg";
+import kep2 from "../../public/kep2.jpg";
+import kep3 from "../../public/kep3.jpg";
+import kep4 from "../../public/kep4.jpg";
+import kep5 from "../../public/kep5.jpg";
 
-import { Header } from "./Header.jsx";
-import { Footer } from "./Footer.jsx";
+import { Header } from "../components/Header.jsx";
+import { Footer } from "../components/Footer.jsx";
 
 
 // News Slider arrow customization
