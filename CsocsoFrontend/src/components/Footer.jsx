@@ -4,7 +4,6 @@ export function Footer(){
         <footer>
             <p id="copyright">&copy; 2025 All rights reserved.</p>
         </footer>
-
         </>
     )
 }

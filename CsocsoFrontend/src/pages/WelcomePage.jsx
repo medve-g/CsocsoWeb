@@ -149,7 +149,7 @@ export function WelcomePage() {
                     </Slider>
                 </div>
             </div>
-            <Footer />
+        <Footer/>
 
 
         </>

@@ -16,8 +16,8 @@ export function Header(){
             <nav>
                  <ul>
                     <Link to="/"><li>Kezdőlap</li></Link> 
-                    <li>Versenyek</li>
-                    <li>Rólunk</li>
+                    <Link to="/contests"><li>Versenyek</li></Link>
+                    <Link to="/aboutus"><li>Rólunk</li></Link>
                     <Link to="/login"><li>Bejelentkezés</li></Link>
                 </ul>
             </nav>   
