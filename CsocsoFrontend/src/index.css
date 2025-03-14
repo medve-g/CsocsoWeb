@@ -17,15 +17,6 @@ body {
   text-align: center;
   height: 40px;
 }
-.popup{
-  background-color: white;
-  width: 50%;
-  height: auto;
-  visibility: hidden;
-}
-.open-popup{
-  visibility: visible;
-}
 
 /*News Slider*/
 
