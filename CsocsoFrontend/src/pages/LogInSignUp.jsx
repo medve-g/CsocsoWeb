@@ -1,11 +1,7 @@
-
-
-
 function LogInSignUp() {
   return (
     <>
-<center>
-      <div className="w-full relative px-10 py-10 mb-[130px]">
+      <div className="w-full absolute top-[52.5%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center">
         <div className="bg-white max-w-md px-10 py-20 rounded-xl drop-shadow-lg max-sm:px-1 max-sm:py-8 ">
           <h1 className="mb-10 mx-5 text-[45px] text-center max-sm:text-[35px]  text-black font-semibold">
             Bejelentkezés
@@ -45,9 +41,6 @@ function LogInSignUp() {
           </div>
         </div>
       </div>
-      </center>
-
-      
       </>
   );
 }
