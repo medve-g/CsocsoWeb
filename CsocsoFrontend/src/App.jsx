@@ -20,7 +20,7 @@ function App() {
         <Route path="/contests" element={<Contests/>}/>
         <Route path="*" element={<WelcomePage />} />
       </Routes>
-      <Footer/>
+     <Footer/>
     </BrowserRouter>
   );
 }
