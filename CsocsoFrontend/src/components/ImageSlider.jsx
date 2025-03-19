@@ -5,8 +5,10 @@ import kep4 from "../../public/kep4.jpg";
 import kep5 from "../../public/kep5.jpg";
 
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
-function ImageSlider(){
+function ImageSlider() {
 
     let [slideShowPicture, setSlideShowPicture] = useState(kep1);
     let [pictureCounter, setPictureCounter] = useState(1);
@@ -95,19 +97,23 @@ function ImageSlider(){
 
     }, [pictureCounter])
 
-    return(
-        <div className="w-full h-[500px]">
-                <div className="w-full h-full relative">
-                    <img className="h-full w-full" src={slideShowPicture} />
-                    <div className="flex text-4xl stroke-2 w-24 justify-between absolute bottom-3 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                        <button id="sliderBtn" value={1} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 border-solid border-black border-[1px]"></button>
-                        <button id="sliderBtn" value={2} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 border-solid border-black border-[1px]"></button>
-                        <button id="sliderBtn" value={3} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 border-solid border-black border-[1px]"></button>
-                        <button id="sliderBtn" value={4} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 border-solid border-black border-[1px]"></button>
-                        <button id="sliderBtn" value={5} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 border-solid border-black border-[1px]"></button>
-                    </div>
+    return (
+        <div className="w-full h-[500px] relative">
+            <div className="w-full h-full relative">
+                <img className="h-full absolute  w-full" src={slideShowPicture} />
+
+                <div className="flex text-4xl stroke-2 w-24 justify-between absolute bottom-3 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <button id="sliderBtn" value={1} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 border-solid border-black border-[1px]"></button>
+                    <button id="sliderBtn" value={2} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 border-solid border-black border-[1px]"></button>
+                    <button id="sliderBtn" value={3} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 border-solid border-black border-[1px]"></button>
+                    <button id="sliderBtn" value={4} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 border-solid border-black border-[1px]"></button>
+                    <button id="sliderBtn" value={5} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 border-solid border-black border-[1px]"></button>
                 </div>
             </div>
+            <button><FontAwesomeIcon className="text-white absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-5 h-10" icon={faChevronLeft} /></button>
+            <button><FontAwesomeIcon className="text-white absolute -translate-x-1/2 -translate-y-1/2 top-1/2 right-5 h-10" icon={faChevronRight} /></button>
+        </div>
+
     )
 
 }
