@@ -1,6 +1,5 @@
 function LogInSignUp() {
   return (
-    //absolute top-[52.5%] left-1/2 -translate-x-1/2 -translate-y-1/2
     <>
       <div className="w-full flex justify-center items-center my-20">
         <div className="bg-white max-w-md px-10 py-20 rounded-xl drop-shadow-lg max-sm:px-1 max-sm:py-8 ">

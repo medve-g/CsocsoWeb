@@ -5,8 +5,8 @@ import kep4 from "../../public/kep4.jpg";
 import kep5 from "../../public/kep5.jpg";
 
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function ImageSlider() {
 
