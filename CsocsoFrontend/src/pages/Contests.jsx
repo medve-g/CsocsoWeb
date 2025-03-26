@@ -1,4 +1,27 @@
+import { useState } from "react";
+
+// function setButton(ertek){
+//   if (ertek == 1) {
+//     return (
+//       <div className="w-full flex justify-end">
+//           <button className="bg-green-500 rounded-md font-bold text-white text-2xl p-3 border-2 hover:bg-white hover:border-green-500  hover:text-green-500">
+//             Új verseny
+//           </button>
+//         </div>
+//     )
+//   }
+//   else{
+//     return (
+//       <>
+
+//       </>
+//     )
+//   }
+// }
+
 export function Contests() {
+
+  let [skibidi, setSkibidi] = useState(2);
   return (
     <>
       <h2
@@ -11,6 +34,11 @@ export function Contests() {
         Versenyek
       </h2>
       <div className="min-h-[700px] w-full px-16">
+        <div className="w-full flex justify-end">
+          <button className="bg-green-500 rounded-md font-bold text-white text-2xl p-3 border-2 hover:bg-white hover:border-green-500  hover:text-green-500">
+            Új verseny
+          </button>
+        </div>
         <div className="bg-green-800 w-full h-[200px] my-10 flex flex-row cursor-pointer ransition-transform duration-200 ease-in-out hover:scale-105">
           <div className="w-32 h-full text-center flex flex-col justify-center">
             <p className="text-2xl font-bold text-white">22</p>
