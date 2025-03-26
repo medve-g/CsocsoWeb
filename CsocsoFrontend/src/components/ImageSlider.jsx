@@ -17,13 +17,17 @@ function ImageSlider() {
 
     function swipeRight(){
         let collectImagePlaceholders = [document.getElementById("prevPic"), document.getElementById("currPic"), document.getElementById("nextPic")]
-        if (pictureCounter == 5) {
-            setPictureCounter(1)
-        }else{
-            setPictureCounter((preValue) => preValue + 1)
-        }
+        
         collectImagePlaceholders[1].classList.add("-translate-x-full")
         collectImagePlaceholders[2].classList.add("-translate-x-full")
+        setPreviousSlideshowPicture(kep1)
+        setCurrentSlideshowPicture(kep2)
+        setNextSlideshowPicture(kep3)
+        setTimeout(()=>{
+            collectImagePlaceholders[2].classList.remove("-translate-x-full")
+            collectImagePlaceholders[1].classList.remove("-translate-x-full")
+        },600)
+        
     }
 
     function swipeLeft(){
@@ -112,9 +116,9 @@ function ImageSlider() {
     return (
         <div className="w-full h-[500px] relative">
             <div className="w-full h-full relative">
-                <img id="prevPic" className="h-full z-10 absolute -left-2/3 w-full transition duration-300 ease-in-out" src={previousSlideshowPicture} />
-                <img id="currPic" className="h-full absolute w-full transition duration-300 ease-in-out-out" src={currentSlideshowPicture} />
-                <img id="nextPic" className="h-full z-10 absolute -right-2/3 w-full transition duration-300 ease-in-out" src={nextSlideshowPicture} />
+                <img id="prevPic" className="h-full absolute -left-full w-full duration-500" src={previousSlideshowPicture} />
+                <img id="currPic" className="h-full absolute w-full duration-500" src={currentSlideshowPicture} />
+                <img id="nextPic" className="h-full absolute -right-full w-full duration-500" src={nextSlideshowPicture} />
 
                 <div className="flex text-4xl stroke-2 w-24 justify-between absolute bottom-3 left-1/2 -translate-x-1/2 -translate-y-1/2">
                     <button id="sliderBtn" value={1} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 border-solid border-black border-[1px]"></button>
