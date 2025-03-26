@@ -10,8 +10,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function ImageSlider() {
 
-    let [slideShowPicture, setSlideShowPicture] = useState(kep1);
+    let [previousSlideshowPicture, setPreviousSlideshowPicture] = useState(kep5)
+    let [currentSlideshowPicture, setCurrentSlideshowPicture] = useState(kep1);
+    let [nextSlideshowPicture, setNextSlideshowPicture] = useState(kep2)
     let [pictureCounter, setPictureCounter] = useState(1);
+
+    function highlightCurrentPictureKnob(knobNumber, sliderButtons){
+        for (let i = 0; i < sliderButtons.length; i++) {
+            sliderButtons[i].classList.remove("bg-white")
+            sliderButtons[i].classList.add("bg-gray-400")
+        }
+        sliderButtons[knobNumber-1].classList.remove("bg-gray-400")
+        sliderButtons[knobNumber-1].classList.add("bg-white")
+    }
 
     let chooseSliderPicture = (event) => {
         let numberOfSliderBtn = event.target.value
@@ -28,58 +39,40 @@ function ImageSlider() {
         let sliderButtons = document.querySelectorAll("#sliderBtn");
         switch (pictureCounter) {
             case 1:
-                setSlideShowPicture(kep1)
-                for (let i = 0; i < sliderButtons.length; i++) {
-                    sliderButtons[i].classList.remove("bg-white")
-                    sliderButtons[i].classList.add("bg-gray-400")
-                }
-                sliderButtons[0].classList.remove("bg-gray-400")
-                sliderButtons[0].classList.add("bg-white")
+                setPreviousSlideshowPicture(kep5)
+                setCurrentSlideshowPicture(kep1)
+                setNextSlideshowPicture(kep2)
+                highlightCurrentPictureKnob(pictureCounter, sliderButtons)
                 break;
             case 2:
-                setSlideShowPicture(kep2)
-                for (let i = 0; i < sliderButtons.length; i++) {
-                    sliderButtons[i].classList.remove("bg-white")
-                    sliderButtons[i].classList.add("bg-gray-400")
-                }
-                sliderButtons[1].classList.remove("bg-gray-400")
-                sliderButtons[1].classList.add("bg-white")
+                setPreviousSlideshowPicture(kep1)
+                setCurrentSlideshowPicture(kep2)
+                setNextSlideshowPicture(kep3)
+                highlightCurrentPictureKnob(pictureCounter, sliderButtons)
                 break;
             case 3:
-                setSlideShowPicture(kep3)
-                for (let i = 0; i < sliderButtons.length; i++) {
-                    sliderButtons[i].classList.remove("bg-white")
-                    sliderButtons[i].classList.add("bg-gray-400")
-                }
-                sliderButtons[2].classList.remove("bg-gray-400")
-                sliderButtons[2].classList.add("bg-white")
+                setPreviousSlideshowPicture(kep2)
+                setCurrentSlideshowPicture(kep3)
+                setNextSlideshowPicture(kep4)
+                highlightCurrentPictureKnob(pictureCounter, sliderButtons)
                 break;
             case 4:
-                setSlideShowPicture(kep4)
-                for (let i = 0; i < sliderButtons.length; i++) {
-                    sliderButtons[i].classList.remove("bg-white")
-                    sliderButtons[i].classList.add("bg-gray-400")
-                }
-                sliderButtons[3].classList.remove("bg-gray-400")
-                sliderButtons[3].classList.add("bg-white")
+                setPreviousSlideshowPicture(kep3)
+                setCurrentSlideshowPicture(kep4)
+                setNextSlideshowPicture(kep5)
+                highlightCurrentPictureKnob(pictureCounter, sliderButtons)
                 break;
             case 5:
-                setSlideShowPicture(kep5)
-                for (let i = 0; i < sliderButtons.length; i++) {
-                    sliderButtons[i].classList.remove("bg-white")
-                    sliderButtons[i].classList.add("bg-gray-400")
-                }
-                sliderButtons[4].classList.remove("bg-gray-400")
-                sliderButtons[4].classList.add("bg-white")
+                setPreviousSlideshowPicture(kep4)
+                setCurrentSlideshowPicture(kep5)
+                setNextSlideshowPicture(kep1)
+                highlightCurrentPictureKnob(pictureCounter, sliderButtons)
                 break;
             default:
-                setSlideShowPicture(kep1)
-                for (let i = 0; i < sliderButtons.length; i++) {
-                    sliderButtons[i].classList.remove("bg-white")
-                    sliderButtons[i].classList.add("bg-gray-400")
-                }
-                sliderButtons[0].classList.remove("bg-gray-400")
-                sliderButtons[0].classList.add("bg-white")
+                setPreviousSlideshowPicture(kep5)
+                setCurrentSlideshowPicture(kep1)
+                setNextSlideshowPicture(kep2)
+                highlightCurrentPictureKnob(pictureCounter, sliderButtons)
                 break;
         }
 
@@ -100,7 +93,10 @@ function ImageSlider() {
     return (
         <div className="w-full h-[500px] relative">
             <div className="w-full h-full relative">
-                <img className="h-full absolute  w-full" src={slideShowPicture} />
+
+                <img className="h-full absolute -left-full w-full" src={previousSlideshowPicture} />
+                <img className="h-full absolute w-full" src={currentSlideshowPicture} />
+                <img className="h-full absolute -right-full w-full" src={nextSlideshowPicture} />
 
                 <div className="flex text-4xl stroke-2 w-24 justify-between absolute bottom-3 left-1/2 -translate-x-1/2 -translate-y-1/2">
                     <button id="sliderBtn" value={1} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 border-solid border-black border-[1px]"></button>
