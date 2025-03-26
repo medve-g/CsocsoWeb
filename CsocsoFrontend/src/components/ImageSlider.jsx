@@ -14,14 +14,22 @@ function ImageSlider() {
     let [currentSlideshowPicture, setCurrentSlideshowPicture] = useState(kep1);
     let [nextSlideshowPicture, setNextSlideshowPicture] = useState(kep2)
     let [pictureCounter, setPictureCounter] = useState(1);
+    let [imagePlaceholder, setImagePlacerholder] = useState([])
 
-    function highlightCurrentPictureKnob(knobNumber, sliderButtons){
+    function swipeRight(){
+        let collectImagePlaceholders = [document.getElementById("prevPic"), document.getElementById("currPic"), document.getElementById("nextPic")]
+        collectImagePlaceholders[0].classList.add("translate-x-full")
+        collectImagePlaceholders[1].classList.add("translate-x-full")
+
+    }
+
+    function highlightCurrentPictureKnob(knobNumber, sliderButtons) {
         for (let i = 0; i < sliderButtons.length; i++) {
             sliderButtons[i].classList.remove("bg-white")
             sliderButtons[i].classList.add("bg-gray-400")
         }
-        sliderButtons[knobNumber-1].classList.remove("bg-gray-400")
-        sliderButtons[knobNumber-1].classList.add("bg-white")
+        sliderButtons[knobNumber - 1].classList.remove("bg-gray-400")
+        sliderButtons[knobNumber - 1].classList.add("bg-white")
     }
 
     let chooseSliderPicture = (event) => {
@@ -36,6 +44,7 @@ function ImageSlider() {
     }
 
     useEffect(() => {
+        ()=>swipeRight();
         let sliderButtons = document.querySelectorAll("#sliderBtn");
         switch (pictureCounter) {
             case 1:
@@ -94,9 +103,9 @@ function ImageSlider() {
         <div className="w-full h-[500px] relative">
             <div className="w-full h-full relative">
 
-                <img className="h-full absolute -left-full w-full" src={previousSlideshowPicture} />
-                <img className="h-full absolute w-full" src={currentSlideshowPicture} />
-                <img className="h-full absolute -right-full w-full" src={nextSlideshowPicture} />
+                <img id="prevPic" className="h-full absolute -left-full w-full transition duration-300 ease-out" src={previousSlideshowPicture} />
+                <img id="currPic" className="h-full absolute w-full transition duration-300 ease-out" src={currentSlideshowPicture} />
+                <img id="nextPic" className="h-full absolute -right-full w-full transition duration-300 ease-out" src={nextSlideshowPicture} />
 
                 <div className="flex text-4xl stroke-2 w-24 justify-between absolute bottom-3 left-1/2 -translate-x-1/2 -translate-y-1/2">
                     <button id="sliderBtn" value={1} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 border-solid border-black border-[1px]"></button>
