@@ -15,25 +15,33 @@ function ImageSlider() {
     let [nextSlideshowPicture, setNextSlideshowPicture] = useState(kep2)
     let [pictureCounter, setPictureCounter] = useState(1);
 
-    function swipeRight(){
+    function swipeRight(paramPreviousSlideshowPicture, paramCurrentSlideshowPicture, paramNextSlideshowPicture) {
         let collectImagePlaceholders = [document.getElementById("prevPic"), document.getElementById("currPic"), document.getElementById("nextPic")]
-        
+
+        collectImagePlaceholders[2].classList.add("duration-500")
+        collectImagePlaceholders[1].classList.add("duration-500")
         collectImagePlaceholders[1].classList.add("-translate-x-full")
         collectImagePlaceholders[2].classList.add("-translate-x-full")
-        setPreviousSlideshowPicture(kep1)
-        setCurrentSlideshowPicture(kep2)
-        setNextSlideshowPicture(kep3)
-        setTimeout(()=>{
+        setTimeout(() => {
+            setPreviousSlideshowPicture(paramPreviousSlideshowPicture)
+            setCurrentSlideshowPicture(paramCurrentSlideshowPicture)
+            setNextSlideshowPicture(paramNextSlideshowPicture)
+            collectImagePlaceholders[2].classList.remove("duration-500")
+            collectImagePlaceholders[1].classList.remove("duration-500")
             collectImagePlaceholders[2].classList.remove("-translate-x-full")
             collectImagePlaceholders[1].classList.remove("-translate-x-full")
-        },600)
+        }, 600)
+
+    }
+
+    function selectNextSliderPicture(){
         
     }
 
-    function swipeLeft(){
+    function swipeLeft() {
         if (pictureCounter == 1) {
             setPictureCounter(5)
-        }else{
+        } else {
             setPictureCounter((preValue) => preValue - 1)
         }
     }
@@ -58,43 +66,37 @@ function ImageSlider() {
         }
     }
 
+    let [firstRun, setFirstRun] = useState(true)
     useEffect(() => {
         let sliderButtons = document.querySelectorAll("#sliderBtn");
         switch (pictureCounter) {
             case 1:
-                setPreviousSlideshowPicture(kep5)
-                setCurrentSlideshowPicture(kep1)
-                setNextSlideshowPicture(kep2)
-                highlightCurrentPictureKnob(pictureCounter, sliderButtons)
+                if (firstRun) {
+                    setFirstRun(false)
+                    highlightCurrentPictureKnob(pictureCounter, sliderButtons)
+                }else{
+                    swipeRight(kep5, kep1, kep2)
+                    highlightCurrentPictureKnob(pictureCounter, sliderButtons)
+                }
                 break;
             case 2:
-                setPreviousSlideshowPicture(kep1)
-                setCurrentSlideshowPicture(kep2)
-                setNextSlideshowPicture(kep3)
+                swipeRight(kep1, kep2, kep3)
                 highlightCurrentPictureKnob(pictureCounter, sliderButtons)
                 break;
             case 3:
-                setPreviousSlideshowPicture(kep2)
-                setCurrentSlideshowPicture(kep3)
-                setNextSlideshowPicture(kep4)
+                swipeRight(kep2, kep3, kep4)
                 highlightCurrentPictureKnob(pictureCounter, sliderButtons)
                 break;
             case 4:
-                setPreviousSlideshowPicture(kep3)
-                setCurrentSlideshowPicture(kep4)
-                setNextSlideshowPicture(kep5)
+                swipeRight(kep3, kep4, kep5)
                 highlightCurrentPictureKnob(pictureCounter, sliderButtons)
                 break;
             case 5:
-                setPreviousSlideshowPicture(kep4)
-                setCurrentSlideshowPicture(kep5)
-                setNextSlideshowPicture(kep1)
+                swipeRight(kep4, kep5, kep1)
                 highlightCurrentPictureKnob(pictureCounter, sliderButtons)
                 break;
             default:
-                setPreviousSlideshowPicture(kep5)
-                setCurrentSlideshowPicture(kep1)
-                setNextSlideshowPicture(kep2)
+                swipeRight(kep5, kep1, kep2)
                 highlightCurrentPictureKnob(pictureCounter, sliderButtons)
                 break;
         }
@@ -116,9 +118,9 @@ function ImageSlider() {
     return (
         <div className="w-full h-[500px] relative">
             <div className="w-full h-full relative">
-                <img id="prevPic" className="h-full absolute -left-full w-full duration-500" src={previousSlideshowPicture} />
-                <img id="currPic" className="h-full absolute w-full duration-500" src={currentSlideshowPicture} />
-                <img id="nextPic" className="h-full absolute -right-full w-full duration-500" src={nextSlideshowPicture} />
+                <img id="prevPic" className="h-full absolute ease-out -left-full w-full" src={previousSlideshowPicture} />
+                <img id="currPic" className="h-full absolute w-full ease-out" src={currentSlideshowPicture} />
+                <img id="nextPic" className="h-full absolute -right-full ease-out w-full" src={nextSlideshowPicture} />
 
                 <div className="flex text-4xl stroke-2 w-24 justify-between absolute bottom-3 left-1/2 -translate-x-1/2 -translate-y-1/2">
                     <button id="sliderBtn" value={1} onClick={chooseSliderPicture} className="rounded-full w-2 h-2 border-solid border-black border-[1px]"></button>
