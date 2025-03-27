@@ -200,6 +200,7 @@ ul li:hover {
   }
   header{
     height: 20%;
+   
   }
   #headerlogo{
     width: 15%;
@@ -208,6 +209,16 @@ ul li:hover {
   .slider-image {
     height: 150px; 
   }
+  ul li {
+    background-color: rgba(22, 163, 74);
+    font-size: 2rem;
+    
+    
+  }
+  ul li span{
+    background-color: rgba(22, 163, 74);
+  }
+  
 }
 
 
