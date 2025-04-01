@@ -11,9 +11,10 @@ body {
   overflow-x: hidden;
 }
 
-#About-Box{
+#About-Box {
   background-color: #A8DCAB;
 }
+
 /*#copyright{
   background-color: rgba(22, 163, 74, 0.7);
   text-align: center;
@@ -21,11 +22,21 @@ body {
 
 /*News Slider*/
 
-.slick-slide>div{
+.slick-slide>div {
   margin: 0 10px;
 }
-#News-Slider-Box{
+
+#News-Slider-Box {
   background-color: rgba(168, 220, 171, 0.7);
+}
+
+.react-slideshow-container .default-nav {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.react-slideshow-container .next {
+  margin-right: 10px;
 }
 
 /*News Slider arrow css */
@@ -33,7 +44,7 @@ body {
   position: absolute;
   right: 10px;
   background: none !important;
-  border: none !important; 
+  border: none !important;
   width: 40px;
   height: 40px;
   display: flex;
@@ -62,9 +73,11 @@ body {
   display: block;
   width: 10px;
   height: 10px;
-  border-right: 3px solid rgba(22, 163, 74, 0.7); /* Green-700 color */
-  border-top: 3px solid rgba(22, 163, 74, 0.7);   /* Green-700 color */
-  transform: rotate(45deg); 
+  border-right: 3px solid rgba(22, 163, 74, 0.7);
+  /* Green-700 color */
+  border-top: 3px solid rgba(22, 163, 74, 0.7);
+  /* Green-700 color */
+  transform: rotate(45deg);
 }
 
 .slick-prev::after {
@@ -72,9 +85,11 @@ body {
   display: block;
   width: 10px;
   height: 10px;
-  border-left: 3px solid rgba(22, 163, 74, 0.7); /* Green-700 color */
-  border-bottom: 3px solid rgba(22, 163, 74, 0.7); /* Green-700 color */
-  transform: rotate(45deg); 
+  border-left: 3px solid rgba(22, 163, 74, 0.7);
+  /* Green-700 color */
+  border-bottom: 3px solid rgba(22, 163, 74, 0.7);
+  /* Green-700 color */
+  transform: rotate(45deg);
 }
 
 .slick-prev:hover,
@@ -88,9 +103,10 @@ body {
 .slick-next::before {
   display: none !important;
 }
+
 /*Navbar*/
 
-header{
+header {
   background-color: rgba(22, 163, 74);
   position: sticky;
   top: 0;
@@ -102,7 +118,7 @@ header{
 
 }
 
-ul{
+ul {
   list-style: none;
   height: 100%;
   display: flex;
@@ -113,7 +129,7 @@ ul{
 
 }
 
-ul li{
+ul li {
   padding: 5px;
   margin-left: 20px;
   background-color: black;
@@ -126,7 +142,7 @@ ul li span {
   border: 1px dashed black;
   padding: 5px 10px;
   margin-right: 10px;
-  background:#fff
+  background: #fff
 }
 
 ul li:hover {
@@ -135,46 +151,50 @@ ul li:hover {
 }
 
 /*Mobile navbar style*/
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-#mobile-icon{
+
+#mobile-icon {
   margin: auto 0;
   display: none;
   cursor: pointer;
   z-index: 1;
 }
 
-#mobile-icon div{
-    width: 35px;
-    height: 3px;
-    background-color: black;
-    margin: 6px 0;
-    transition: 0.4s;
-    z-index: 1;
-}
-.open .bar1 {
-   -webkit-transform: rotate(-45deg) translate(-6px, 6px);
-   transform: rotate(-45deg) translate(-6px, 6px);
-}
-.open .bar2{
-  opacity: 0;
-}
-.open .bar3{
-  -webkit-transform: rotate(45deg) translate(-6px, -8px);
-   transform: rotate(45deg) translate(-6px, -8px);
+#mobile-icon div {
+  width: 35px;
+  height: 3px;
+  background-color: black;
+  margin: 6px 0;
+  transition: 0.4s;
+  z-index: 1;
 }
 
-.open .mobile-menu{
+.open .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-6px, 6px);
+  transform: rotate(-45deg) translate(-6px, 6px);
+}
+
+.open .bar2 {
+  opacity: 0;
+}
+
+.open .bar3 {
+  -webkit-transform: rotate(45deg) translate(-6px, -8px);
+  transform: rotate(45deg) translate(-6px, -8px);
+}
+
+.open .mobile-menu {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
 
-.mobile-menu{
+.mobile-menu {
   display: none;
   position: absolute;
   top: 90%;
@@ -185,48 +205,45 @@ ul li:hover {
   background-color: rgba(22, 163, 74);
 }
 
-.mobile-menu li{
+.mobile-menu li {
   margin-top: 5px;
   margin-bottom: 10px;
 }
 
 /*Mobile view*/
 @media only screen and (max-width: 750px) {
-  header nav{
+  header nav {
     display: none;
   }
-  #mobile-icon{
+
+  #mobile-icon {
     display: block;
     margin-right: 40px;
   }
-  header{
+
+  header {
     height: 20%;
-   
+
   }
-  #headerlogo{
+
+  #headerlogo {
     width: 15%;
     height: 15%;
   }
+
   .slider-image {
-    height: 150px; 
+    height: 150px;
   }
+
   ul li {
     background-color: rgba(22, 163, 74);
     font-size: 2rem;
-    
-    
+
+
   }
-  ul li span{
+
+  ul li span {
     background-color: rgba(22, 163, 74);
   }
-  
+
 }
-
-
-
-
-
-
-
-
-
