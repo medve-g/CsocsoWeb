@@ -10,13 +10,13 @@ export function Footer() {
                     <div class="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-2 place-items-center">
                         <div class="">
                             <h6
-                                class="mb-3 flex justify-center font-semibold uppercase md:justify-start">
+                                class="mb-3 flex justify-center font-semibold uppercase md:justify-start text-xl">
                                 Contact us
                             </h6>
-                            <p class="mb-3">
-                                <p class="mb-4">
+                            <p class="mb-3 text-xl">
                                     <a href="#!"><FontAwesomeIcon icon={faHouse} /> 5600 Békéscsaba, Széchenyi utca 4</a>
                                 </p>
+                            <p class="mb-3">
                                 <a href="#"><FontAwesomeIcon icon={faPhone} /> +3620123456789</a>
                             </p>
                             <p class="mb-3">
