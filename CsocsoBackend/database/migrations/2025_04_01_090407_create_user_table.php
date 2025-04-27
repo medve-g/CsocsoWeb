@@ -19,6 +19,43 @@ return new class extends Migration
             $table->boolean("contest_admin");
             $table->timestamps();
         });
+
+        Schema::create('categories', function (Blueprint $table){
+            $table->id();
+            $table->string("name");
+            $table->string("short_name");
+            $table->enum('type', ['egyéni', 'páros']);
+            $table->timestamps();
+        });
+
+        Schema::create('competition', function (Blueprint $table){
+            $table->id();
+            $table->string("competition_name");
+            $table->string("location");
+            $table->dateTime("competition_start");
+            $table->dateTime("end_of_pre-registration");
+            $table->json("categories_and_fees");
+            $table->timestamps();
+        });
+
+        Schema::create('ranklist', function (Blueprint $table){
+            $table->id();
+            $table->string("name");
+            $table->integer("points");
+            $table->foreignId("categorie")->constrained("categories");
+            $table->timestamps();
+        });
+
+        Schema::create('registration', function (Blueprint $table){
+            $table->id();
+            $table->foreignId("registration_submitter")->constrained("user");
+            $table->foreignId("categorie")->constrained("categories");
+            $table->foreignId("contestant1")->constrained("ranklist");
+            $table->foreignId("contestant2")->constrained("ranklist")->nullable();
+            $table->integer("registration_fee");
+            $table->foreignId("competition_id")->constrained("competition");
+            $table->timestamps();
+        });
     }
 
     /**
