@@ -8,11 +8,37 @@ use Illuminate\Support\Facades\DB;
 
 class ContestSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        
+        DB::table("competition")->insert([
+            [
+                "competition_name" => "Giga verseny",
+                "location" => "Békéscsaba, Széchenyi u. 4, 5600",
+                "competition_start" => "2025-05-10 14:00:00",
+                "end_of_pre-registration" => "025-05-09 14:00:00",
+                "categories_and_fees" => '{
+                    "Rookie (junior)" : 500,
+                    "Rookie" : 1500,
+                    "Semi-pro (junior)" : 1000,
+                    "Semi-pro" : 2500,
+                    "Pro" : 3000,
+                    "Master" : 4000
+                }'
+            ],
+            [
+                "competition_name" => "Kicsi verseny",
+                "location" => "Békéscsaba, Széchenyi u. 4, 5600",
+                "competition_start" => "2025-06-10 14:00:00",
+                "end_of_pre-registration" => "025-06-09 14:00:00",
+                "categories_and_fees" => '{
+                    "Rookie (junior)" : 500,
+                    "Rookie" : 1500,
+                    "Semi-pro (junior)" : 1000,
+                    "Semi-pro" : 2500,
+                    "Pro" : 3000,
+                    "Master" : 4000
+                }'
+            ]
+        ]);
     }
 }
