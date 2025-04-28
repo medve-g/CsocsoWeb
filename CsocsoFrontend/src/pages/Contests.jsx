@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+
 
 // function setButton(ertek){
 //   if (ertek == 1) {
@@ -21,7 +23,19 @@ import { Link } from "react-router-dom";
 // }
 
 export function Contests() {
+  let [contests, setContests] = useState([]);
 
+  useEffect(() => {
+    async function getAllContests() {
+      let response = await fetch("http://127.0.0.1:8000/api/contests");
+      let data = response.json();
+      setContests(data)
+    }
+  
+    getAllContests();
+  })
+
+  
   //let [skibidi, setSkibidi] = useState(2);
   return (
     <>
