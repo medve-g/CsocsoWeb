@@ -21,6 +21,13 @@ class UserSeeder extends Seeder
                 "password" => Hash::make("123qwe"),
                 "contest_admin" => false
             ]
+            ,
+            [
+                "username" => "Csocsó Mester",
+                "email" => "viharsarkicse@gmail.com",
+                "password" => Hash::make("csocso"),
+                "contest_admin" => true
+            ]
         ]);
     }
 }
