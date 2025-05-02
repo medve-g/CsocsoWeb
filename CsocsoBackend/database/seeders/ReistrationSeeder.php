@@ -23,7 +23,7 @@ class ReistrationSeeder extends Seeder
                 "competition_id" => 1
             ],
             [
-              "registration_submitter" => 2,
+                "registration_submitter" => 2,
                 "categorie" => 2,
                 "contestant1" => 1,
                 "contestant2" => 2,

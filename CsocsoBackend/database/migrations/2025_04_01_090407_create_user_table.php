@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('categories', function (Blueprint $table){
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string("name");
             $table->string("short_name");
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('competition', function (Blueprint $table){
+        Schema::create('competition', function (Blueprint $table) {
             $table->id();
             $table->string("competition_name");
             $table->string("location");
@@ -38,7 +38,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('ranklist', function (Blueprint $table){
+        Schema::create('ranklist', function (Blueprint $table) {
             $table->id();
             $table->string("name");
             $table->integer("points");
@@ -46,7 +46,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('registration', function (Blueprint $table){
+        Schema::create('registration', function (Blueprint $table) {
             $table->id();
             $table->foreignId("registration_submitter")->constrained("user");
             $table->foreignId("categorie")->constrained("categories");

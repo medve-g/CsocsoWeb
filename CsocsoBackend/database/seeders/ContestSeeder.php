@@ -15,7 +15,7 @@ class ContestSeeder extends Seeder
                 "competition_name" => "Giga verseny",
                 "location" => "Békéscsaba, Széchenyi u. 4, 5600",
                 "competition_start" => "2025-05-10 14:00:00",
-                "end_of_pre-registration" => "025-05-09 14:00:00",
+                "end_of_pre-registration" => "2025-05-09 14:00:00",
                 "categories_and_fees" => json_encode([
                     "Rookie (junior)" => 500,
                     "Rookie" => 1500,
@@ -29,7 +29,7 @@ class ContestSeeder extends Seeder
                 "competition_name" => "Kicsi verseny",
                 "location" => "Békéscsaba, Széchenyi u. 4, 5600",
                 "competition_start" => "2025-06-10 14:00:00",
-                "end_of_pre-registration" => "025-06-09 14:00:00",
+                "end_of_pre-registration" => "2025-06-09 14:00:00",
                 "categories_and_fees" => json_encode([
                     "Rookie (junior)" => 500,
                     "Rookie" => 1500,

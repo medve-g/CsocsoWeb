@@ -20,8 +20,7 @@ class UserSeeder extends Seeder
                 "email" => "pelda@gmail.com",
                 "password" => Hash::make("123qwe"),
                 "contest_admin" => false
-            ]
-            ,
+            ],
             [
                 "username" => "Csocsó Mester",
                 "email" => "viharsarkicse@gmail.com",
