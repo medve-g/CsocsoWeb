@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
 export default function ContestCard({ contestInformation }) {
-    const categoriesAndFees = contestInformation?.categories_and_fees;
-
+  const categoriesAndFees = contestInformation?.categories_and_fees;
 
   return (
     <div className="bg-green-800 w-full h-[200px] my-10 flex flex-row cursor-pointer ransition-transform duration-200 ease-in-out hover:scale-105">
@@ -15,7 +14,8 @@ export default function ContestCard({ contestInformation }) {
             {contestInformation?.competition_name}
           </p>
           <p className="text-2xl text-white font-normal">
-            Előregisztráció lezáródása: {contestInformation?.["end_of_pre-registration"]}
+            Előregisztráció lezáródása:{" "}
+            {contestInformation?.["end_of_pre-registration"]}
           </p>
           <p className="text-2xl text-white font-normal">
             Kezdés: {contestInformation?.["end_of_pre-registration"]}
@@ -28,21 +28,37 @@ export default function ContestCard({ contestInformation }) {
           <table className="border-collapse border border-white text-center">
             <thead>
               <tr className="bg-emerald-900 text-white font-bold text-lg">
-                {categoriesAndFees&&Object.entries(categoriesAndFees).map(([category, fee]) =>{
+                {categoriesAndFees &&
+                  Object.entries(categoriesAndFees).map(([category, fee]) => {
                     if (category.includes("junior")) {
-                        let attempt = category.split(" ");
-                        return <th key={category} className="p-3 border border-white">{attempt[0]}<br/>{attempt[1]}</th>
-                    }else{
-                        return <th key={category} className="p-3 border border-white">{category}</th>
+                      let attempt = category.split(" ");
+                      return (
+                        <th key={category} className="p-3 border border-white">
+                          {attempt[0]}
+                          <br />
+                          {attempt[1]}
+                        </th>
+                      );
+                    } else {
+                      return (
+                        <th key={category} className="p-3 border border-white">
+                          {category}
+                        </th>
+                      );
                     }
-                })}
+                  })}
               </tr>
             </thead>
             <tbody>
               <tr className="bg-emerald-700 text-white font-light text-lg">
-              {categoriesAndFees&&Object.entries(categoriesAndFees).map(([category, fee]) =>{
-                        return <td key={category} className="px-3 border border-white">{fee} HUF</td>
-                })}
+                {categoriesAndFees &&
+                  Object.entries(categoriesAndFees).map(([category, fee]) => {
+                    return (
+                      <td key={category} className="px-3 border border-white">
+                        {fee} HUF
+                      </td>
+                    );
+                  })}
               </tr>
             </tbody>
           </table>

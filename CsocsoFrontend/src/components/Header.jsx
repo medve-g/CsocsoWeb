@@ -11,7 +11,7 @@ export function Header() {
 
     return (
         <>
-            <header className="min-h-24">
+            <header className="min-h-24 z-20">
                 <div className="h-fit"><img className="h-24" src={logo}></img></div>
                 <nav>
                     <ul>
