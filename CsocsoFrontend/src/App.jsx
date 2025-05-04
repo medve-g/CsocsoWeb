@@ -1,29 +1,30 @@
 import "./App.css";
-import LogInSignUp from "./pages/LogInSignUp";
+import LogIn from "./pages/LogIn";
 import { WelcomePage } from "./pages/WelcomePage";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { AboutUs } from "./pages/AboutUs";
 import { Contests } from "./pages/Contests";
 import CreateContest from "./pages/CreateContest";
+import { SignUp } from "./pages/SingUp";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-
 function App() {
   return (
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<WelcomePage />} />
-        <Route path="/login" element={<LogInSignUp />} />
-        <Route path="/createContest" element={<CreateContest/>}/>
-        <Route path="/aboutus" element={<AboutUs/>}/>
-        <Route path="/contests" element={<Contests/>}/>
-        <Route path="*" element={<WelcomePage />} />
-      </Routes>
-     <Footer/>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<WelcomePage />} />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/registration" element={<SignUp />} />
+          <Route path="/createContest" element={<CreateContest />} />
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/contests" element={<Contests />} />
+          <Route path="*" element={<WelcomePage />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
   );
 }
 
