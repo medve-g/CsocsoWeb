@@ -1,33 +1,40 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function LogIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    try {
-      console.log(email);
-      console.log(password);
-      await login(email, password);
-    } catch (e) {
-      console.log(e);
-    }
+  let [logInData, setLogInData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setLogInData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const login = async (email, password) => {
-    const response = await fetch("http://127.0.0.1:8000/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+  let handleLogIn = async () => {
+    try {
+      let res = await fetch("http://127.0.0.1:8000/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(logInData),
+      });
 
-    if (!response.ok) throw new Error("Login failed");
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Valami hiba történt");
+      }
 
-    const data = await response.json();
-    setToken(data.access_token);
-    setUser(data.user);
-    localStorage.setItem("token", data.access_token);
+      navigate("/");
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   return (
@@ -44,8 +51,9 @@ function LogIn() {
                 className="w-full border rounded-xl p-3 mt-1 mb-3"
                 placeholder="Írja be az email címét"
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                name="email"
+                value={logInData.email}
+                onChange={handleChange}
               />
             </div>
             <div className="px-5 text-left">
@@ -54,8 +62,9 @@ function LogIn() {
                 className="w-full border rounded-xl p-3 mt-1"
                 placeholder="Írja be a jelszavát"
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                value={logInData.password}
+                onChange={handleChange}
               />
             </div>
             <div className="text-right pr-5 mt-2 hover:text-green-600 cursor-pointer">
@@ -64,7 +73,7 @@ function LogIn() {
             <div className="w-full p-5 mt-3">
               <button
                 className="w-full border-2 rounded-md p-3 font-bold bg-green-600 text-white text-lg border-gray-500 hover:text-gray-600 hover:bg-white hover:border-green-600"
-                onClick={handleLogin}
+                onClick={handleLogIn}
               >
                 Bejelentkezés
               </button>

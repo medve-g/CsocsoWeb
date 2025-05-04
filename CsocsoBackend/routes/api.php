@@ -9,3 +9,4 @@ use Illuminate\Support\Facades\Route;
 Route::get("/contests", [ContestController::class, "index"]);
 
 Route::post("/registerUser", [AuthController::class, "register"]);
+Route::post("/login", [AuthController::class, "logIn"]);

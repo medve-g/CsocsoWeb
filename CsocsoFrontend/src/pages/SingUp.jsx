@@ -1,26 +1,45 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function SignUp() {
-  let [formatData, setFormatData] = useState({
+    const navigate = useNavigate()
+
+  let [registrationData, setRegistrationData] = useState({
     username: "",
-    email:"",
-    password:"",
-    passwordAgain:""
+    email: "",
+    password: "",
+    password_confirmed: "",
+    contest_admin: 0
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setFormatData((prev) => ({
+    setRegistrationData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  let handleRegistration = () => {
-    console.log(formatData)
+  let handleRegistration = async () => {
+    try {
+      let res = await fetch("http://127.0.0.1:8000/api/registerUser", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(registrationData),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Valami hiba történt");
+      }
+
+      navigate("/");
+    } catch (err) {
+      console.error(err.message);
+    }
   };
+
   return (
     <div className="w-full flex justify-center items-center my-20">
       <div className="bg-white w-[1000px] px-10 py-20 rounded-xl drop-shadow-lg max-sm:px-1 max-sm:py-8 ">
@@ -37,7 +56,7 @@ export function SignUp() {
                 placeholder="Írja be a felhasználó nevét"
                 type="text"
                 name="username"
-                value={formatData.username}
+                value={registrationData.username}
                 onChange={handleChange}
               />
             </div>
@@ -49,7 +68,7 @@ export function SignUp() {
                 placeholder="Írja be az email címét"
                 type="email"
                 name="email"
-                value={formatData.email}
+                value={registrationData.email}
                 onChange={handleChange}
               />
             </div>
@@ -64,7 +83,7 @@ export function SignUp() {
                 placeholder="Írja be a felhasználó nevét"
                 type="password"
                 name="password"
-                value={formatData.password}
+                value={registrationData.password}
                 onChange={handleChange}
               />
             </div>
@@ -75,14 +94,17 @@ export function SignUp() {
                 className="w-full border rounded-xl p-3 mt-1 mb-3"
                 placeholder="Írja be az email címét"
                 type="password"
-                name="passwordAgain"
-                value={formatData.passwordAgain}
+                name="password_confirmed"
+                value={registrationData.password_confirmed}
                 onChange={handleChange}
               />
             </div>
           </div>
           <div className="w-full p-5 mt-3">
-            <button onClick={handleRegistration} className="w-full border-2 rounded-md p-3 font-bold bg-green-600 text-white text-lg border-gray-500 hover:text-gray-600 hover:bg-white hover:border-green-600">
+            <button
+              onClick={handleRegistration}
+              className="w-full border-2 rounded-md p-3 font-bold bg-green-600 text-white text-lg border-gray-500 hover:text-gray-600 hover:bg-white hover:border-green-600"
+            >
               Regisztráció
             </button>
           </div>
