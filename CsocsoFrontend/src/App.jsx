@@ -7,6 +7,7 @@ import { AboutUs } from "./pages/AboutUs";
 import { Contests } from "./pages/Contests";
 import CreateContest from "./pages/CreateContest";
 import { SignUp } from "./pages/SingUp";
+import {AddNews} from "./pages/AddNews";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/createContest" element={<CreateContest />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/contests" element={<Contests />} />
+          <Route path="/AddNews" element={<AddNews />}/>
           <Route path="*" element={<WelcomePage />} />
         </Routes>
         <Footer />
