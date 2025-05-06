@@ -14,7 +14,7 @@ import React, { useState } from "react";
 export const UserContext = React.createContext();
 
 function App() {
-  let [currentUser, setCurrentUser] = useState(0);
+  let [currentUser, setCurrentUser] = useState({});
 
   return (
     <UserContext.Provider value={[currentUser, setCurrentUser]}>
