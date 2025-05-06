@@ -1,8 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
+import { UserContext } from "../App";
+import { useNavigate } from "react-router-dom";
+
+let enableButton = (user) => {
+    if (user.contest_admin == 1) {
+        return (
+            <div id="Add-News-Button" className="w-full flex justify-end">
+                <Link to="/AddNews">
+                    <button className="bg-green-500 rounded-md font-bold text-white text-2xl p-3 border-2 hover:bg-white hover:border-green-500 hover:text-green-500">
+                        Új Hír
+                    </button>
+                </Link>
+            </div>
+        );
+    } else {
+        return <></>;
+    }
+};
 
 // API Fetch 
 function ApiConnect({ setAdat }) {
@@ -48,6 +66,8 @@ function PrevArrow(props) {
 
 export function NewsSlider() {
     const [adat, setAdat] = useState([]);
+    const [user, setUser] = useContext(UserContext);
+    const navigate = useNavigate();
 
     return (
         <>
@@ -60,13 +80,7 @@ export function NewsSlider() {
             </section>
 
             <div id="News-Slider-Box" className="h-[400px] pt-10">
-                <div id="Add-News-Button" className="w-full flex justify-end">
-                    <Link to="/AddNews">
-                        <button className="bg-green-500 rounded-md font-bold text-white text-2xl p-3 border-2 hover:bg-white hover:border-green-500 hover:text-green-500">
-                            Új Hír
-                        </button>
-                    </Link>
-                </div>
+                {enableButton(user)}
 
                 <div className="h-[400px] w-3/4 m-auto">
                     <Slider
@@ -91,8 +105,11 @@ export function NewsSlider() {
                                     <img src={item.image} className="w-full h-full object-cover block" alt={item.title} />
                                 </div>
                                 <div className="p-10 bg-green-600 rounded-b-lg">
-                                    <p className="font-semibold text-white">{item.title}</p>
+                                    <Link to="/clickednews" state={{ title: item.title }}>
+                                        <p className="font-semibold text-white">{item.title}</p>
+                                    </Link>
                                 </div>
+
                             </div>
                         ))}
                     </Slider>
