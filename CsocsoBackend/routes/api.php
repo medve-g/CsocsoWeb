@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/contests", [ContestController::class, "index"]);
 
-Route::post("/registerUser", [AuthController::class, "register"]);
+Route::post("/register", [AuthController::class, "register"]);
 Route::post("/login", [AuthController::class, "logIn"]);
+Route::post("/logout", [AuthController::class, "logOut"]);
 
 Route::get('/newsApi', [NewsController::class, 'getnews']);
 Route::post('/newsApi', [NewsController::class, 'storenews']);

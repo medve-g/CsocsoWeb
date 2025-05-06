@@ -23,7 +23,7 @@ export function SignUp() {
 
   let handleRegistration = async () => {
     try {
-      let res = await fetch("http://127.0.0.1:8000/api/registerUser", {
+      let res = await fetch("http://127.0.0.1:8000/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(registrationData),

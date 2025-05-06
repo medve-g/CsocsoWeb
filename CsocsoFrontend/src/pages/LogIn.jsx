@@ -5,7 +5,6 @@ import { UserContext } from "../App"
 
 function LogIn() {
   const navigate = useNavigate();
-
   const [ user, setUser ] = useContext(UserContext);
 
   let [logInData, setLogInData] = useState({
@@ -23,7 +22,6 @@ function LogIn() {
   };
 
   let handleLogIn = async () => {
-    console.log(user)
     try {
       let res = await fetch("http://127.0.0.1:8000/api/login", {
         method: "POST",
@@ -36,6 +34,8 @@ function LogIn() {
         throw new Error(errorData.message || "Valami hiba történt");
       }
 
+      let data = await res.json();
+      await setUser(data)
       navigate("/");
     } catch (err) {
       console.error(err.message);
