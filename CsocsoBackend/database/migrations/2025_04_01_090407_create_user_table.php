@@ -23,7 +23,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string("short_name");
+            $table->string("ranklist_reference");
             $table->enum('type', ['egyéni', 'páros']);
             $table->timestamps();
         });
@@ -34,7 +34,8 @@ return new class extends Migration
             $table->string("location");
             $table->dateTime("competition_start");
             $table->dateTime("end_of_pre-registration");
-            $table->json("categories_and_fees");
+            $table->json("categories");
+            $table->json("ratings_and_fees");
             $table->timestamps();
         });
 
@@ -54,6 +55,24 @@ return new class extends Migration
             $table->foreignId('contestant2')->nullable()->constrained('ranklist');
             $table->integer("registration_fee");
             $table->foreignId("competition_id")->constrained("competition");
+            $table->timestamps();
+        });
+
+        Schema::create('news', function (Blueprint $table) {
+            $table->id();
+            $table->string("imagepath", length: 255);
+            $table->string("title");
+            $table->string("content");
+        });
+
+        Schema::create('personal_access_tokens', function (Blueprint $table) {
+            $table->id();
+            $table->morphs('tokenable');
+            $table->string('name');
+            $table->string('token', 64)->unique();
+            $table->text('abilities')->nullable();
+            $table->timestamp('last_used_at')->nullable();
+            $table->timestamp('expires_at')->nullable();
             $table->timestamps();
         });
     }

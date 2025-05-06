@@ -16,7 +16,12 @@ class ContestSeeder extends Seeder
                 "location" => "Békéscsaba, Széchenyi u. 4, 5600",
                 "competition_start" => "2025-05-10 14:00:00",
                 "end_of_pre-registration" => "2025-05-09 14:00:00",
-                "categories_and_fees" => json_encode([
+                "categories" => json_encode([
+                    "categorie_id" => 1,
+                    "categorie_id" => 2,
+                    "categorie_id" => 4
+                ]),
+                "ratings_and_fees" => json_encode([
                     "Rookie (junior)" => 500,
                     "Rookie" => 1500,
                     "Semi-pro (junior)" => 1000,
@@ -30,7 +35,12 @@ class ContestSeeder extends Seeder
                 "location" => "Békéscsaba, Széchenyi u. 4, 5600",
                 "competition_start" => "2025-06-10 14:00:00",
                 "end_of_pre-registration" => "2025-06-09 14:00:00",
-                "categories_and_fees" => json_encode([
+                "categories" => json_encode([
+                    "categorie_id" => 5,
+                    "categorie_id" => 6,
+                    "categorie_id" => 7
+                ]),
+                "ratings_and_fees" => json_encode([
                     "Rookie (junior)" => 500,
                     "Rookie" => 1500,
                     "Semi-pro (junior)" => 1000,

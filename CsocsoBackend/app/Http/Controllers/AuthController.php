@@ -23,7 +23,7 @@ class AuthController extends Controller
         $user = UserModel::create($validate);
 
         Auth::login($user);
-
+        
         return ["id" => $user["id"], "contest_admin" => $user["contest_admin"]];
     }
 

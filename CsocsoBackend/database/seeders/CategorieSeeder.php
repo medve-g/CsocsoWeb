@@ -16,12 +16,12 @@ class CategorieSeeder extends Seeder
         DB::table("categories")->insert([
             [
                 "name" => "Nyílt Egyéni",
-                "short_name" => "NYE",
+                "ranklist_reference" => "NYE",
                 "type" => "egyéni"
             ],
             [
                 "name" => "Nyílt Páros",
-                "short_name" => "NYP",
+                "ranklist_reference" => "NYP",
                 "type" => "páros"
             ],
         ]);

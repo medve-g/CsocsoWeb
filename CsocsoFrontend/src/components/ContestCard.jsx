@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export default function ContestCard({ contestInformation }) {
-  const categoriesAndFees = contestInformation?.categories_and_fees;
+  const ratingsAndFees = contestInformation?.ratings_and_fees;
 
   return (
     <div className="bg-green-800 w-full h-[200px] my-10 flex flex-row cursor-pointer ransition-transform duration-200 ease-in-out hover:scale-105">
@@ -28,8 +28,8 @@ export default function ContestCard({ contestInformation }) {
           <table className="border-collapse border border-white text-center">
             <thead>
               <tr className="bg-emerald-900 text-white font-bold text-lg">
-                {categoriesAndFees &&
-                  Object.entries(categoriesAndFees).map(([category, fee]) => {
+                {ratingsAndFees &&
+                  Object.entries(ratingsAndFees).map(([category, fee]) => {
                     if (category.includes("junior")) {
                       let attempt = category.split(" ");
                       return (
@@ -51,8 +51,8 @@ export default function ContestCard({ contestInformation }) {
             </thead>
             <tbody>
               <tr className="bg-emerald-700 text-white font-light text-lg">
-                {categoriesAndFees &&
-                  Object.entries(categoriesAndFees).map(([category, fee]) => {
+                {ratingsAndFees &&
+                  Object.entries(ratingsAndFees).map(([category, fee]) => {
                     return (
                       <td key={category} className="px-3 border border-white">
                         {fee} HUF

@@ -23,8 +23,8 @@ class UserSeeder extends Seeder
             ],
             [
                 "username" => "Csocsó Mester",
-                "email" => "viharsarkicse@gmail.com",
-                "password" => Hash::make("csocso"),
+                "email" => "admin@gmail.com",
+                "password" => Hash::make("admin"),
                 "contest_admin" => true
             ]
         ]);
