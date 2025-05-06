@@ -27,7 +27,7 @@ export function WelcomePage() {
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-4xl font-bold text-green-700 mb-6">Viharsarki Csocsó Egyesület</h2>
                     <p className="text-lg leading-relaxed">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium reprehenderit doloribus illum dolorum, iusto atque reiciendis doloremque error facilis veniam sed id. Fugiat, odit cupiditate ex mollitia aliquid veritatis excepturi!
+                    A Viharsarki Csocsó Egyesület 2023-ban alakult azzal a céllal, hogy a csocsót és más sportágakat népszerűsítse hazánkban, valamint a fiatalok számára újabb sportolási és közösségi lehetőséget teremtsen. Az egyesület elkötelezett a csocsó oktatás színvonalának emelése mellett, és célja, hogy a sportágat minél szélesebb körben megismertesse a fiatalsággal. A szervezet tartalmas szabadidős programokat kínál, versenyzési lehetőséget biztosít, és összefogja a sport iránt érdeklődő ifjúságot. Az alapító tagok tapasztalt, profi játékosok, akik évek óta aktív szereplői a hazai sportéletnek, és szenvedélyesen dolgoznak a csocsó hazai fejlődéséért.
                     </p>
                 </div>
                 <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-8">
@@ -40,13 +40,13 @@ export function WelcomePage() {
                     <div className="bg-green-500 text-white p-6 rounded-2xl shadow-lg w-80 text-center hover:brightness-125 transition duration-300">
                         <h3 className="text-2xl font-semibold">Alapító tagok</h3>
                         <p className="mt-3 text-green-200">
-                            Földi Zsolt
+                            Diós Norbert, Börcsök Szabolcs, Kósa György, Hegedűs Dániel, Cseresznyés Ferenc, Bencsik Tamás, Dénes Benedek
                         </p>
                     </div>
                     <div className="bg-green-400 text-white p-6 rounded-2xl shadow-lg w-80 text-center hover:brightness-125 transition duration-300">
                         <h3 className="text-2xl font-semibold">Alapításának éve</h3>
                         <p className="mt-3 text-green-200">
-                            nemtudom
+                            2023
                         </p>
                     </div>
                 </div>

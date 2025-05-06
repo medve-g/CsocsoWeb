@@ -17,10 +17,10 @@ export function Footer() {
                                     <a href="#!"><FontAwesomeIcon icon={faHouse} /> 5600 Békéscsaba, Széchenyi utca 4</a>
                                 </p>
                             <p class="mb-3">
-                                <a href="#"><FontAwesomeIcon icon={faPhone} /> +3620123456789</a>
+                                <a href="#"><FontAwesomeIcon icon={faPhone} /> +36 30 395 6571</a>
                             </p>
                             <p class="mb-3">
-                                <a href="#!"><FontAwesomeIcon icon={faEnvelope} /> viharsarkicsocso@gmail.com</a>
+                                <a href="#!"><FontAwesomeIcon icon={faEnvelope} /> viharsarkicse@gmail.com</a>
                             </p>
                         </div>
                         <div>
@@ -29,13 +29,13 @@ export function Footer() {
                                 Média megjelenéseink
                             </h6>
                             <p class="mb-3">
-                                <a href="https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2Fviharsarkicse%2F"><FontAwesomeIcon icon={faFacebook} />Facebook</a>
+                                <a href="https://www.facebook.com/viharsarkicse"><FontAwesomeIcon icon={faFacebook} /> Facebook</a>
                             </p>
                             <p class="mb-3">
-                                <a href=""><FontAwesomeIcon icon={faLinkedin} />Instagram</a>
+                                <a href="https://www.instagram.com/viharsarkicsocsoegyesulet/"><FontAwesomeIcon icon={faLinkedin} /> Instagram</a>
                             </p>
                             <p class="mb-3">
-                            <a href="https://www.youtube.com/playlist?list=PLBu4v_ZMPewVwk-MmSnFoneDCQfORzpTM"><FontAwesomeIcon icon={faYoutube} />Youtube</a>
+                            <a href="https://www.youtube.com/playlist?list=PLBu4v_ZMPewVwk-MmSnFoneDCQfORzpTM"><FontAwesomeIcon icon={faYoutube} /> Youtube</a>
                             </p>
                         </div>
                     </div>
