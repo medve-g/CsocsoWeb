@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../App"
+
 
 function LogIn() {
   const navigate = useNavigate();
+
+  const [ user, setUser ] = useContext(UserContext);
 
   let [logInData, setLogInData] = useState({
     email: "",
@@ -19,6 +23,7 @@ function LogIn() {
   };
 
   let handleLogIn = async () => {
+    console.log(user)
     try {
       let res = await fetch("http://127.0.0.1:8000/api/login", {
         method: "POST",

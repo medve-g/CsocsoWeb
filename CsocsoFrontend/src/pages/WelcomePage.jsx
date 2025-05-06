@@ -53,12 +53,6 @@ export function WelcomePage() {
             </section>
 
             <NewsSlider/>
-
-
-            
-        
-
-
         </>
     );
 }

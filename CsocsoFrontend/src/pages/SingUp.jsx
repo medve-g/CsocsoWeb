@@ -8,7 +8,7 @@ export function SignUp() {
     username: "",
     email: "",
     password: "",
-    password_confirmed: "",
+    password_confirmation: "",
     contest_admin: 0
   });
 
@@ -94,8 +94,8 @@ export function SignUp() {
                 className="w-full border rounded-xl p-3 mt-1 mb-3"
                 placeholder="Írja be az email címét"
                 type="password"
-                name="password_confirmed"
-                value={registrationData.password_confirmed}
+                name="password_confirmation"
+                value={registrationData.password_confirmation}
                 onChange={handleChange}
               />
             </div>
