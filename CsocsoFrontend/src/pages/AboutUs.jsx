@@ -46,7 +46,6 @@ export function AboutUs() {
                 <div className="flex-1 p-8 text-green-900 text-lg" style={{ scrollBehavior: 'smooth' }}>
                     <h2 className="text-4xl font-bold text-green-700 mb-10 text-center">Rólunk</h2>
 
-                    {/* Az egyesület célja */}
                     <div className="mb-24">
                         <h3 id="cel" className="text-3xl font-bold text-green-700 mb-4 text-center scroll-mt-16">Az egyesület célja</h3>
                         <div className="flex flex-col-reverse md:flex-row items-center gap-8">
@@ -57,7 +56,6 @@ export function AboutUs() {
                         </div>
                     </div>
 
-                    {/* Tevékenységeink */}
                     <div className="mb-24">
                         <h3 id="tevekenyseg" className="text-3xl font-bold text-green-700 mb-4 text-center scroll-mt-16">Tevékenységeink</h3>
                         <div className="flex flex-col-reverse md:flex-row-reverse items-center gap-8">
@@ -70,7 +68,6 @@ export function AboutUs() {
                         </div>
                     </div>
 
-                    {/* Terveink */}
                     <div className="mb-24">
                         <h3 id="tervek" className="text-3xl font-bold text-green-700 mb-4 text-center scroll-mt-16">Terveink</h3>
                         <div className="flex flex-col-reverse md:flex-row items-center gap-8">
@@ -84,7 +81,6 @@ export function AboutUs() {
                         </div>
                     </div>
 
-                    {/* Megjelenési lehetőségek */}
                     <div className="mb-24">
                         <h3 id="megjelenes" className="text-3xl font-bold text-green-700 mb-4 text-center scroll-mt-16">Megjelenési lehetőségeink</h3>
                         <div className="flex flex-col-reverse md:flex-row-reverse items-center gap-8">
@@ -98,7 +94,6 @@ export function AboutUs() {
                         </div>
                     </div>
 
-                    {/* Az egyesület felépítése */}
                     <div className="mb-24">
                         <h3 id="felepites" className="text-3xl font-bold text-green-700 mb-4 text-center scroll-mt-16">Az egyesület felépítése</h3>
                         <div className="flex flex-col-reverse md:flex-row items-center gap-8">
