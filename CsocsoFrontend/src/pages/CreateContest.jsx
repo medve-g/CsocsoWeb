@@ -7,40 +7,51 @@ export default function CreateContest() {
     competition_start: "",
     end_of_pre_registration: "",
     ratings_and_fees: {
-      rookie_junior : 0,
-      rookie : 0,
-      semi_pro_junior : 0,
-      semi_pro : 0,
-      pro : 0,
-      master : 0,
+      rookie_junior: 0,
+      rookie: 0,
+      semi_pro_junior: 0,
+      semi_pro: 0,
+      pro: 0,
+      master: 0,
     },
     categories: "",
   });
 
-  const handleFormSubmit = async () => {
-    try {
-      await gatherMissingFormData();
-      //let res = await fetch("http://127.0.0.1:8000/api/register", {
-      //  method: "POST",
-      //  headers: { "Content-Type": "application/json" },
-      //  body: JSON.stringify(newContestData),
-      //});
-//
-      //if (!res.ok) {
-      //  const errorData = await res.json();
-      //  throw new Error(errorData.message || "Valami hiba történt");
-      //}
-    } catch (err) {
-      console.err(err.message);
+  const handleForm = async (event) => {
+    event.preventDefault();
+
+  const checkedRadios = document.querySelectorAll('input[type="checkbox"]:checked');
+  const selectedCategories = {};
+
+  checkedRadios.forEach((radio) => {
+    const category = radio.className.split(" ")[0];
+    selectedCategories[category] = parseInt(radio.id);
+  });
+
+  const finalData = {
+    ...newContestData,
+    categories: selectedCategories,
+  };
+
+  console.log(finalData);
+
+  let res = await fetch("http://127.0.0.1:8000/api/newContest", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(finalData),
+  });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || "Valami hiba történt");
     }
   };
 
-  const gatherMissingFormData = async (event) => {
-    event.preventDefault();
+  const gatherMissingFormData = () => {
     const checkedRadios = document.querySelectorAll(
       'input[type="checkbox"]:checked'
     );
-    const selectedCategories = [];
+    const selectedCategories = {};
 
     checkedRadios.forEach((radio) => {
       const category = radio.className.split(" ")[0];
@@ -51,13 +62,7 @@ export default function CreateContest() {
       ...prev,
       categories: selectedCategories,
     }));
-
-
   };
-
-  useEffect(()=>{
-    console.log(newContestData)
-  },[newContestData])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -82,11 +87,7 @@ export default function CreateContest() {
 
   return (
     <div className="my-24">
-      <form
-        action=""
-        method=""
-        className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md space-y-4 text-green-600"
-      >
+      <form className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md space-y-4 text-green-600">
         <label className="block font-medium mb-1 ">Verseny neve:</label>
         <div>
           <input
@@ -274,7 +275,7 @@ export default function CreateContest() {
 
         <button
           className="bg-green-600 text-white px-8 py-3 rounded hover:bg-green-700 transition block mx-auto"
-          onClick={gatherMissingFormData}
+          onClick={handleForm}
         >
           Beküldés
         </button>

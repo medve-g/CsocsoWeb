@@ -4,8 +4,8 @@ export default function ContestCard({ contestInformation }) {
   const ratingsAndFees = contestInformation?.ratings_and_fees;
 
   return (
-    <div className="bg-green-800 w-full h-[200px] my-10 flex flex-row cursor-pointer ransition-transform duration-200 ease-in-out hover:scale-105">
-      <div className="h-full bg-black min-w-[200px]">
+    <div className="bg-green-800 w-full min-h-[200px] my-10 flex flex-row cursor-pointer ransition-transform duration-200 ease-in-out hover:scale-105">
+      <div className="bg-black min-w-[200px]">
         <img src="../../public/ContestImage.jpg" alt="Contest Image" />
       </div>
       <div className="w-full flex justify-between">

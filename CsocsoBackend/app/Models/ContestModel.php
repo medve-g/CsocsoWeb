@@ -14,5 +14,6 @@ class ContestModel extends Model
 
     protected $casts = [
         'ratings_and_fees' => 'array',  
+        'categories' => 'array'
     ];
 }
