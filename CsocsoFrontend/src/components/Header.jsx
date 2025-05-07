@@ -19,8 +19,13 @@ export function Header() {
           <li>Bejelentkezés</li>
         </Link>
       );
-    } else {
-      return <li onClick={logOut}>Kijelentkezés</li>;
+    } 
+    else {
+      return (
+      <Link to="/profile">
+        <li>Profil</li>
+      </Link>
+      );
     }
   };
 

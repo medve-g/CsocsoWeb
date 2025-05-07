@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 export default function ContestCard({ contestInformation }) {
   const ratingsAndFees = contestInformation?.ratings_and_fees;
   const navigate = useNavigate();
@@ -9,10 +8,9 @@ export default function ContestCard({ contestInformation }) {
   return (
     <div
       onClick={() => {
-        console.log("asd");
-        navigate("/contestRegistration");
+        navigate("/contestRegistration", { state: { contestInformation } });
       }}
-      className="bg-green-800 w-full min-h-[200px] my-10 flex flex-row cursor-pointer ransition-transform duration-200 ease-in-out hover:scale-105"
+      className="bg-green-800 w-full min-h-[200px] my-10 flex flex-row cursor-pointer transition-transform duration-200 ease-in-out hover:scale-105"
     >
       <div className="bg-black min-w-[200px]">
         <img src="../../public/ContestImage.jpg" alt="Contest Image" />
@@ -38,36 +36,21 @@ export default function ContestCard({ contestInformation }) {
             <thead>
               <tr className="bg-emerald-900 text-white font-bold text-lg">
                 {ratingsAndFees &&
-                  Object.entries(ratingsAndFees).map(([category, fee]) => {
-                    if (category.includes("junior")) {
-                      let attempt = category.split(" ");
-                      return (
-                        <th key={category} className="p-3 border border-white">
-                          {attempt[0]}
-                          <br />
-                          {attempt[1]}
-                        </th>
-                      );
-                    } else {
-                      return (
-                        <th key={category} className="p-3 border border-white">
-                          {category}
-                        </th>
-                      );
-                    }
-                  })}
+                  Object.entries(ratingsAndFees).map(([category, fee]) => (
+                    <th key={category} className="p-3 border border-white">
+                      {category}
+                    </th>
+                  ))}
               </tr>
             </thead>
             <tbody>
               <tr className="bg-emerald-700 text-white font-light text-lg">
                 {ratingsAndFees &&
-                  Object.entries(ratingsAndFees).map(([category, fee]) => {
-                    return (
-                      <td key={category} className="px-3 border border-white">
-                        {fee} HUF
-                      </td>
-                    );
-                  })}
+                  Object.entries(ratingsAndFees).map(([category, fee]) => (
+                    <td key={category} className="px-3 border border-white">
+                      {fee} HUF
+                    </td>
+                  ))}
               </tr>
             </tbody>
           </table>

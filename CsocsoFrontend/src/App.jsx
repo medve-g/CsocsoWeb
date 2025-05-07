@@ -13,6 +13,7 @@ import ContestRegistration from "./pages/ContestRegistration";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React,{ useState, useEffect, createContext } from "react";
 import { ClickedNewsPage } from "./pages/ClickedNews";
+import Profile from "./pages/Profile";
 export const UserContext = React.createContext();
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
           <Route path="/contests" element={<Contests />} />
           <Route path="/addnews" element={<AddNews />} />
           <Route path="/clickednews" element={<ClickedNewsPage/>}/>
+          <Route path="/profile" element={<Profile/>}/>
           <Route path="*" element={<WelcomePage />} />
         </Routes>
         <Footer />

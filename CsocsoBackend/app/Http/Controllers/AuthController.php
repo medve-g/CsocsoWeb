@@ -40,7 +40,7 @@ class AuthController extends Controller
                 return response()->json(['message' => 'Helytelen jelszó vagy email'], 401);
             }
 
-            return response()->json(["id" => $user["id"], "contest_admin" => $user["contest_admin"]], 200);
+            return response()->json(["id" => $user["id"], "contest_admin" => $user["contest_admin"], "username" => $user["username"], "email" => $user["email"] ], 200);
         } catch (Exception $err) {
             return response()->json(['errors' => $err->getMessage()], 500);
         }
