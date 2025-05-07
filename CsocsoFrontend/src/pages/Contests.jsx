@@ -1,9 +1,11 @@
 import { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ContestCard from "../components/ContestCard";
 import { UserContext } from "../App";
 
 let enableButton = (user) => {
+
+
   if (user.contest_admin == 1) {
     return (
       <div className="w-full flex justify-end">
@@ -53,7 +55,7 @@ export function Contests() {
 
         {contests.map((contest) => {
           return (
-            <ContestCard
+            <ContestCard 
               key={contest.id}
               contestInformation={contest}
             ></ContestCard>

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateContest() {
+  const navigate = useNavigate();
   let [newContestData, setNewContestData] = useState({
     competition_name: "",
     location: "",
@@ -17,37 +19,8 @@ export default function CreateContest() {
     categories: "",
   });
 
-  const handleForm = async (event) => {
-    event.preventDefault();
-
-  const checkedRadios = document.querySelectorAll('input[type="checkbox"]:checked');
-  const selectedCategories = {};
-
-  checkedRadios.forEach((radio) => {
-    const category = radio.className.split(" ")[0];
-    selectedCategories[category] = parseInt(radio.id);
-  });
-
-  const finalData = {
-    ...newContestData,
-    categories: selectedCategories,
-  };
-
-  console.log(finalData);
-
-  let res = await fetch("http://127.0.0.1:8000/api/newContest", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(finalData),
-  });
-
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(errorData.message || "Valami hiba történt");
-    }
-  };
-
-  const gatherMissingFormData = () => {
+  const handleForm = async (e) => {
+    e.preventDefault()
     const checkedRadios = document.querySelectorAll(
       'input[type="checkbox"]:checked'
     );
@@ -58,10 +31,23 @@ export default function CreateContest() {
       selectedCategories[category] = parseInt(radio.id);
     });
 
-    setNewContestData((prev) => ({
-      ...prev,
+    const finalData = {
+      ...newContestData,
       categories: selectedCategories,
-    }));
+    };
+
+    let res = await fetch("http://127.0.0.1:8000/api/newContest", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(finalData),
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || "Valami hiba történt");
+    }
+
+    navigate("/contests");
   };
 
   const handleChange = (e) => {

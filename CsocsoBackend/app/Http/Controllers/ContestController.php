@@ -28,17 +28,20 @@ class ContestController extends Controller
             ]);
 
             $ratingsAndFees = $request->input('ratings_and_fees');
+            $categories = $request->input("categories");
+
+            $categoriesAssoc = [];
+
+            foreach ($categories as $key => $value) {
+                $categoriesAssoc[$key] = $value;
+            }
 
             DB::table("competition")->insert([
                 "competition_name" => $request["competition_name"],
                 "location" => $request["location"],
                 "competition_start" => $request["competition_start"],
                 "end_of_pre_registration" => $request["end_of_pre_registration"],
-                "categories" => json_encode([
-                    "categorie_id1" => 1,
-                    "categorie_id2" => 2,
-                    "categorie_id3" => 4
-                ]),
+                "categories" => json_encode($categoriesAssoc),
                 "ratings_and_fees" => json_encode([
                     "Rookie (junior)" => $ratingsAndFees['rookie_junior'] ?? 0,
                     "Rookie" => $ratingsAndFees['rookie'] ?? 0,

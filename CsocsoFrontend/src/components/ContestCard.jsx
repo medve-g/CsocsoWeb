@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 export default function ContestCard({ contestInformation }) {
   const ratingsAndFees = contestInformation?.ratings_and_fees;
+  const navigate = useNavigate();
 
   return (
-    <div className="bg-green-800 w-full min-h-[200px] my-10 flex flex-row cursor-pointer ransition-transform duration-200 ease-in-out hover:scale-105">
+    <div
+      onClick={() => {
+        console.log("asd");
+        navigate("/contestRegistration");
+      }}
+      className="bg-green-800 w-full min-h-[200px] my-10 flex flex-row cursor-pointer ransition-transform duration-200 ease-in-out hover:scale-105"
+    >
       <div className="bg-black min-w-[200px]">
         <img src="../../public/ContestImage.jpg" alt="Contest Image" />
       </div>

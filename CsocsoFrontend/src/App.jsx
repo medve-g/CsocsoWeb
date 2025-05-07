@@ -8,6 +8,7 @@ import { Contests } from "./pages/Contests";
 import CreateContest from "./pages/CreateContest";
 import { SignUp } from "./pages/SingUp";
 import { AddNews } from "./pages/AddNews";
+import ContestRegistration from "./pages/ContestRegistration";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React,{ useState, useEffect, createContext } from "react";
@@ -35,6 +36,7 @@ function App() {
           <Route path="/login" element={<LogIn />} />
           <Route path="/registration" element={<SignUp />} />
           <Route path="/createContest" element={<CreateContest />} />
+          <Route path="/contestRegistration" element={<ContestRegistration />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/contests" element={<Contests />} />
           <Route path="/addnews" element={<AddNews />} />
