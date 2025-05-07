@@ -12,6 +12,9 @@ import { AddNews } from "./pages/AddNews";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect, createContext } from "react";
 export const UserContext = createContext();
+import React, { useState } from "react";
+import { ClickedNewsPage } from "./pages/ClickedNews";
+export const UserContext = React.createContext();
 
 function App() {
   let [currentUser, setCurrentUser] = useState({});
@@ -36,7 +39,8 @@ function App() {
           <Route path="/createContest" element={<CreateContest />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/contests" element={<Contests />} />
-          <Route path="/AddNews" element={<AddNews />} />
+          <Route path="/addnews" element={<AddNews />} />
+          <Route path="/clickednews" element={<ClickedNewsPage/>}/>
           <Route path="*" element={<WelcomePage />} />
         </Routes>
         <Footer />

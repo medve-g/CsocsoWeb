@@ -47,13 +47,13 @@ export function SignUp() {
 
   return (
     <div className="w-full flex justify-center items-center my-20">
-      <div className="bg-white w-[1000px] px-10 py-20 rounded-xl drop-shadow-lg max-sm:px-1 max-sm:py-8 ">
-        <h1 className="mb-10 mx-5 text-[45px] text-center max-sm:text-[35px]  text-black font-semibold">
+      <div className="bg-white w-[1000px] max-w-full px-10 py-20 rounded-xl drop-shadow-lg sm:px-6 sm:py-10">
+        <h1 className="mb-10 mx-5 text-[45px] text-center text-black font-semibold sm:text-[35px]">
           Regisztráció
         </h1>
         <div className="flex flex-col">
-          <div className="flex justify-between mb-5">
-            <div className="px-5 text-left w-[400px]">
+          <div className="flex flex-col sm:flex-row sm:justify-between mb-5 gap-5">
+            <div className="px-5 text-left flex-1">
               <label className="font-medium text-lg">Felhasználónév</label>
               <br />
               <input
@@ -65,7 +65,7 @@ export function SignUp() {
                 onChange={handleChange}
               />
             </div>
-            <div className="px-5 text-left w-[400px]">
+            <div className="px-5 text-left flex-1">
               <label className="font-medium text-lg">Email</label>
               <br />
               <input
@@ -79,25 +79,25 @@ export function SignUp() {
             </div>
           </div>
 
-          <div className="flex justify-between">
-            <div className="px-5 text-left w-[400px]">
+          <div className="flex flex-col sm:flex-row sm:justify-between gap-5">
+            <div className="px-5 text-left flex-1">
               <label className="font-medium text-lg">Jelszó</label>
               <br />
               <input
                 className="w-full border rounded-xl p-3 mt-1 mb-3"
-                placeholder="Írja be a felhasználó nevét"
+                placeholder="Írja be a jelszót"
                 type="password"
                 name="password"
                 value={registrationData.password}
                 onChange={handleChange}
               />
             </div>
-            <div className="px-5 text-left w-[400px]">
+            <div className="px-5 text-left flex-1">
               <label className="font-medium text-lg">Jelszó újra</label>
               <br />
               <input
                 className="w-full border rounded-xl p-3 mt-1 mb-3"
-                placeholder="Írja be az email címét"
+                placeholder="Írja be a jelszót újra"
                 type="password"
                 name="password_confirmation"
                 value={registrationData.password_confirmation}
@@ -105,7 +105,8 @@ export function SignUp() {
               />
             </div>
           </div>
-          <div className="w-full p-5 mt-3">
+
+          <div className="w-full px-5 mt-3">
             <button
               onClick={handleRegistration}
               className="w-full border-2 rounded-md p-3 font-bold bg-green-600 text-white text-lg border-gray-500 hover:text-gray-600 hover:bg-white hover:border-green-600"
@@ -113,16 +114,16 @@ export function SignUp() {
               Regisztráció
             </button>
           </div>
-          <div className="flex mt-3 px-5 justify-between">
-            <p>Van már fiókod</p>
+
+          <div className="flex mt-3 px-5 justify-between text-sm sm:text-base">
+            <p>Van már fiókod?</p>
             <Link to="/logIn">
-              <p className="hover:text-green-600 cursor-pointer">
-                Bejelentkezés
-              </p>
+              <p className="hover:text-green-600 cursor-pointer">Bejelentkezés</p>
             </Link>
           </div>
         </div>
       </div>
     </div>
+
   );
 }

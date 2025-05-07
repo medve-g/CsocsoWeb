@@ -20,14 +20,13 @@ export function AddNews() {
         const formData = new FormData();
         formData.append("title", title);
         formData.append("content", content);
-        formData.append("imagepath", `/images/${fileName}`);
-
+        formData.append("image", document.querySelector('input[type="file"]').files[0]);
+    
         try {
             const response = await fetch("http://127.0.0.1:8000/api/newsApi", {
                 method: "POST",
                 body: formData,
             });
-
             const result = await response.json();
             console.log("Success:", result);
             alert("Hír sikeresen feltöltve!");
@@ -67,7 +66,7 @@ export function AddNews() {
                     <label className="font-medium text-lg">Válassz ki egy képet a hírhez:</label>
                     <input
                         type="file"
-                        accept="image/*"
+                        accept=".jpg, .jpeg, .png"
                         onChange={handleImageChange}
                         className="w-full border rounded-xl p-3 mt-1 mb-3"
                     />
