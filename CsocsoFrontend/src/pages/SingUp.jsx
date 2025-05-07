@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../App";
 
 export function SignUp() {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [user, setUser] = useContext(UserContext);
 
   let [registrationData, setRegistrationData] = useState({
     username: "",
     email: "",
     password: "",
     password_confirmation: "",
-    contest_admin: 0
+    contest_admin: 0,
   });
 
   const handleChange = (e) => {
@@ -34,6 +36,9 @@ export function SignUp() {
         throw new Error(errorData.message || "Valami hiba történt");
       }
 
+      let data = await res.json();
+      await setUser(data);
+      localStorage.setItem("user", JSON.stringify(data));
       navigate("/");
     } catch (err) {
       console.error(err.message);

@@ -25,7 +25,7 @@ class AuthController extends Controller
 
             $user = UserModel::create($validate);
 
-            return ["id" => $user["id"], "contest_admin" => $user["contest_admin"]];
+            return response()->json(["id" => $user["id"], "contest_admin" => $user["contest_admin"]], 200);
         } catch (ValidationException $err) {
             return response()->json(['errors' => $err->errors()], 422);
         }

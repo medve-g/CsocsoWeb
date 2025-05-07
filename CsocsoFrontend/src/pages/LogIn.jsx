@@ -1,16 +1,28 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../App"
-
+import { UserContext } from "../App";
 
 function LogIn() {
   const navigate = useNavigate();
-  const [ user, setUser ] = useContext(UserContext);
+  const [user, setUser] = useContext(UserContext);
+  const [errorMessage, setErrorMessage] = useState("");
 
   let [logInData, setLogInData] = useState({
     email: "",
     password: "",
   });
+
+  let displayError = (errorMessage) => {
+    if (errorMessage == "") {
+      return;
+    } else {
+      return (
+        <div className="mx-5 mt-3 p-2 rounded-lg border-2 border-red-700 bg-red-200 text-white font-bold text-xl">
+          <p>{errorMessage}</p>
+        </div>
+      );
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,11 +43,13 @@ function LogIn() {
 
       if (!res.ok) {
         const errorData = await res.json();
+        setErrorMessage(errorData.message);
         throw new Error(errorData.message || "Valami hiba történt");
       }
 
       let data = await res.json();
-      await setUser(data)
+      await setUser(data);
+      localStorage.setItem("user", JSON.stringify(data));
       navigate("/");
     } catch (err) {
       console.error(err.message);
@@ -72,6 +86,7 @@ function LogIn() {
                 onChange={handleChange}
               />
             </div>
+            {displayError(errorMessage)}
             <div className="text-right pr-5 mt-2 hover:text-green-600 cursor-pointer">
               <p>Elfelejtette jelszavát?</p>
             </div>

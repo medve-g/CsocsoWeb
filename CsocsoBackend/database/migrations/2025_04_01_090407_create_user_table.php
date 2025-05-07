@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("email");
             $table->string("password");
             $table->boolean("contest_admin");
+            $table->string('api_token', 80)->after('password')->nullable()->unique();
             $table->timestamps();
         });
 

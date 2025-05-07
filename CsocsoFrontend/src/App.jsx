@@ -10,11 +10,20 @@ import { SignUp } from "./pages/SingUp";
 import { AddNews } from "./pages/AddNews";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React, { useState } from "react";
-export const UserContext = React.createContext();
+import { useState, useEffect, createContext } from "react";
+export const UserContext = createContext();
 
 function App() {
   let [currentUser, setCurrentUser] = useState({});
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      setCurrentUser(JSON.parse(localStorage.getItem("user")));
+    }else{
+      setCurrentUser({})
+    }
+  }, []);
 
   return (
     <UserContext.Provider value={[currentUser, setCurrentUser]}>

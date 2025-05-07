@@ -22,6 +22,7 @@ export function Header() {
     }
 
     let logOut = () => {
+        localStorage.removeItem("user");
         setUser({})
     }
 

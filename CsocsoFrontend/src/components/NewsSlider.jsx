@@ -53,13 +53,13 @@ export function NewsSlider() {
         <>
             <ApiConnect setAdat={setAdat} />
 
-            <section id="News-Slider-Box" className="py-16 px-6 md:px-12 lg:px-24 text-green-900">
+            <section id="News-Slider-Box" className="pt-10 px-6 md:px-12 lg:px-24 text-green-900">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-4xl font-bold text-green-700 mb-6">Hírek</h2>
                 </div>
             </section>
 
-            <div id="News-Slider-Box" className="h-[400px] pt-10">
+            <div id="News-Slider-Box" className="h-[400px]">
                 <div id="Add-News-Button" className="w-full flex justify-end">
                     <Link to="/AddNews">
                         <button className="bg-green-500 rounded-md font-bold text-white text-2xl p-3 border-2 hover:bg-white hover:border-green-500 hover:text-green-500">
