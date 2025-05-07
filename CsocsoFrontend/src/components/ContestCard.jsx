@@ -15,10 +15,10 @@ export default function ContestCard({ contestInformation }) {
           </p>
           <p className="text-2xl text-white font-normal">
             Előregisztráció lezáródása:{" "}
-            {contestInformation?.["end_of_pre-registration"]}
+            {contestInformation?.["end_of_pre_registration"]}
           </p>
           <p className="text-2xl text-white font-normal">
-            Kezdés: {contestInformation?.["end_of_pre-registration"]}
+            Kezdés: {contestInformation?.["competition_start"]}
           </p>
           <p className="text-xl font-light text-white">
             Helyszín: {contestInformation?.location}

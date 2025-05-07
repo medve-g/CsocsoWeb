@@ -10,9 +10,7 @@ import { SignUp } from "./pages/SingUp";
 import { AddNews } from "./pages/AddNews";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useEffect, createContext } from "react";
-export const UserContext = createContext();
-import React, { useState } from "react";
+import React,{ useState, useEffect, createContext } from "react";
 import { ClickedNewsPage } from "./pages/ClickedNews";
 export const UserContext = React.createContext();
 

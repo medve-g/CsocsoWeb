@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string("email");
             $table->string("password");
             $table->boolean("contest_admin");
-            $table->string('api_token', 80)->after('password')->nullable()->unique();
             $table->timestamps();
         });
 
@@ -34,7 +33,7 @@ return new class extends Migration
             $table->string("competition_name");
             $table->string("location");
             $table->dateTime("competition_start");
-            $table->dateTime("end_of_pre-registration");
+            $table->dateTime("end_of_pre_registration");
             $table->json("categories");
             $table->json("ratings_and_fees");
             $table->timestamps();
