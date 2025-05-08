@@ -9,7 +9,7 @@ export default function ContestCard({ contestInformation }) {
   return (
     <div
       onClick={() => {
-        localStorage.setItem("currentCompetition", contestInformation.id)
+        console.log("asd");
         navigate("/contestRegistration");
       }}
       className="bg-green-800 w-full min-h-[200px] my-10 flex flex-row cursor-pointer ransition-transform duration-200 ease-in-out hover:scale-105"

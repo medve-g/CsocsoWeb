@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/contests", [ContestController::class, "index"]);
 Route::post("/newContest", [ContestController::class, "store"]) ;
-Route::get("/getContestData/{id}", [ContestController::class, "show"]);
 
 Route::post("/register", [AuthController::class, "register"]);
 Route::post("/login", [AuthController::class, "logIn"]);
