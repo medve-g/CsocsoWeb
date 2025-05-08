@@ -12,24 +12,34 @@ use Illuminate\Validation\ValidationException;
 class AuthController extends Controller
 {
     public function register(Request $request)
-    {
-        try {
-            $validate = $request->validate([
-                "username" => "required|string",
-                "email" => "required|email|unique:user",
-                "password" => "required|string|min:8|confirmed",
-                "contest_admin" => "in:0"
-            ]);
+{
+    try {
+        $validate = $request->validate([
+            "username" => "required|string",
+            "email" => "required|email|unique:user",
+            "password" => "required|string|min:8|confirmed",
+            "phonenumber" => "required|string|min:12|max:12|regex:/^\+/",
+            "gender" => "required|string|min:2|max:5",
+            "contest_admin" => "in:0"
+        ]);
 
-            $validate['password'] = Hash::make($validate['password']);
+        $validate['password'] = Hash::make($validate['password']);
 
-            $user = UserModel::create($validate);
+        $user = UserModel::create($validate);
 
-            return response()->json(["id" => $user["id"], "contest_admin" => $user["contest_admin"]], 200);
-        } catch (ValidationException $err) {
-            return response()->json(['errors' => $err->errors()], 422);
-        }
+        return response()->json([
+            "id" => $user->id,
+            "username" => $user->username,
+            "email" => $user->email,
+            "phonenumber" => $user->phonenumber,
+            "gender" => $user->gender,
+            "contest_admin" => $user->contest_admin
+        ], 200);
+    } catch (ValidationException $err) {
+        return response()->json(['errors' => $err->errors()], 422);
     }
+}
+
 
     public function logIn(Request $request)
     {
@@ -40,7 +50,8 @@ class AuthController extends Controller
                 return response()->json(['message' => 'Helytelen jelszó vagy email'], 401);
             }
 
-            return response()->json(["id" => $user["id"], "contest_admin" => $user["contest_admin"]], 200);
+            return response()->json(["id" => $user["id"], "contest_admin" => $user["contest_admin"], "username" => $user["username"], "email" => $user["email"],
+             "phonenumber" => $user["phonenumber"], "gender" => $user["gender"] ], 200);
         } catch (Exception $err) {
             return response()->json(['errors' => $err->getMessage()], 500);
         }

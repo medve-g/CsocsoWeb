@@ -65,7 +65,7 @@ export function ClickedNewsPage() {
                     </button>
 
                     <div className="flex justify-center w-full">
-                        <button id="ClickedNews-BackTo-Homepage" className="bg-green-500 rounded-md font-bold text-white text-lg sm:text-xl px-4 py-2 hover:bg-green-600 transition">
+                        <button className="bg-green-500 rounded-md font-bold text-white text-lg sm:text-xl px-4 py-2 hover:bg-green-600 transition">
                             <Link to="/">Vissza a főoldalra</Link>
                         </button>
                     </div>

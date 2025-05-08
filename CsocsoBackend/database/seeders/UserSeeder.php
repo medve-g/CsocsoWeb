@@ -19,12 +19,16 @@ class UserSeeder extends Seeder
                 "username" => "Csocsós Csanád",
                 "email" => "pelda@gmail.com",
                 "password" => Hash::make("123qwe"),
+                "phonenumber" => "+36703120666",
+                "gender" => "férfi",
                 "contest_admin" => false
             ],
             [
                 "username" => "Csocsó Mester",
                 "email" => "admin@gmail.com",
                 "password" => Hash::make("admin"),
+                "phonenumber" => "+36302554668",
+                "gender" => "férfi",
                 "contest_admin" => true
             ]
         ]);

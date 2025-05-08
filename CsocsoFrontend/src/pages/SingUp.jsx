@@ -11,6 +11,8 @@ export function SignUp() {
     email: "",
     password: "",
     password_confirmation: "",
+    phonenumber: "",
+    gender: "",
     contest_admin: 0,
   });
 
@@ -30,20 +32,21 @@ export function SignUp() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(registrationData),
       });
-
+  
+      let responseData = await res.json();
+  
       if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.message || "Valami hiba történt");
+        throw new Error(responseData.errors ? JSON.stringify(responseData.errors) : "Valami hiba történt");
       }
-
-      let data = await res.json();
-      await setUser(data);
-      localStorage.setItem("user", JSON.stringify(data));
+  
+      localStorage.setItem("user", JSON.stringify(responseData));
+      setUser(responseData);
       navigate("/");
     } catch (err) {
-      console.error(err.message);
+      console.error("Error:", err.message);
     }
   };
+  
 
   return (
     <div className="w-full flex justify-center items-center my-20">
@@ -105,6 +108,34 @@ export function SignUp() {
               />
             </div>
           </div>
+
+          <div className="flex flex-col sm:flex-row sm:justify-between gap-5">
+            <div className="px-5 text-left flex-1">
+              <label className="font-medium text-lg">Telefonszám</label>
+              <br />
+              <input
+                className="w-full border rounded-xl p-3 mt-1 mb-3"
+                placeholder="+36703569587"
+                type="text"
+                name="phonenumber"
+                value={registrationData.phonenumber}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="px-5 text-left flex-1">
+              <label className="font-medium text-lg">Nem</label>
+              <br />
+              <input
+                className="w-full border rounded-xl p-3 mt-1 mb-3"
+                placeholder="Írja be a nemét: Férfi/Nő"
+                type="text"
+                name="gender"
+                value={registrationData.gender}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          
 
           <div className="w-full px-5 mt-3">
             <button
