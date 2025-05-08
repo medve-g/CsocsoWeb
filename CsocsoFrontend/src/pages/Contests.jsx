@@ -27,6 +27,7 @@ export function Contests() {
 
   useEffect(() => {
     try {
+      localStorage.removeItem("currentCompetition")
       async function getAllContests() {
         let response = await fetch("http://127.0.0.1:8000/api/contests");
         let data = await response.json();

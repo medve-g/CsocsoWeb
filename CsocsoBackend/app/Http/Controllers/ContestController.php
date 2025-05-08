@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContestModel;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\DB;
@@ -59,6 +60,30 @@ class ContestController extends Controller
             ], 200);
         } catch (ValidationException $err) {
             return response()->json(['errors' => $err->errors()], 422);
+        }
+    }
+
+    public function show(string $id)
+    {
+        try {
+
+            $data = DB::table("competition")->find($id);
+
+            if ($data) {
+                return response()->json([
+                    "data" => $data,
+                    "message" => "Sikeres lekérdezés"
+                ]);
+            } else {
+                return response()->json([
+                    "message" => "Nem található az adat"
+                ], 404);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                "message" => "Hiba történt a lekérdezés során",
+                "error" => $e->getMessage()
+            ], 500);
         }
     }
 }
