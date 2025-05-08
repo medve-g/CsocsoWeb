@@ -26,6 +26,8 @@ function App() {
     }else{
       setCurrentUser({})
     }
+
+
   }, []);
 
   return (

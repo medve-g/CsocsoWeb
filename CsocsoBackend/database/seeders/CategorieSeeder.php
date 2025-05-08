@@ -15,14 +15,64 @@ class CategorieSeeder extends Seeder
     {
         DB::table("categories")->insert([
             [
+                "name" => "Nyílt Páros",
+                "ranklist_reference" => "NYP",
+                "type" => "páros"
+            ],
+            [
                 "name" => "Nyílt Egyéni",
                 "ranklist_reference" => "NYE",
                 "type" => "egyéni"
             ],
             [
-                "name" => "Nyílt Páros",
+                "name" => "Semi_pro Páros",
                 "ranklist_reference" => "NYP",
                 "type" => "páros"
+            ],
+            [
+                "name" => "Rookie Páros",
+                "ranklist_reference" => "NYP",
+                "type" => "páros"
+            ],
+            [
+                "name" => "Vegyes Páros",
+                "ranklist_reference" => "VP",
+                "type" => "páros"
+            ],
+            [
+                "name" => "Rookie Egyéni",
+                "ranklist_reference" => "NYE",
+                "type" => "egyéni"
+            ],
+            [
+                "name" => "Amatőr Páros",
+                "ranklist_reference" => "NYP",
+                "type" => "páros"
+            ],
+            [
+                "name" => "Női Páros",
+                "ranklist_reference" => "NP",
+                "type" => "páros"
+            ],
+            [
+                "name" => "Női Egyéni",
+                "ranklist_reference" => "NE",
+                "type" => "egyéni"
+            ],
+            [
+                "name" => "Junior Páros",
+                "ranklist_reference" => "NYP",
+                "type" => "páros"
+            ],
+            [
+                "name" => "Junior Egyéni",
+                "ranklist_reference" => "NYE",
+                "type" => "egyéni"
+            ],
+            [
+                "name" => "Sorsolásos Páros",
+                "ranklist_reference" => "NYP",
+                "type" => "egyéni"
             ],
         ]);
     }

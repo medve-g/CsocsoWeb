@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ContestController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\NewsController;
@@ -16,3 +17,5 @@ Route::post("/logout", [AuthController::class, "logOut"]);
 
 Route::get('/newsApi', [NewsController::class, 'getnews']);
 Route::post('/newsApi', [NewsController::class, 'storenews']);
+
+Route::post("/categories", [CategorieController::class, "sendRequestedCategories"]);
