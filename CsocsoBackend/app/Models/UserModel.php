@@ -12,7 +12,7 @@ class UserModel extends Authenticatable
     
     protected $table = "user";
 
-    protected $fillable = ["username", "email", "password", "contest_admin"];
+    protected $fillable = ["username", "email", "password","phonenumber","gender", "contest_admin"];
 
     public $timestamps = false;
 }
