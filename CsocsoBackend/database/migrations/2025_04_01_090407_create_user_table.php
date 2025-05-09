@@ -46,7 +46,7 @@ return new class extends Migration
             $table->foreignId("registration_submitter")->constrained("user");
             $table->json("categorie");
             $table->json("contestant1");
-            $table->foreignId('contestant2')->nullable()->constrained('ranklist');
+            $table->json('contestant2')->nullable();
             $table->integer("registration_fee");
             $table->foreignId("competition_id")->constrained("competition");
             $table->timestamps();
