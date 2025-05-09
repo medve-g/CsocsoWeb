@@ -44,7 +44,7 @@ return new class extends Migration
         Schema::create('registration', function (Blueprint $table) {
             $table->id();
             $table->foreignId("registration_submitter")->constrained("user");
-            $table->json("categorie");
+            $table->foreignId("categorie")->constrained("categories");
             $table->json("contestant1");
             $table->json('contestant2')->nullable();
             $table->integer("registration_fee");
