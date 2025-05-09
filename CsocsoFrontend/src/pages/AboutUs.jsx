@@ -46,7 +46,7 @@ export function AboutUs() {
                 <div className="flex-1 p-8 text-green-900 text-lg" style={{ scrollBehavior: 'smooth' }}>
                     <h2 className="text-4xl font-bold text-green-700 mb-10 text-center">Rólunk</h2>
 
-                    <div className="mb-24">
+                    <div className="mb-24 bg-white opacity-90 rounded-lg p-6">
                         <h3 id="cel" className="text-3xl font-bold text-green-700 mb-4 text-center scroll-mt-16">Az egyesület célja</h3>
                         <div className="flex flex-col-reverse md:flex-row items-center gap-8">
                             <p className="md:w-1/2">
@@ -56,7 +56,7 @@ export function AboutUs() {
                         </div>
                     </div>
 
-                    <div className="mb-24">
+                    <div className="mb-24 bg-white opacity-90 rounded-lg p-6">
                         <h3 id="tevekenyseg" className="text-3xl font-bold text-green-700 mb-4 text-center scroll-mt-16">Tevékenységeink</h3>
                         <div className="flex flex-col-reverse md:flex-row-reverse items-center gap-8">
                             <p className="md:w-1/2">
@@ -68,7 +68,7 @@ export function AboutUs() {
                         </div>
                     </div>
 
-                    <div className="mb-24">
+                    <div className="mb-24 bg-white opacity-90 rounded-lg p-6">
                         <h3 id="tervek" className="text-3xl font-bold text-green-700 mb-4 text-center scroll-mt-16">Terveink</h3>
                         <div className="flex flex-col-reverse md:flex-row items-center gap-8">
                             <p className="md:w-1/2">
@@ -77,11 +77,11 @@ export function AboutUs() {
                                 A lehetséges támogatásokból az asztalok, versenyeink fejlesztése az cél. A lehető legjobb körülmények megteremtése.<br /><br />
                                 Az edzéseken általában 8-12 gyermek szokott részt venni. Őket csoportokra osztjuk, hiszen a legtöbb esetben korban és fejlettségi szintben is máshol járnak.
                             </p>
-                            <img src="./public/kep1.jpg" alt="Terveink" className="md:w-1/2 w-full rounded-xl shadow-lg object-contain" />
+                            <img src="./public/csocsoedzes.jpg" alt="Terveink" className="md:w-1/2 w-full rounded-xl shadow-lg object-contain" />
                         </div>
                     </div>
 
-                    <div className="mb-24">
+                    <div className="mb-24 bg-white opacity-90 rounded-lg p-6">
                         <h3 id="megjelenes" className="text-3xl font-bold text-green-700 mb-4 text-center scroll-mt-16">Megjelenési lehetőségeink</h3>
                         <div className="flex flex-col-reverse md:flex-row-reverse items-center gap-8">
                             <p className="md:w-1/2">
@@ -90,11 +90,11 @@ export function AboutUs() {
                                 - közösségimédia felületeinken<br /><br />
                                 Ezeket rendszeresen használjuk.
                             </p>
-                            <img src="./public/kep1.jpg" alt="Megjelenés" className="md:w-1/2 w-full rounded-xl shadow-lg object-contain" />
+                            <img src="./public/csocsoliga_megjelenes.jpg" alt="Megjelenés" className="md:w-1/2 w-full rounded-xl shadow-lg object-contain" />
                         </div>
                     </div>
 
-                    <div className="mb-24">
+                    <div className="mb-24 bg-white opacity-90 rounded-lg p-6">
                         <h3 id="felepites" className="text-3xl font-bold text-green-700 mb-4 text-center scroll-mt-16">Az egyesület felépítése</h3>
                         <div className="flex flex-col-reverse md:flex-row items-center gap-8">
                             <p className="md:w-1/2">
@@ -103,7 +103,7 @@ export function AboutUs() {
                                 <b>Alapítótagok:</b> Diós Norbert, Börcsök Szabolcs, Kósa György, Hegedűs Dániel, Cseresznyés Ferenc, Bencsik Tamás, Dénes Benedek.<br /><br />
                                 <b>Alapítás után érkező tagjaink:</b> Futaki Dániel, Földi Nóra, Czombos Balázs, Gubucz Panna, Csizmadia Róbert, Verók Csaba, Gyuricza Tamás, Makai Márton, Sajben Mercédesz, Bónus Kristóf, Albert Ádám, Molcsán Szabolcs, Boldog Kristóf, Megyeri Petra.
                             </p>
-                            <img src="./public/kep1.jpg" alt="Felépítés" className="md:w-1/2 w-full rounded-xl shadow-lg object-contain" />
+                            <img src="./public/csocso_csapat.jpg" alt="Felépítés" className="md:w-1/2 w-full rounded-xl shadow-lg object-contain" />
                         </div>
                     </div>
                 </div>
