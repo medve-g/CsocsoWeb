@@ -53,9 +53,23 @@ export default function ContestRegistration() {
     );
     let arrayBuffer = await res.arrayBuffer();
     const workbook = XLSX.read(arrayBuffer, { type: "array" });
-    const sheetName = workbook.SheetNames[i];
-    const worksheet = workbook.Sheets[sheetName];
-    const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+    categorieReferencesForSpreadsheet.forEach((sheetName) => {
+      let activePlayers = [];
+      let columnName = "Inaktív?";
+      let columnValueIfNotActive = "X"; // empty means active
+      const worksheet = workbook.Sheets[sheetName];
+      const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+      for (let i = 0; i < jsonData.length; i++) {
+        const row = jsonData[i];
+        if (!row[columnName] === columnValueIfNotActive) {
+          activePlayers.push(row); // player is active
+        }
+      }
+
+      console.log(`Active players in sheet ${sheetName}:`, activePlayers);
+    });
   }
 
   useEffect(() => {
@@ -65,8 +79,6 @@ export default function ContestRegistration() {
     }
 
     gatherSelectedCategories();
-
-    //fetchExcel();
   }, []);
 
   const enableRegisterButton = (user) => {
