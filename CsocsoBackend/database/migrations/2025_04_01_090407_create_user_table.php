@@ -41,19 +41,11 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('ranklist', function (Blueprint $table) {
-            $table->id();
-            $table->string("name");
-            $table->integer("points");
-            $table->foreignId("categorie")->constrained("categories");
-            $table->timestamps();
-        });
-
         Schema::create('registration', function (Blueprint $table) {
             $table->id();
             $table->foreignId("registration_submitter")->constrained("user");
-            $table->foreignId("categorie")->constrained("categories");
-            $table->foreignId("contestant1")->constrained("ranklist");
+            $table->json("categorie");
+            $table->json("contestant1");
             $table->foreignId('contestant2')->nullable()->constrained('ranklist');
             $table->integer("registration_fee");
             $table->foreignId("competition_id")->constrained("competition");

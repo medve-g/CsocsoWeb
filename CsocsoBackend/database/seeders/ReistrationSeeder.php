@@ -17,7 +17,11 @@ class ReistrationSeeder extends Seeder
             [
                 "registration_submitter" => 1,
                 "categorie" => 1,
-                "contestant1" => 1,
+                "contestant1" => json_encode([
+                    "name" => "Rozsos Gábor",
+                    "rating" => "Master",
+                    "points" => 885
+                ]),
                 "contestant2" => null,
                 "registration_fee" => 1000,
                 "competition_id" => 1
@@ -25,8 +29,16 @@ class ReistrationSeeder extends Seeder
             [
                 "registration_submitter" => 2,
                 "categorie" => 2,
-                "contestant1" => 1,
-                "contestant2" => 2,
+                "contestant1" => json_encode([
+                    "name" => "Rozsos Gábor",
+                    "rating" => "Master",
+                    "points" => 1000
+                ]),
+                "contestant2" => json_encode([
+                    "name" => "Tálai Gergely",
+                    "rating" => "Master",
+                    "points" => 855
+                ]),
                 "registration_fee" => 1000,
                 "competition_id" => 2
             ]

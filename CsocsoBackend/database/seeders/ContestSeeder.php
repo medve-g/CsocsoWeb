@@ -17,9 +17,9 @@ class ContestSeeder extends Seeder
                 "competition_start" => "2025-05-10 14:00:00",
                 "end_of_pre_registration" => "2025-05-09 14:00:00",
                 "categories" => json_encode([
-                    "categorie_id" => 1,
-                    "categorie_id" => 2,
-                    "categorie_id" => 4
+                    "Nyílt Páros" => 1,
+                    "Nyílt Egyéni" => 2,
+                    "Rookie Páros" => 4
                 ]),
                 "ratings_and_fees" => json_encode([
                     "Rookie (junior)" => 500,
@@ -36,9 +36,9 @@ class ContestSeeder extends Seeder
                 "competition_start" => "2025-06-10 14:00:00",
                 "end_of_pre_registration" => "2025-06-09 14:00:00",
                 "categories" => json_encode([
-                    "categorie_id" => 5,
-                    "categorie_id" => 6,
-                    "categorie_id" => 7
+                    "Nyílt Páros" => 1,
+                    "Nyílt Egyéni" => 2,
+                    "Rookie Páros" => 4
                 ]),
                 "ratings_and_fees" => json_encode([
                     "Rookie (junior)" => 500,
