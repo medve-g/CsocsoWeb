@@ -42,18 +42,43 @@ class AuthController extends Controller
 
 
     public function logIn(Request $request)
-    {
-        try {
-            $user = UserModel::where('email', $request->email)->first();
+{
+    try {
+        $user = UserModel::where('email', $request->email)->first();
 
-            if (! $user || ! Hash::check($request->password, $user->password)) {
-                return response()->json(['message' => 'Helytelen jelszó vagy email'], 401);
-            }
-
-            return response()->json(["id" => $user["id"], "contest_admin" => $user["contest_admin"], "username" => $user["username"], "email" => $user["email"],
-             "phonenumber" => $user["phonenumber"], "gender" => $user["gender"] ], 200);
-        } catch (Exception $err) {
-            return response()->json(['errors' => $err->getMessage()], 500);
+        if (! $user || ! Hash::check($request->password, $user->password)) {
+            return response()->json(['message' => 'Helytelen email vagy jelszó!'], 401);
         }
+
+        $token = $user->createToken('authToken')->plainTextToken;
+
+        return response()->json([
+            "user" => $user,
+            "token" => $token
+        ], 200);
+    } catch (Exception $err) {
+        return response()->json(['errors' => $err->getMessage()], 500);
     }
+}
+
+public function updateProfile(Request $request)
+{
+    try {
+        $user = auth()->user();
+
+        $validatedData = $request->validate([
+            "username" => "string|max:255",
+            "email" => "email|unique:user,email," . $user->id,
+            "phonenumber" => "string|max:20",
+            "gender" => "string|max:10"
+        ]);
+
+        $user->update($validatedData);
+
+        return response()->json(["message" => "Profil adatainak módosítása sikeresen megtörtént!", "user" => $user], 200);
+    } catch (\Exception $e) {
+        \Log::error("Update profile error: " . $e->getMessage());
+        return response()->json(["error" => "Hiba történt a profil adatainak módosítása során!", "details" => $e->getMessage()], 500);
+    }
+}
 }

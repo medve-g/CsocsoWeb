@@ -9,7 +9,7 @@ export default function Profile() {
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem("user"));
         if (storedUser) {
-            setUser(storedUser);
+            setUser(storedUser); 
         }
     }, []);
 
@@ -34,9 +34,6 @@ export default function Profile() {
                             <label className="font-semibold text-lg">Email:</label>
                             <span className="text-gray-700">{user?.email}</span>
                         </div>
-                        <button className="bg-green-500 rounded-md font-bold text-white text-sm px-4 py-2 border hover:bg-green-600">
-                            Email cím megváltoztatása
-                        </button>
                     </div>
 
 
@@ -45,9 +42,6 @@ export default function Profile() {
                             <label className="font-semibold text-lg">Telefonszám:</label>
                             <span className="text-gray-700">{user?.phonenumber}</span>
                         </div>
-                        <button className="bg-green-500 rounded-md font-bold text-white text-sm px-4 py-2 border hover:bg-green-600">
-                            Telefonszám megváltoztatása
-                        </button>
                     </div>
 
 
@@ -56,8 +50,10 @@ export default function Profile() {
                             <label className="font-semibold text-lg">Nem:</label>
                             <span className="text-gray-700">{user?.gender}</span>
                         </div>
-                        <button className="bg-green-500 rounded-md font-bold text-white text-sm px-4 py-2 border hover:bg-green-600">
-                            Nem megváltoztatása
+                    </div>
+                    <div class="text-right">
+                        <button class="bg-green-500 rounded-md font-bold text-white text-sm px-4 py-2 border hover:bg-green-600" onClick={() => navigate("/profiledatachange")}>
+                            Adatok módosítása
                         </button>
                     </div>
                 </div>

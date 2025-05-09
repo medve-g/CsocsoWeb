@@ -17,9 +17,9 @@ function LogIn() {
       return;
     } else {
       return (
-        <div className="mx-5 mt-3 p-2 rounded-lg border-2 border-red-700 bg-red-200 text-white font-bold text-xl">
+        <div className="mx-5 mt-3 p-3 rounded-lg border-4 border-red-700 bg-red-100 text-red-700 font-bold text-lg shadow-md">
           <p>{errorMessage}</p>
-        </div>
+        </div>  
       );
     }
   };
@@ -35,26 +35,32 @@ function LogIn() {
 
   let handleLogIn = async () => {
     try {
-      let res = await fetch("http://127.0.0.1:8000/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(logInData),
-      });
+        let res = await fetch("http://127.0.0.1:8000/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(logInData),
+        });
 
-      if (!res.ok) {
-        const errorData = await res.json();
-        setErrorMessage(errorData.message);
-        throw new Error(errorData.message || "Valami hiba történt");
-      }
+        console.log("Response status:", res.status);
+        
+        let data = await res.json();
+        console.log("Received response:", data);
 
-      let data = await res.json();
-      await setUser(data);
-      localStorage.setItem("user", JSON.stringify(data));
-      navigate("/");
+        if (!res.ok) {
+            setErrorMessage(data.message);
+            throw new Error(data.message || "Hiba a belépés során!");
+        }
+
+        localStorage.setItem("authToken", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        setUser(data.user);
+        navigate("/");
     } catch (err) {
-      console.error(err.message);
+        console.error("Fetch error:", err);
     }
-  };
+};
+
 
   return (
     <>

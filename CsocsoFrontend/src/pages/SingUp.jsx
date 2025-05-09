@@ -5,6 +5,7 @@ import { UserContext } from "../App";
 export function SignUp() {
   const navigate = useNavigate();
   const [user, setUser] = useContext(UserContext);
+  const [errors, setErrors] = useState({});
 
   let [registrationData, setRegistrationData] = useState({
     username: "",
@@ -32,13 +33,13 @@ export function SignUp() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(registrationData),
       });
-  
+
       let responseData = await res.json();
-  
+
       if (!res.ok) {
         throw new Error(responseData.errors ? JSON.stringify(responseData.errors) : "Valami hiba történt");
       }
-  
+
       localStorage.setItem("user", JSON.stringify(responseData));
       setUser(responseData);
       navigate("/");
@@ -46,7 +47,42 @@ export function SignUp() {
       console.error("Error:", err.message);
     }
   };
-  
+
+  const inputValidation = (name, value) => {
+    let errorMessage = "";
+
+    if (name === "email") {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(value)) {
+        errorMessage = "Érvénytelen email formátum!";
+      }
+    }
+
+    if (name === "phonenumber") {
+      const phoneRegex = /^\+\d{11}$/;
+      if (!phoneRegex.test(value)) {
+        errorMessage = "Telefon formátum: +36703569587";
+      }
+    }
+
+    if (name === "password") {
+      if (value.length < 8) {
+        errorMessage = "A jelszónak legalább 8 karakter hosszúnak kell lennie!";
+      }
+    }
+
+    if (name === "password_confirmation") {
+      if (value !== registrationData.password) {
+        errorMessage = "A jelszavak nem egyeznek!";
+      }
+    }
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: errorMessage,
+    }));
+  };
+
 
   return (
     <div className="w-full flex justify-center items-center my-20">
@@ -67,6 +103,7 @@ export function SignUp() {
                 value={registrationData.username}
                 onChange={handleChange}
               />
+
             </div>
             <div className="px-5 text-left flex-1">
               <label className="font-medium text-lg">Email</label>
@@ -78,7 +115,9 @@ export function SignUp() {
                 name="email"
                 value={registrationData.email}
                 onChange={handleChange}
+                onBlur={(e) => inputValidation(e.target.name, e.target.value)}
               />
+              {errors.email && <small className="text-red-500">{errors.email}</small>}
             </div>
           </div>
 
@@ -93,7 +132,9 @@ export function SignUp() {
                 name="password"
                 value={registrationData.password}
                 onChange={handleChange}
+                onBlur={(e) => inputValidation(e.target.name, e.target.value)}
               />
+              {errors.password && <small className="text-red-500">{errors.password}</small>}
             </div>
             <div className="px-5 text-left flex-1">
               <label className="font-medium text-lg">Jelszó újra</label>
@@ -105,7 +146,10 @@ export function SignUp() {
                 name="password_confirmation"
                 value={registrationData.password_confirmation}
                 onChange={handleChange}
+                onBlur={(e) => inputValidation(e.target.name, e.target.value)}
               />
+              {errors.password_confirmation && <small className="text-red-500">{errors.password_confirmation}</small>}
+
             </div>
           </div>
 
@@ -120,22 +164,28 @@ export function SignUp() {
                 name="phonenumber"
                 value={registrationData.phonenumber}
                 onChange={handleChange}
+                onBlur={(e) => inputValidation(e.target.name, e.target.value)}
               />
+              {errors.phonenumber && <small className="text-red-500">{errors.phonenumber}</small>}
             </div>
             <div className="px-5 text-left flex-1">
               <label className="font-medium text-lg">Nem</label>
               <br />
-              <input
+              <select
                 className="w-full border rounded-xl p-3 mt-1 mb-3"
-                placeholder="Írja be a nemét: Férfi/Nő"
-                type="text"
                 name="gender"
                 value={registrationData.gender}
                 onChange={handleChange}
-              />
+                onBlur={(e) => inputValidation(e.target.name, e.target.value)}
+              >
+                <option value="" disabled selected>Válassza ki a nemét</option>
+                <option value="Férfi">Férfi</option>
+                <option value="Nő">Nő</option>
+              </select>
             </div>
           </div>
-          
+
+
 
           <div className="w-full px-5 mt-3">
             <button

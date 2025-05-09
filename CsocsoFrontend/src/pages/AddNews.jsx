@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function AddNews() {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [fileName, setFileName] = useState("");
     const [imageURL, setImageURL] = useState(null);
+    const navigate = useNavigate();
 
     const handleImageChange = (event) => {
         const selectedFile = event.target.files[0];
@@ -16,12 +18,16 @@ export function AddNews() {
     };
 
 
+
+
     const handleSubmit = async () => {
+        
+
         const formData = new FormData();
         formData.append("title", title);
         formData.append("content", content);
         formData.append("image", document.querySelector('input[type="file"]').files[0]);
-    
+
         try {
             const response = await fetch("http://127.0.0.1:8000/api/newsApi", {
                 method: "POST",
@@ -29,12 +35,15 @@ export function AddNews() {
             });
             const result = await response.json();
             console.log("Success:", result);
+
             alert("Hír sikeresen feltöltve!");
+            navigate("/targetPage"); 
         } catch (error) {
             console.error("Error uploading news:", error);
             alert("Hiba történt a feltöltés során!");
         }
     };
+
 
     return (
         <div className="w-full flex justify-center items-center my-20">

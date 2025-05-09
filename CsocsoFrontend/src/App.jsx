@@ -9,6 +9,7 @@ import CreateContest from "./pages/CreateContest";
 import { SignUp } from "./pages/SingUp";
 import { AddNews } from "./pages/AddNews";
 import ContestRegistration from "./pages/ContestRegistration";
+import ProfilDataChange from "./pages/ProfilDataChange";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React,{ useState, useEffect, createContext } from "react";
@@ -19,14 +20,14 @@ export const UserContext = React.createContext();
 function App() {
   let [currentUser, setCurrentUser] = useState({});
 
-  useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (user) {
-      setCurrentUser(JSON.parse(localStorage.getItem("user")));
-    }else{
-      setCurrentUser({})
-    }
-  }, []);
+useEffect(() => {
+  const user = localStorage.getItem("user");
+  if (user && user !== "undefined") {
+    setCurrentUser(JSON.parse(user));
+  } else {
+    setCurrentUser({}); 
+  }
+}, []);
 
   return (
     <UserContext.Provider value={[currentUser, setCurrentUser]}>
@@ -43,6 +44,7 @@ function App() {
           <Route path="/addnews" element={<AddNews />} />
           <Route path="/clickednews" element={<ClickedNewsPage/>}/>
           <Route path="/profile" element={<Profile/>}/>
+          <Route path="/profiledatachange" element={<ProfilDataChange/>}/>
           <Route path="*" element={<WelcomePage />} />
         </Routes>
         <Footer />

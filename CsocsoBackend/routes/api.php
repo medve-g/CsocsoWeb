@@ -13,6 +13,7 @@ Route::post("/newContest", [ContestController::class, "store"]) ;
 Route::post("/register", [AuthController::class, "register"]);
 Route::post("/login", [AuthController::class, "logIn"]);
 Route::post("/logout", [AuthController::class, "logOut"]);
+Route::middleware('auth:sanctum')->put('/user/update', [AuthController::class, 'updateProfile']);
 
 Route::get('/newsApi', [NewsController::class, 'getnews']);
 Route::post('/newsApi', [NewsController::class, 'storenews']);
