@@ -5,8 +5,10 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ContestController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\RegistrationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get("/contests", [ContestController::class, "index"]);
 Route::post("/newContest", [ContestController::class, "store"]) ;
@@ -22,3 +24,7 @@ Route::post('/newsApi', [NewsController::class, 'storenews']);
 Route::delete('/newsApi/{id}', [NewsController::class, 'deletenews']);
 
 Route::post("/categories", [CategorieController::class, "sendRequestedCategories"]);
+
+Route::post('/registration', [RegistrationController::class, 'store']);
+Route::get('/registration', [RegistrationController::class, 'index']);
+Route::get('/registration/export', [RegistrationController::class, 'exportExcel']);
