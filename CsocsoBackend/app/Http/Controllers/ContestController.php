@@ -45,8 +45,8 @@ class ContestController extends Controller
                 "ratings_and_fees" => json_encode([
                     "Rookie (junior)" => $ratingsAndFees['rookie_junior'] ?? 0,
                     "Rookie" => $ratingsAndFees['rookie'] ?? 0,
-                    "Semi-pro (junior)" => $ratingsAndFees['semi_pro_junior'] ?? 0,
-                    "Semi-pro" => $ratingsAndFees['semi_pro'] ?? 0,
+                    "Semi Pro (junior)" => $ratingsAndFees['semi_pro_junior'] ?? 0,
+                    "Semi Pro" => $ratingsAndFees['semi_pro'] ?? 0,
                     "Pro" => $ratingsAndFees['pro'] ?? 0,
                     "Master" => $ratingsAndFees['master'] ?? 0,
                 ])
