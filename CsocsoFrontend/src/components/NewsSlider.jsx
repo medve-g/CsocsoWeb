@@ -67,7 +67,6 @@ function PrevArrow(props) {
 export function NewsSlider() {
     const [adat, setAdat] = useState([]);
     const [user, setUser] = useContext(UserContext);
-    const navigate = useNavigate();
 
     return (
         <>
@@ -85,7 +84,7 @@ export function NewsSlider() {
                 <div className="h-[400px] w-3/4 m-auto">
                     <Slider
                         dots={false}
-                        infinite={true}
+                        infinite={adat.length > 2}
                         autoplay={true}
                         autoplaySpeed={2000}
                         speed={500}
@@ -93,7 +92,7 @@ export function NewsSlider() {
                         slidesToScroll={1}
                         responsive={[
                             { breakpoint: 1024, settings: { slidesToShow: 3 } },
-                            { breakpoint: 600, settings: { slidesToShow: 2 } },
+                            { breakpoint: 750, settings: { slidesToShow: 2 } },
                             { breakpoint: 480, settings: { slidesToShow: 1 } }
                         ]}
                         nextArrow={<NextArrow />}

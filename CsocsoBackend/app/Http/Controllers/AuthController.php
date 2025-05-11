@@ -81,4 +81,22 @@ public function updateProfile(Request $request)
         return response()->json(["error" => "Hiba történt a profil adatainak módosítása során!", "details" => $e->getMessage()], 500);
     }
 }
+public function changePassword(Request $request)
+{
+    $user = auth()->user();
+
+    $request->validate([
+        'current_password' => 'required|string',
+        'new_password' => 'required|string|min:8|confirmed',
+    ]);
+
+    if (!Hash::check($request->current_password, $user->password)) {
+        return response()->json(['message' => 'A jelenlegi jelszó hibás.'], 403);
+    }
+
+    $user->password = Hash::make($request->new_password);
+    $user->save();
+
+    return response()->json(['message' => 'Jelszó sikeresen megváltoztatva.'], 200);
+}
 }

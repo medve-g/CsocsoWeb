@@ -20,45 +20,59 @@ export default function ProfilDataChange() {
         }
     }, []);
 
-   const updateUserData = async () => {
-    try {
-        const token = localStorage.getItem("authToken");
-        
-        console.log("Sending update request with:", user);
+    const updateUserData = async () => {
+        try {
+            const token = localStorage.getItem("authToken");
+            const storedUser = JSON.parse(localStorage.getItem("user"));
 
-        const response = await fetch("http://127.0.0.1:8000/api/user/update", {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                username: user?.username,
-                email: user?.email,
-                phonenumber: user?.phonenumber,
-                gender: user?.gender
-            })
-        });
+            
+            if (
+                storedUser.username === user.username &&
+                storedUser.email === user.email &&
+                storedUser.phonenumber === user.phonenumber &&
+                storedUser.gender === user.gender
+            ) {
+                alert("Nem történt változás az adatokban.");
+                navigate("/profile");
+                return; 
+            }
 
-        console.log("Response status:", response.status);
+            console.log("Sending update request with:", user);
 
-        const data = await response.json();
-        console.log("Received response:", data);
+            const response = await fetch("http://127.0.0.1:8000/api/user/update", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    username: user?.username,
+                    email: user?.email,
+                    phonenumber: user?.phonenumber,
+                    gender: user?.gender
+                })
+            });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}, Details: ${data.error}`);
+            console.log("Response status:", response.status);
+
+            const data = await response.json();
+            console.log("Received response:", data);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}, Details: ${data.error}`);
+            }
+
+            localStorage.setItem("user", JSON.stringify(data.user));
+            alert("Profil adatainak módosítása sikeresen megtörtént!");
+            navigate("/profile");
+        } catch (error) {
+            console.error("Hiba az adatok módosítása során:", error);
+            alert("Hiba az adatok módosítása során!");
         }
+    };
 
-        localStorage.setItem("user", JSON.stringify(data.user));
-        alert("Profil adatainak módosítása sikeresen megtörtént!");
-    } catch (error) {
-        console.error("Hiba az adatok módosítása során:", error);
-        alert("Hiba az adatok módosítása során!");
-    }
-};
 
-    
-    
+
     return (
         <>
             <div className="w-full flex justify-center items-center my-20 px-4">
@@ -92,7 +106,7 @@ export default function ProfilDataChange() {
                                         onDoubleClick={() => setShowEmailInput(true)}
                                     >
                                         {user?.email}
-                                        
+
                                     </span>
 
                                 ) : (
@@ -157,11 +171,6 @@ export default function ProfilDataChange() {
                                 onClick={updateUserData}
                             >
                                 Rendben
-                            </button>
-
-
-                            <button className="bg-green-500 rounded-md font-bold text-white text-lg sm:text-xl px-6 py-3 w-full sm:w-auto hover:bg-green-600">
-                                Jelszó megváltoztatása
                             </button>
                         </div>
                     </div>

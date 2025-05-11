@@ -43,6 +43,19 @@ class NewsController extends Controller
     ], 201);
 }
 
+public function deletenews($id)
+{
+    $news = NewsModel::find($id);
+
+    if (!$news) {
+        return response()->json(['error' => 'Hír nem található'], 404);
+    }
+
+    $news->delete();
+    
+    return response()->json(['message' => 'Hír sikeresen törölve!'], 200);
+}
+
 
     
 }

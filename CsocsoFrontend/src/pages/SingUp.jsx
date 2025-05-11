@@ -6,6 +6,7 @@ export function SignUp() {
   const navigate = useNavigate();
   const [user, setUser] = useContext(UserContext);
   const [errors, setErrors] = useState({});
+  
 
   let [registrationData, setRegistrationData] = useState({
     username: "",
@@ -66,9 +67,13 @@ export function SignUp() {
     }
 
     if (name === "password") {
-      if (value.length < 8) {
-        errorMessage = "A jelszónak legalább 8 karakter hosszúnak kell lennie!";
-      }
+        if (value.length < 8) {
+            errorMessage = "A jelszónak legalább 8 karakter hosszúnak kell lennie!";
+        } else if (!/[A-Z]/.test(value)) {
+            errorMessage = "A jelszónak tartalmaznia kell legalább egy nagybetűt!";
+        } else if (!/[\W]/.test(value)) {
+            errorMessage = "A jelszónak tartalmaznia kell legalább egy speciális karaktert (pl.: !@#$%^&*)!";
+        }
     }
 
     if (name === "password_confirmation") {

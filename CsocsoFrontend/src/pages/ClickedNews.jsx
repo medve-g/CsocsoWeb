@@ -3,29 +3,13 @@ import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../App";
 
-const enableDeleteButton = (user, deleteNews) => {
-    if (user?.contest_admin === 1) {
-        return (
-            <div id="Delete-News-Button" className="w-full flex justify-end">
-                <button
-                    onClick={deleteNews}
-                    className="bg-red-500 rounded-lg font-bold text-white text-2xl p-3 border-2 border-red-700 hover:bg-red-700 hover:border-red-900 hover:text-white shadow-md transition duration-300">
-                    Hír törlése
-                </button>
-            </div>
-        );
-    } else {
-        return null;
-    }
-};
-
-
 export function ClickedNewsPage() {
     const location = useLocation();
     const navigate = useNavigate();
     const [newsList, setNewsList] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(null);
     const [user, setUser] = useContext(UserContext);
+
     useEffect(() => {
         fetch("http://127.0.0.1:8000/api/newsApi")
             .then(response => response.json())
@@ -53,12 +37,64 @@ export function ClickedNewsPage() {
         }
     };
 
+    const deleteNews = async () => {
+        if (currentIndex !== null && newsList.length > 0) {
+            const currentNews = newsList[currentIndex];
 
+            if (!currentNews?.id) {
+                console.error("Error: News ID missing!");
+                return;
+            }
+
+            const confirmDelete = window.confirm("Biztosan törölni szeretnéd ezt a hírt?");
+            if (!confirmDelete) return;
+
+            try {
+                const response = await fetch(`http://127.0.0.1:8000/api/newsApi/${currentNews.id}`, {
+                    method: "DELETE",
+                    headers: { "Content-Type": "application/json" },
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error("API Error:", errorData);
+                    return;
+                }
+
+                const updatedNewsList = newsList.filter(news => news.id !== currentNews.id);
+                setNewsList(updatedNewsList);
+
+                if (updatedNewsList.length > 0) {
+                    navigate("/clickednews", { state: updatedNewsList[Math.max(0, currentIndex - 1)] });
+                } else {
+                    navigate("/");
+                }
+            } catch (error) {
+                console.error("Error deleting news:", error);
+            }
+        }
+    };
+
+    const enableDeleteButton = (user, deleteNews) => {
+        if (user?.contest_admin === 1) {
+            return (
+                <div id="Delete-News-Button" className="w-full flex justify-end">
+                    <button
+                        onClick={deleteNews}
+                        className="bg-red-500 rounded-lg font-bold text-white text-2xl p-3 border-2 border-red-700 hover:bg-red-700 hover:border-red-900 hover:text-white shadow-md transition duration-300">
+                        Hír törlése
+                    </button>
+                </div>
+            );
+        } else {
+            return null;
+        }
+    };
 
     return (
         <div className="w-full flex justify-center items-center my-20">
             <div className="bg-white w-full max-w-[1000px] px-5 sm:px-10 py-10 sm:py-20 rounded-xl drop-shadow-lg mx-auto">
-                {enableDeleteButton(user)}
+                {enableDeleteButton(user, deleteNews)}
                 <h1 className="mb-5 text-2xl sm:text-3xl md:text-4xl lg:text-[45px] text-center font-semibold">
                     {currentNews?.title}
                 </h1>
@@ -101,6 +137,5 @@ export function ClickedNewsPage() {
                 </div>
             </div>
         </div>
-
     );
 }

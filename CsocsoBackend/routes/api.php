@@ -15,8 +15,10 @@ Route::post("/register", [AuthController::class, "register"]);
 Route::post("/login", [AuthController::class, "logIn"]);
 Route::post("/logout", [AuthController::class, "logOut"]);
 Route::middleware('auth:sanctum')->put('/user/update', [AuthController::class, 'updateProfile']);
+Route::middleware('auth:sanctum')->put('/user/changePassword', [AuthController::class, 'changePassword']);
 
 Route::get('/newsApi', [NewsController::class, 'getnews']);
 Route::post('/newsApi', [NewsController::class, 'storenews']);
+Route::delete('/newsApi/{id}', [NewsController::class, 'deletenews']);
 
 Route::post("/categories", [CategorieController::class, "sendRequestedCategories"]);
