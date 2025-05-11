@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import axios from 'axios';  // Axios importálása
 
 export function AboutUs() {
     useEffect(() => {
@@ -30,6 +31,22 @@ export function AboutUs() {
         };
     }, []);
 
+   const downloadExcel = async () => {
+    try {
+        const response = await fetch('/api/registration/export');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const blob = await response.blob();
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'registrations.xlsx';
+        link.click();
+    } catch (error) {
+        console.error('Error downloading the file:', error);
+    }
+};
     return (
         <>
             <div className="flex min-h-screen flex-col md:flex-row">
@@ -106,9 +123,15 @@ export function AboutUs() {
                             <img src="./public/csocso_csapat.jpg" alt="Felépítés" className="md:w-1/2 w-full rounded-xl shadow-lg object-contain" />
                         </div>
                     </div>
+
+                    {/* Exportálás gomb */}
+                    <div className="text-center mt-8">
+                        <button onClick={downloadExcel} className="bg-green-700 text-white py-2 px-6 rounded-lg hover:bg-green-600" >
+                            Excel letöltése
+                        </button>
+                    </div>
                 </div>
             </div>
-
         </>
-    )
+    );
 }
