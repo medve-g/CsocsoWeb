@@ -1,5 +1,5 @@
-import { PrefetchPageLinks, useLocation } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
+import { useLocation } from "react-router-dom";
+import { useState, useEffect, useContext, useCallback } from "react";
 import { UserContext } from "../App";
 import * as XLSX from "xlsx";
 
@@ -7,34 +7,29 @@ export default function ContestRegistration() {
   const location = useLocation();
   const { contestInformation } = location.state || {};
   const [user, setUser] = useContext(UserContext);
-  const [registrationData, setRegistrationData] = useState([]);
-  const [
-    categorieReferencesForSpreadsheet,
-    setCategorieReferencesForSpreadsheet,
-  ] = useState([]);
+  const [availablePlayers, setAvailablePlayers] = useState([]);
+  const [searchTerms, setSearchTerms] = useState({});
+  const [showDropdowns, setShowDropdowns] = useState({});
 
-  let registrationTester = () => {
-    const checkedCategories = document.querySelectorAll(
-      'input[type="checkbox"]:checked'
-    );
-
-    checkedCategories.forEach((singleCategorie) => {
-      let temporaryRegistrationData = {
-        registration_submitter: user.id,
-        categorie: singleCategorie.value,
-      };
-    });
-
-    fetchExcel();
+  const handleInputChange = (key, value) => {
+    setSearchTerms((prev) => ({ ...prev, [key]: value }));
+    setShowDropdowns((prev) => ({ ...prev, [key]: true }));
   };
 
-  let gatherSelectedCategories = async () => {
-    let res = await fetch("http://127.0.0.1:8000/api/categories", {
+  const handleSelectPlayer = (key, playerName) => {
+    setSearchTerms((prev) => ({ ...prev, [key]: playerName }));
+    setShowDropdowns((prev) => ({ ...prev, [key]: false }));
+  };
+
+  const gatherSelectedCategories = async () => {
+    const res = await fetch("http://127.0.0.1:8000/api/categories", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(contestInformation.categories),
     });
-    let data = await res.json();
+
+    const data = await res.json();
+
     let uniqueReferences = [];
     let seen = [];
 
@@ -44,41 +39,43 @@ export default function ContestRegistration() {
         seen.push(data[i].ranklist_reference);
       }
     }
-    setCategorieReferencesForSpreadsheet(uniqueReferences);
+
+    return uniqueReferences;
   };
 
-  async function fetchExcel() {
-    let res = await fetch(
+  const fetchExcel = async (sheetNames) => {
+    const res = await fetch(
       `https://docs.google.com/spreadsheets/d/1XSWVXtvboY8Rr8sIP0QtDjju4W1fa20u/export?format=xlsx`
     );
-    let arrayBuffer = await res.arrayBuffer();
+    const arrayBuffer = await res.arrayBuffer();
     const workbook = XLSX.read(arrayBuffer, { type: "array" });
 
-    categorieReferencesForSpreadsheet.forEach((sheetName) => {
-      let activePlayers = [];
-      let columnName = "Inaktív?";
-      let columnValueIfNotActive = "X"; // empty means active
+    const activePlayers = [];
+
+    sheetNames.forEach((sheetName) => {
       const worksheet = workbook.Sheets[sheetName];
+      if (!worksheet) return;
+
       const jsonData = XLSX.utils.sheet_to_json(worksheet);
-
-      for (let i = 0; i < jsonData.length; i++) {
-        const row = jsonData[i];
-        if (!row[columnName] === columnValueIfNotActive) {
-          activePlayers.push(row); // player is active
-        }
-      }
-
-      console.log(`Active players in sheet ${sheetName}:`, activePlayers);
+      const filtered = jsonData.filter((row) => row["Inaktív?"] === undefined);
+      activePlayers.push(...filtered);
     });
-  }
+
+    return activePlayers;
+  };
+
+  const gathereveryinfo = async () => {
+    const sheetNames = await gatherSelectedCategories();
+    if (sheetNames.length > 0) {
+      const players = await fetchExcel(sheetNames);
+      setAvailablePlayers(players);
+    }
+  };
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (storedUser) {
-      setUser(storedUser);
-    }
-
-    gatherSelectedCategories();
+    if (storedUser) setUser(storedUser);
+    gathereveryinfo();
   }, []);
 
   const enableRegisterButton = (user) => {
@@ -98,18 +95,45 @@ export default function ContestRegistration() {
               </div>
               <div className="flex justify-center items-center gap-2 text-center px-5">
                 <p className="text-lg">Játékos: </p>
-                <select
-                  name="playersFromRanklist"
-                  id="playersFromRanklist"
-                ></select>
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Versenyző neve"
+                    className="w-40 border-2 p-1 border-gray-500"
+                    value={searchTerms[key] || ""}
+                    onChange={(e) => handleInputChange(key, e.target.value)}
+                    onFocus={() =>
+                      setShowDropdowns((prev) => ({ ...prev, [key]: true }))
+                    }
+                  />
+
+                  {showDropdowns[key] && searchTerms[key] && (
+                    <div className="absolute top-full left-0 w-40 bg-white border border-gray-300 rounded max-h-60 overflow-y-auto z-10 shadow-md">
+                      {availablePlayers
+                        .filter((player) =>
+                          player?.Név?.toLowerCase().includes(
+                            searchTerms[key].toLowerCase()
+                          )
+                        )
+                        .map((player, idx) => (
+                          <div
+                            key={idx}
+                            className="px-4 py-2 hover:bg-blue-500 hover:text-white cursor-pointer"
+                            onClick={() => handleSelectPlayer(key, player.Név)}
+                          >
+                            {player.Név}
+                          </div>
+                        ))}
+                    </div>
+                  )}
+
+                  
+                </div>
               </div>
             </div>
           );
         })}
-        <button
-          onClick={registrationTester}
-          className="bg-green-500 rounded-md font-bold text-white text-medium p-3 border-1 hover:bg-green-600"
-        >
+        <button className="bg-green-500 rounded-md font-bold text-white text-medium p-3 border-1 hover:bg-green-600">
           Regisztráció
         </button>
       </>
