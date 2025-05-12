@@ -30,7 +30,7 @@ class RegistrationController extends Controller
             $rules = [
                 "registration_submitter" => "required|numeric",
                 "categorie" => "required|numeric",
-                "contestant1" => "required|array",
+                "contestant1" => "required",
                 "contestant1.name" => "required|string",
                 "contestant1.points" => "nullable|numeric",
                 "contestant1.rating" => "nullable|string",
@@ -76,7 +76,7 @@ class RegistrationController extends Controller
                 "categorie" => $singleRegistration["categorie"],
                 "contestant1" => json_encode($singleRegistration["contestant1"]),
                 "contestant2" => json_encode($singleRegistration["contestant2"] ?? null),
-                "registration_fee" => $singleRegistration["registration_fee"],
+                "registration_fee" => $singleRegistration["registration_fee"] ?? 0,
                 "competition_id" => $singleRegistration["competition_id"],
             ]);
         }

@@ -1,13 +1,5 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-
-import kep1 from "../../public/kep1.jpg";
-import kep2 from "../../public/kep2.jpg";
-import kep3 from "../../public/kep3.jpg";
-
-import { Header } from "../components/Header.jsx";
-import { Footer } from "../components/Footer.jsx";
 import ImageSlider from "../components/ImageSlider.jsx";
 import { NewsSlider } from "../components/NewsSlider.jsx";
 
@@ -21,8 +13,6 @@ export function WelcomePage() {
     return (
         <>
             <ImageSlider/>  
-
-            {/* About */}
             <section id="About-Box"className="py-16 px-6 md:px-12 lg:px-24 text-green-900">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-4xl font-bold text-green-700 mb-6">Viharsarki Csocsó Egyesület</h2>

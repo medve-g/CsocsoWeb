@@ -31,26 +31,10 @@ export function AboutUs() {
         };
     }, []);
 
-   const downloadExcel = async () => {
-    try {
-        const response = await fetch('/api/registration/export');
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const blob = await response.blob();
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'registrations.xlsx';
-        link.click();
-    } catch (error) {
-        console.error('Error downloading the file:', error);
-    }
-};
     return (
         <>
             <div className="flex min-h-screen flex-col md:flex-row">
-                <div className="w-full md:w-64 bg-white opacity-90 text-green-700 p-6 pl-[5px] rounded-xl m-4 h-fit">
+                <div className="md:w-64 bg-white opacity-90 text-green-700 p-6 pl-[5px] rounded-xl m-4 h-fit">
                     <div className="space-y-6 text-center">
                         <a href="#cel" className="block hover:text-green-400">Az egyesület célja</a>
                         <a href="#tevekenyseg" className="block hover:text-green-400">Tevékenységeink</a>
@@ -69,7 +53,7 @@ export function AboutUs() {
                             <p className="md:w-1/2">
                                 A csocsó és más sportágak hazai népszerűsítése, a csocsó oktatás színvonalának növelése, valamint a fiatalság körében való terjesztése, a fiatalok számára tartalmas szabadidő eltöltési lehetőség nyújtása, ifjúság tömörítése, versenyeztetése a csocsó sportágban. Az egyesület alapító tagjai a már évek óta a sportban résztvevő profi játékosok.
                             </p>
-                            <img src="./public/kep1.jpg" alt="Az egyesület célja" className="md:w-1/2 w-full rounded-xl shadow-lg object-contain" />
+                            <img src="./public/kep1.jpg" alt="Az egyesület célja" className="md:w-1/2 w-full rounded-xl object-contain" />
                         </div>
                     </div>
 
@@ -81,7 +65,7 @@ export function AboutUs() {
                                 Amatőr és profi edzések, heti rendszerességgel tartanak a tagok edzéseket maguknak, illetve a fiataloknak, vagy az amatőröknek is. Életkori megkötés nincs.<br /><br />
                                 Egyéb versenyek szervezése, amelyek fő célpontjai az amatőr játékosok, illetve a 14-18 éves korosztály. Ezek közül a versenyek közül kiemelkedik a Békéscsabai Városi Középiskolás Csocsóverseny, amelyet évente egy vagy két alkalommal szerveztünk meg eddig is, 2024-ben már a nyolcadik ilyen versenyre kerül majd sor. Ezeken a versenyeken az 50-120 középiskolás tanuló szokott részt venni. Többek között minden évben megrendezésre kerül a „Mikulás Csocsó Kupa” is, ahol a gyerekek mikulás csomagokért küzdenek meg egymással. Továbbá évente 4-6 alkalommal amatőr versenyeket is szervezünk.
                             </p>
-                            <img src="./public/logo.png" alt="Tevékenységeink" className="md:w-1/2 w-full rounded-xl shadow-lg object-contain" />
+                            <img src="./public/logo.png" alt="Tevékenységeink" className="md:w-1/2 w-full rounded-xl object-contain" />
                         </div>
                     </div>
 
@@ -94,7 +78,7 @@ export function AboutUs() {
                                 A lehetséges támogatásokból az asztalok, versenyeink fejlesztése az cél. A lehető legjobb körülmények megteremtése.<br /><br />
                                 Az edzéseken általában 8-12 gyermek szokott részt venni. Őket csoportokra osztjuk, hiszen a legtöbb esetben korban és fejlettségi szintben is máshol járnak.
                             </p>
-                            <img src="./public/csocsoedzes.jpg" alt="Terveink" className="md:w-1/2 w-full rounded-xl shadow-lg object-contain" />
+                            <img src="./public/csocsoedzes.jpg" alt="Terveink" className="md:w-1/2 w-full rounded-xl object-contain" />
                         </div>
                     </div>
 
@@ -107,7 +91,7 @@ export function AboutUs() {
                                 - közösségimédia felületeinken<br /><br />
                                 Ezeket rendszeresen használjuk.
                             </p>
-                            <img src="./public/csocsoliga_megjelenes.jpg" alt="Megjelenés" className="md:w-1/2 w-full rounded-xl shadow-lg object-contain" />
+                            <img src="./public/csocsoliga_megjelenes.jpg" alt="Megjelenés" className="md:w-1/2 w-full rounded-xl object-contain" />
                         </div>
                     </div>
 
@@ -120,16 +104,10 @@ export function AboutUs() {
                                 <b>Alapítótagok:</b> Diós Norbert, Börcsök Szabolcs, Kósa György, Hegedűs Dániel, Cseresznyés Ferenc, Bencsik Tamás, Dénes Benedek.<br /><br />
                                 <b>Alapítás után érkező tagjaink:</b> Futaki Dániel, Földi Nóra, Czombos Balázs, Gubucz Panna, Csizmadia Róbert, Verók Csaba, Gyuricza Tamás, Makai Márton, Sajben Mercédesz, Bónus Kristóf, Albert Ádám, Molcsán Szabolcs, Boldog Kristóf, Megyeri Petra.
                             </p>
-                            <img src="./public/csocso_csapat.jpg" alt="Felépítés" className="md:w-1/2 w-full rounded-xl shadow-lg object-contain" />
+                            <img src="./public/csocso_csapat.jpg" alt="Felépítés" className="md:w-1/2 w-full rounded-xl object-contain" />
                         </div>
                     </div>
 
-                    {/* Exportálás gomb */}
-                    <div className="text-center mt-8">
-                        <button onClick={downloadExcel} className="bg-green-700 text-white py-2 px-6 rounded-lg hover:bg-green-600" >
-                            Excel letöltése
-                        </button>
-                    </div>
                 </div>
             </div>
         </>

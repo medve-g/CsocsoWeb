@@ -4,7 +4,6 @@ import kep3 from "../../public/kep3.jpg";
 import kep4 from "../../public/kep4.jpg";
 import kep5 from "../../public/kep5.jpg";
 
-import React from "react"
 import { Slide } from "react-slideshow-image";
 import 'react-slideshow-image/dist/styles.css'
 
