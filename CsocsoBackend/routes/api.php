@@ -26,6 +26,6 @@ Route::delete('/newsApi/{id}', [NewsController::class, 'deletenews']);
 
 Route::post("/categories", [CategorieController::class, "sendRequestedCategories"]);
 
-Route::post('/registration', [RegistrationController::class, 'store']);
-Route::get('/registration', [RegistrationController::class, 'index']);
+Route::post('/registrationSender', [RegistrationController::class, 'store']);
+Route::get('/useRregistrationGetter/{id}', [RegistrationController::class, 'showUserRegistrations']);
 Route::get('/registration/export', [RegistrationController::class, 'exportExcel']);

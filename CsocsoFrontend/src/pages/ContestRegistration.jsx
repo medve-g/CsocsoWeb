@@ -2,15 +2,19 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../App";
 import * as XLSX from "xlsx";
+import { faSleigh } from "@fortawesome/free-solid-svg-icons";
 
 export default function ContestRegistration() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isPreRegistrationBeforeDeadline, setIsPreRegistrationBeforeDeadline] =
+    useState(true);
   const { contestInformation } = location.state || {};
   const [user, setUser] = useContext(UserContext);
   const [availablePlayers, setAvailablePlayers] = useState([]);
   const [searchTerms, setSearchTerms] = useState({});
   const [showDropdowns, setShowDropdowns] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
   const [selectedCategories, setSelectedCategories] = useState({});
   const [registration, setRegistration] = useState({
     registration_submitter: user.id,
@@ -29,6 +33,18 @@ export default function ContestRegistration() {
     competition_id: contestInformation.id,
   });
 
+  let displayError = (errorMessage) => {
+    if (errorMessage == "") {
+      return;
+    } else {
+      return (
+        <div className="mx-5 mt-3 p-3 rounded-lg border-4 border-red-700 bg-red-100 text-red-700 font-bold text-lg shadow-md">
+          <p>{errorMessage}</p>
+        </div>
+      );
+    }
+  };
+
   const handleInputChange = (key, value) => {
     setSearchTerms((prev) => ({
       ...prev,
@@ -44,7 +60,6 @@ export default function ContestRegistration() {
   };
 
   const handleBlur = (key) => {
-    // Opció: 200ms késleltetés, hogy a felhasználó a legördülő menüre kattintva is tudjon választani
     setTimeout(() => {
       setShowDropdowns((prev) => ({ ...prev, [key]: false }));
     }, 200);
@@ -56,7 +71,6 @@ export default function ContestRegistration() {
     playerCategory,
     playerPoints
   ) => {
-    // Objektumot tárolunk el, nem csak a nevet
     const playerData = {
       name: playerName,
       rating: playerCategory,
@@ -66,21 +80,17 @@ export default function ContestRegistration() {
     setSearchTerms((prev) => ({ ...prev, [key]: playerData }));
     setShowDropdowns((prev) => ({ ...prev, [key]: false }));
 
-    // Az objektum frissítése
     const updatedRegistration = { ...registration };
 
-    // Ha a második játékos lett kiválasztva, akkor a második versenyző adatainak frissítése
     if (key === `${key}_second`) {
       updatedRegistration.contestant2 = playerData;
     } else {
       updatedRegistration.contestant1 = playerData;
     }
 
-    // Regisztrációs díj beállítása: csak az első játékos besorolása számít
     const firstContestantCategory = updatedRegistration.contestant1?.rating;
 
     if (firstContestantCategory) {
-      // Cseréljük a szóközöket kötőjelekre a kategória nevében
       const fee = contestInformation.ratings_and_fees[firstContestantCategory];
       updatedRegistration.registration_fee = fee ?? null;
     }
@@ -100,7 +110,6 @@ export default function ContestRegistration() {
     const categoryMap = {};
 
     for (const category of data) {
-      // Csak akkor adjuk hozzá, ha még nem létezik a kategória neve
       if (!categoryMap.hasOwnProperty(category.name)) {
         categoryMap[category.name] = category.ranklist_reference;
       }
@@ -151,13 +160,30 @@ export default function ContestRegistration() {
   const gathereveryinfo = async () => {
     const categoryMap = await gatherSelectedCategories();
     const players = await fetchExcel(categoryMap);
-    setAvailablePlayers(players); // most már objektum, nem tömb!
+    setAvailablePlayers(players);
   };
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) setUser(storedUser);
     gathereveryinfo();
+
+    function checkIfPreRegistrationEnded() {
+      const now = new Date();
+      const target = new Date(contestInformation.end_of_pre_registration);
+      if (now.getTime() > target.getTime()) {
+        setIsPreRegistrationBeforeDeadline(false);
+        return () => clearInterval(masodpercenkentiEllenorzes);
+      }
+      console.log(isPreRegistrationBeforeDeadline);
+    }
+    checkIfPreRegistrationEnded();
+    let masodpercenkentiEllenorzes = setInterval(
+      checkIfPreRegistrationEnded,
+      1000
+    );
+
+    return () => clearInterval(masodpercenkentiEllenorzes);
   }, []);
 
   const testRegistrationData = async () => {
@@ -176,18 +202,22 @@ export default function ContestRegistration() {
           competition_id: contestInformation.id,
         };
       });
-    let res = await fetch("http://127.0.0.1:8000/api/registration", {
+    let res = await fetch("http://127.0.0.1:8000/api/registrationSender", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(selectedData),
     });
+    let data = await res.json();
+
+    console.log(selectedData);
+
+    if (!res.ok) {
+      setErrorMessage(data.message);
+    }
 
     if (res.status == 201) {
       navigate("/contests");
     }
-
-    console.log(selectedData);
-    console.log(res.status);
   };
 
   const enableRegisterButton = (user) => {
@@ -203,7 +233,6 @@ export default function ContestRegistration() {
               key={key}
               className="flex flex-col sm:flex-row w-full border-green-400 border-2 my-5 items-start sm:items-center px-4 py-4 gap-4 sm:gap-10 rounded-md"
             >
-              {/* Checkbox és kategórianév */}
               <div className="flex items-center gap-2 min-w-[180px]">
                 <input
                   className="w-4 h-4"
@@ -222,9 +251,7 @@ export default function ContestRegistration() {
                 </p>
               </div>
 
-              {/* Játékos / Partner mezők */}
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:flex-wrap">
-                {/* Fő játékos */}
                 <div className="relative flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full sm:w-auto sm:max-w-[350px]">
                   <span className="text-sm font-medium whitespace-nowrap">
                     Játékos:
@@ -274,7 +301,6 @@ export default function ContestRegistration() {
                   </div>
                 </div>
 
-                {/* Partner (ha páros) */}
                 {isDoubles && (
                   <div className="relative flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full sm:w-auto sm:max-w-[350px]">
                     <span className="text-sm font-medium whitespace-nowrap">
@@ -338,21 +364,32 @@ export default function ContestRegistration() {
           );
         })}
 
-        {/* Regisztráció gomb */}
+        {displayError(errorMessage)}
         <div className="w-full flex justify-center mt-8 gap-4">
-          <button
-            onClick={testRegistrationData}
-            className="bg-green-500 rounded-md font-bold text-white text-base sm:text-lg p-3 hover:bg-green-600"
-          >
-            Regisztráció
-          </button>
-          {Boolean(user?.contest_admin) && (
+          {isPreRegistrationBeforeDeadline && (
             <button
-              onClick={deleteCurrentContest}
-              className="bg-red-500 rounded-md font-bold text-white text-base sm:text-lg p-3 hover:bg-red-600"
+              onClick={testRegistrationData}
+              className="bg-green-500 rounded-md font-bold text-white text-base sm:text-lg p-3 hover:bg-green-600"
             >
-              Verseny Törlése
+              Regisztráció
             </button>
+          )}
+
+          {Boolean(user?.contest_admin) && (
+            <div className="gap-4 flex">
+              <button
+                onClick={deleteCurrentContest}
+                className="bg-red-500 rounded-md font-bold text-white text-base sm:text-lg p-3 hover:bg-red-600"
+              >
+                Verseny Törlése
+              </button>
+              <button
+                onClick={deleteCurrentContest}
+                className="bg-blue-500 rounded-md font-bold text-white text-base sm:text-lg p-3 hover:bg-blue-600"
+              >
+                Regisztrációk megtekintése
+              </button>
+            </div>
           )}
         </div>
       </>
@@ -362,30 +399,25 @@ export default function ContestRegistration() {
   return (
     <div className="w-full flex justify-center items-center px-4 sm:px-6 lg:px-8 my-10 sm:my-20">
       <div className="bg-white w-full max-w-[1000px] px-5 sm:px-10 py-8 sm:py-16 rounded-xl drop-shadow-lg mx-auto">
-        {/* Verseny neve */}
         <h1 className="mb-6 text-2xl sm:text-3xl md:text-4xl lg:text-[45px] text-center font-semibold leading-tight">
           {contestInformation?.competition_name}
         </h1>
 
-        {/* Helyszín */}
         <div className="text-base sm:text-lg md:text-xl text-center py-2 sm:py-3">
           <div className="font-bold">Helyszín:</div>
           <div>{contestInformation?.location}</div>
         </div>
 
-        {/* Kezdés */}
         <div className="text-base sm:text-lg md:text-xl text-center py-2 sm:py-3">
           <div className="font-bold">Kezdés:</div>
           <div>{contestInformation?.competition_start}</div>
         </div>
 
-        {/* Előregisztráció vége */}
         <div className="text-base sm:text-lg md:text-xl text-center py-2 sm:py-3">
           <div className="font-bold">Előregisztráció lezáródása:</div>
           <div>{contestInformation?.end_of_pre_registration}</div>
         </div>
 
-        {/* Regisztrációs űrlap */}
         <div className="text-center mt-6 sm:mt-10">
           {enableRegisterButton(user)}
         </div>

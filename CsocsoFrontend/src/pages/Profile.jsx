@@ -64,6 +64,12 @@ export default function Profile() {
         }));
     };
 
+    const fetchUserRegistrations = async () => {
+        let res = await fetch(`http://127.0.0.1:8000/api/useRregistrationGetter/${user.id}`)
+        let data = await res.json()
+        console.log(data)
+    }
+
 
     const handleChangePassword = async () => {
         const token = localStorage.getItem("authToken");
@@ -142,8 +148,8 @@ export default function Profile() {
                 </div>
 
                 <div className="px-6 pt-5 text-center w-full">
-                    <label className="font-semibold text-lg">Eddigi versenyeim:</label>
-                    <p className="text-gray-600">Jelenleg nincs versenyadat.</p>
+                    <label className="font-semibold text-lg">Eddigi nevezéseim:</label>
+                    <p className="text-gray-600">Jelenleg nincs nevezésed.</p>
                 </div>
 
                 <div className="flex flex-col sm:flex-row justify-between mt-10 w-full">
