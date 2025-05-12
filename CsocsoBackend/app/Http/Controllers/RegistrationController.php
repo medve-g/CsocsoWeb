@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\FullCompetitionExport;
+use App\Exports\MultipleSheetExport;
 use Illuminate\Http\Request;
 use App\Models\RegistrationModel;
-use App\Exports\RegistrationsExport;
 use App\Models\CategoryModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -105,8 +106,8 @@ class RegistrationController extends Controller
         return response()->json($userRegistrations);
     }
 
-    public function exportExcel()
+    public function exportExcel(string $id)
     {
-        return Excel::download(new RegistrationsExport, "registrations.xlsx");
+        return Excel::download(new FullCompetitionExport($id), "registrations.xlsx");
     }
 }

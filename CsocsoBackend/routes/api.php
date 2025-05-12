@@ -3,10 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ContestController;
-use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\RegistrationController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,4 +26,4 @@ Route::post("/categories", [CategorieController::class, "sendRequestedCategories
 
 Route::post('/registrationSender', [RegistrationController::class, 'store']);
 Route::get('/useRregistrationGetter/{id}', [RegistrationController::class, 'showUserRegistrations']);
-Route::get('/registration/export', [RegistrationController::class, 'exportExcel']);
+Route::get('/registration/export/{id}', [RegistrationController::class, 'exportExcel']);
