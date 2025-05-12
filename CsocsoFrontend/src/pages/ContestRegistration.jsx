@@ -121,6 +121,24 @@ export default function ContestRegistration() {
     return categoryMap;
   };
 
+  const downloadExcel = async () => {
+    let id = contestInformation.id;
+    try {
+      const response = await fetch(`/api/registration/export/${id}`);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const blob = await response.blob();
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "registrations.xlsx";
+      link.click();
+    } catch (error) {
+      console.error("Error downloading the file:", error);
+    }
+  };
+
   const fetchExcel = async (categoryMap) => {
     const res = await fetch(
       `https://docs.google.com/spreadsheets/d/1XSWVXtvboY8Rr8sIP0QtDjju4W1fa20u/export?format=xlsx`
@@ -178,7 +196,6 @@ export default function ContestRegistration() {
         setIsPreRegistrationBeforeDeadline(false);
         return () => clearInterval(masodpercenkentiEllenorzes);
       }
-      console.log(isPreRegistrationBeforeDeadline);
     }
     checkIfPreRegistrationEnded();
     let masodpercenkentiEllenorzes = setInterval(
@@ -389,6 +406,12 @@ export default function ContestRegistration() {
                 className="bg-blue-500 rounded-md font-bold text-white text-base sm:text-lg p-3 hover:bg-blue-600"
               >
                 Regisztrációk megtekintése
+              </button>
+              <button
+                onClick={downloadExcel}
+                className="bg-gray-500 rounded-md font-bold text-white text-base sm:text-lg p-3 hover:bg-gray-600"
+              >
+                Excel letöltése
               </button>
             </div>
           )}
