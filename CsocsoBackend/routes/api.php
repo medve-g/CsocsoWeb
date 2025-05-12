@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/contests", [ContestController::class, "index"]);
 Route::post("/newContest", [ContestController::class, "store"]) ;
+Route::delete("/deleteContest/{id}", [ContestController::class, "destroy"]);
 
 Route::post("/register", [AuthController::class, "register"]);
 Route::post("/login", [AuthController::class, "logIn"]);

@@ -48,7 +48,7 @@ return new class extends Migration
             $table->json("contestant1");
             $table->json('contestant2')->nullable();
             $table->integer("registration_fee");
-            $table->foreignId("competition_id")->constrained("competition");
+            $table->foreignId("competition_id")->constrained("competition")->onDelete('cascade');
             $table->timestamps();
         });
 

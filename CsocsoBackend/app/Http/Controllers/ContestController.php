@@ -15,6 +15,22 @@ class ContestController extends Controller
         return response()->json($contests, 200, ["Content-Type" => "application/json"]);
     }
 
+    public function destroy(string $id)
+    {
+        $currentContest = ContestModel::find($id);
+
+        if ($currentContest) {
+            $currentContest->delete();
+            return response()->json([
+                "message" => "Sikeres törlés"
+            ],200);
+        }else{
+            return response()->json([
+                "message" => "Nincs ilyen verseny"
+            ],404);
+        }
+    }
+
     public function store(Request $request)
     {
         try {
