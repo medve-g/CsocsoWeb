@@ -33,6 +33,9 @@ export default function ContestRegistration() {
     competition_id: contestInformation.id,
   });
 
+  // Popup állapot
+  const [showPopup, setShowPopup] = useState(false);
+
   let displayError = (errorMessage) => {
     if (errorMessage == "") {
       return;
@@ -341,9 +344,7 @@ export default function ContestRegistration() {
                             {availablePlayers[key]
                               ?.filter((player) =>
                                 player?.Név?.toLowerCase().includes(
-                                  searchTerms[
-                                    `${key}_second`
-                                  ]?.name?.toLowerCase()
+                                  searchTerms[`${key}_second`]?.name?.toLowerCase()
                                 )
                               )
                               .map((player, idx) => (
@@ -356,7 +357,7 @@ export default function ContestRegistration() {
                                       player.Név,
                                       player["Besorolás"] || "Nincs besorolás",
                                       player["Össz pontszám"] ||
-                                        "Nincs pontszám"
+                                      "Nincs pontszám"
                                     )
                                   }
                                 >
@@ -395,7 +396,7 @@ export default function ContestRegistration() {
           {Boolean(user?.contest_admin) && (
             <div className="gap-4 flex">
               <button
-                onClick={deleteCurrentContest}
+                onClick={() => setShowPopup(true)} // popup megjelenítése
                 className="bg-red-500 rounded-md font-bold text-white text-base sm:text-lg p-3 hover:bg-red-600"
               >
                 Verseny Törlése
@@ -419,6 +420,34 @@ export default function ContestRegistration() {
     );
   };
 
+  // Popup ablak megjelenítése
+  const ShowPopup = () => {
+    return (
+      <div className="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
+        <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+          <h2 className="text-xl font-semibold mb-4">Biztos, hogy törölni szeretnéd a versenyt?</h2>
+          <div className="flex justify-center gap-4">
+            <button
+              onClick={() => {
+                setShowPopup(false);
+                deleteCurrentContest();
+              }}
+              className="bg-red-500 text-white py-2 px-4 rounded-md"
+            >
+              Igen
+            </button>
+            <button
+              onClick={() => setShowPopup(false)}
+              className="bg-gray-500 text-white py-2 px-4 rounded-md"
+            >
+              Mégsem
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="w-full flex justify-center items-center px-4 sm:px-6 lg:px-8 my-10 sm:my-20">
       <div className="bg-white w-full max-w-[1000px] px-5 sm:px-10 py-8 sm:py-16 rounded-xl drop-shadow-lg mx-auto">
@@ -437,11 +466,13 @@ export default function ContestRegistration() {
         </div>
 
         <div className="text-base sm:text-lg md:text-xl text-center py-2 sm:py-3">
-          <div className="font-bold">Előregisztráció lezáródása:</div>
+          <div className="font-bold">Előregisztrációhatárideje:</div>
           <div>{contestInformation?.end_of_pre_registration}</div>
         </div>
 
-        <div className="text-center mt-6 sm:mt-10">
+        {showPopup && <ShowPopup />}
+
+       <div className="text-center mt-6 sm:mt-10">
           {enableRegisterButton(user)}
         </div>
       </div>

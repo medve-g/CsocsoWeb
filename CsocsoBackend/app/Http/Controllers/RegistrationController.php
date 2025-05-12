@@ -92,6 +92,22 @@ class RegistrationController extends Controller
         return response()->json($registrations);
     }
 
+    public function destroy(string $id)
+{
+    $registration = RegistrationModel::find($id);
+
+    if ($registration) {
+        $registration->delete();
+        return response()->json([
+            "message" => "Sikeres törlés"
+        ], 200);
+    } else {
+        return response()->json([
+            "message" => "Nincs ilyen nevezés"
+        ], 404);
+    }
+}
+
     public function showUserRegistrations(string $id)
     {
         $userRegistrations = DB::table("registration")->join("categories", "registration.categorie", "=", "categories.id")

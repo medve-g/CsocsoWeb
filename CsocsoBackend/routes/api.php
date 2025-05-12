@@ -15,6 +15,7 @@ Route::delete("/deleteContest/{id}", [ContestController::class, "destroy"]);
 Route::post("/register", [AuthController::class, "register"]);
 Route::post("/login", [AuthController::class, "logIn"]);
 Route::post("/logout", [AuthController::class, "logOut"]);
+Route::delete("/deleteRegister/{id}", [RegistrationController::class, "destroy"]);
 Route::middleware('auth:sanctum')->put('/user/update', [AuthController::class, 'updateProfile']);
 Route::middleware('auth:sanctum')->put('/user/changePassword', [AuthController::class, 'changePassword']);
 
