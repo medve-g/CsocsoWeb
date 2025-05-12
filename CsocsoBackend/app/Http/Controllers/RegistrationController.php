@@ -63,7 +63,7 @@ class RegistrationController extends Controller
             if ($existingRegistration) {
                 return response()->json([
                     "message" => "Ez a versenyző már nevezett ebben a kategóriában ezen a versenyen"
-                ],409);
+                ], 409);
             }
 
             array_push($correctRegistrations, $validated);
@@ -91,10 +91,18 @@ class RegistrationController extends Controller
         return response()->json($registrations);
     }
 
-    public function showUserRegistrations(string $id){
-        $userRegistrations = DB::table("registration")->where("registration_submitter", $id)->get();
+    public function showUserRegistrations(string $id)
+    {
+        $userRegistrations = DB::table("registration")->join("categories", "registration.categorie", "=", "categories.id")
+            ->join("competition", "registration.competition_id", "=", "competition.id")->where("registration_submitter", $id)
+            ->select(
+                "registration.*",
+                'categories.name as category_name',
+                'competition.competition_name as competition_name',
+            )->get();
 
-        return $userRegistrations;
+
+        return response()->json($userRegistrations);
     }
 
     public function exportExcel()
