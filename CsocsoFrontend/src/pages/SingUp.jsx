@@ -6,7 +6,8 @@ export function SignUp() {
   const navigate = useNavigate();
   const [user, setUser] = useContext(UserContext);
   const [errors, setErrors] = useState({});
-  
+  const [showPopup, setShowPopup] = useState(false);
+
 
   let [registrationData, setRegistrationData] = useState({
     username: "",
@@ -41,9 +42,7 @@ export function SignUp() {
         throw new Error(responseData.errors ? JSON.stringify(responseData.errors) : "Valami hiba történt");
       }
 
-      localStorage.setItem("user", JSON.stringify(responseData));
-      setUser(responseData);
-      navigate("/");
+      setShowPopup(true);
     } catch (err) {
       console.error("Error:", err.message);
     }
@@ -67,13 +66,13 @@ export function SignUp() {
     }
 
     if (name === "password") {
-        if (value.length < 8) {
-            errorMessage = "A jelszónak legalább 8 karakter hosszúnak kell lennie!";
-        } else if (!/[A-Z]/.test(value)) {
-            errorMessage = "A jelszónak tartalmaznia kell legalább egy nagybetűt!";
-        } else if (!/[\W]/.test(value)) {
-            errorMessage = "A jelszónak tartalmaznia kell legalább egy speciális karaktert (pl.: !@#$%^&*)!";
-        }
+      if (value.length < 8) {
+        errorMessage = "A jelszónak legalább 8 karakter hosszúnak kell lennie!";
+      } else if (!/[A-Z]/.test(value)) {
+        errorMessage = "A jelszónak tartalmaznia kell legalább egy nagybetűt!";
+      } else if (!/[\W]/.test(value)) {
+        errorMessage = "A jelszónak tartalmaznia kell legalább egy speciális karaktert (pl.: !@#$%^&*)!";
+      }
     }
 
     if (name === "password_confirmation") {
@@ -209,7 +208,22 @@ export function SignUp() {
           </div>
         </div>
       </div>
+      {showPopup && (
+        <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm text-center">
+            <h2 className="text-xl font-bold mb-4">Sikeres regisztráció! Kérlek jelentkezz be újra!</h2>
+            <button
+              onClick={() => {
+                setShowPopup(false);
+                navigate("/login");
+              }}
+              className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-500 transition"
+            >
+              Rendben
+            </button>
+          </div>
+        </div>
+      )}
     </div>
-
   );
 }

@@ -11,6 +11,10 @@ export default function ProfilDataChange() {
     const [showEmailInput, setShowEmailInput] = useState(false);
     const [showPhoneNumberInput, setShowPhoneNumberInput] = useState(false);
     const [showGenderInput, setShowGenderInput] = useState(false);
+    const [popupMessage, setPopupMessage] = useState("");
+    const [showPopup, setShowPopup] = useState(false);
+    const [errors, setErrors] = useState({});
+
 
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -20,24 +24,75 @@ export default function ProfilDataChange() {
         }
     }, []);
 
+    const inputValidation = (name, value) => {
+        let errorMessage = "";
+
+        if (name === "email") {
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(value)) {
+                errorMessage = "Érvénytelen email formátum!";
+            }
+        }
+
+        if (name === "phonenumber") {
+            const phoneRegex = /^\+\d{11}$/;
+            if (!phoneRegex.test(value)) {
+                errorMessage = "Telefon formátum: +36703569587";
+            }
+        }
+
+        if (name === "username") {
+            if (value.length < 3) {
+                errorMessage = "A felhasználónévnek legalább 3 karakter hosszúnak kell lennie!";
+            }
+        }
+
+        if (name === "gender") {
+            if (value !== "Férfi" && value !== "Nő") {
+                errorMessage = "Nem megfelelő nem! Csak 'Férfi' vagy 'Nő' választható.";
+            }
+        }
+
+        return errorMessage;
+    };
+
+
     const updateUserData = async () => {
         try {
-            const token = localStorage.getItem("authToken");
-            const storedUser = JSON.parse(localStorage.getItem("user"));
 
-            
-            if (
-                storedUser.username === user.username &&
-                storedUser.email === user.email &&
-                storedUser.phonenumber === user.phonenumber &&
-                storedUser.gender === user.gender
-            ) {
-                alert("Nem történt változás az adatokban.");
-                navigate("/profile");
-                return; 
+            const emailError = inputValidation("email", user.email);
+            const phoneError = inputValidation("phonenumber", user.phonenumber);
+            const usernameError = inputValidation("username", user.username);
+
+            if (usernameError) {
+                setErrors({
+                    username: usernameError,
+                });
+                setPopupMessage("A felhasználónévnek legalább 3 karakter hosszúnak kell lennie!");
+                setShowPopup(true);
+                return;
             }
 
-            console.log("Sending update request with:", user);
+            if (emailError) {
+                setErrors({
+                    email: emailError,
+                });
+                setPopupMessage("Érvénytelen email formátum!");
+                setShowPopup(true);
+                return;
+            }
+
+            if (phoneError) {
+                setErrors({
+                    phonenumber: phoneError,
+                });
+                setPopupMessage("Telefon formátum: +36703569587");
+                setShowPopup(true);
+                return;
+            }
+
+
+            const token = localStorage.getItem("authToken");
 
             const response = await fetch("http://127.0.0.1:8000/api/user/update", {
                 method: "PUT",
@@ -53,23 +108,21 @@ export default function ProfilDataChange() {
                 })
             });
 
-            console.log("Response status:", response.status);
-
             const data = await response.json();
-            console.log("Received response:", data);
 
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}, Details: ${data.error}`);
             }
 
             localStorage.setItem("user", JSON.stringify(data.user));
-            alert("Profil adatainak módosítása sikeresen megtörtént!");
-            navigate("/profile");
+            setPopupMessage("Profil adatainak módosítása sikeresen megtörtént!");
+            setShowPopup(true);
         } catch (error) {
-            console.error("Hiba az adatok módosítása során:", error);
-            alert("Hiba az adatok módosítása során!");
+            setPopupMessage("Hiba az adatok módosítása során!");
+            setShowPopup(true);
         }
     };
+
 
 
 
@@ -90,7 +143,11 @@ export default function ProfilDataChange() {
                         <input
                             className="border border-gray-400 p-2 rounded text-lg font-bold text-gray-700"
                             value={user?.username}
-                            onChange={(e) => setUser({ ...user, username: e.target.value })}
+                            onChange={(e) => {
+                                setUser({ ...user, username: e.target.value });
+                                setErrors({ ...errors, username: inputValidation("username", e.target.value) });
+
+                            }}
                         />
 
                     )}
@@ -113,7 +170,10 @@ export default function ProfilDataChange() {
                                     <input
                                         className="border border-gray-400 p-2 rounded text-lg font-bold text-gray-700"
                                         value={user?.email}
-                                        onChange={(e) => setUser({ ...user, email: e.target.value })}
+                                        onChange={(e) => {
+                                            setUser({ ...user, email: e.target.value });
+                                            setErrors({ ...errors, email: inputValidation("email", e.target.value) });
+                                        }}
                                     />
 
                                 )}
@@ -136,12 +196,16 @@ export default function ProfilDataChange() {
                                     <input
                                         className="border border-gray-400 p-2 rounded text-lg font-bold text-gray-700"
                                         value={user?.phonenumber}
-                                        onChange={(e) => setUser({ ...user, phonenumber: e.target.value })}
+                                        onChange={(e) => {
+                                            setUser({ ...user, phonenumber: e.target.value });
+                                            setErrors({ ...errors, phonenumber: inputValidation("phonenumber", e.target.value) });
+                                        }}
                                     />
 
                                 )}
                             </div>
                         </div>
+
 
 
                         <div className="px-6 py-6 flex items-center justify-between bg-gray-100 rounded-lg">
@@ -155,11 +219,15 @@ export default function ProfilDataChange() {
                                         {user?.gender}
                                     </span>
                                 ) : (
-                                    <input
+                                    <select
                                         className="border border-gray-400 p-2 rounded text-lg font-bold text-gray-700"
                                         value={user?.gender}
                                         onChange={(e) => setUser({ ...user, gender: e.target.value })}
-                                    />
+                                        onBlur={() => setShowGenderInput(false)}
+                                    >
+                                        <option value="Férfi">Férfi</option>
+                                        <option value="Nő">Nő</option>
+                                    </select>
                                 )}
                             </div>
                         </div>
@@ -175,6 +243,20 @@ export default function ProfilDataChange() {
                         </div>
                     </div>
                 </div>
+                {showPopup && (
+                    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50">
+                        <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm text-center">
+                            <h2 className="text-xl font-bold mb-4">{popupMessage}</h2>
+                            <button
+                                onClick={() => setShowPopup(false)}
+                                className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-500 transition"
+
+                            >
+                                Rendben
+                            </button>
+                        </div>
+                    </div>
+                )}
             </div>
 
         </>

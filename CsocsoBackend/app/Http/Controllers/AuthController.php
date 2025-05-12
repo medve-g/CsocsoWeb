@@ -74,7 +74,7 @@ public function updateProfile(Request $request)
         ]);
 
         $user->update($validatedData);
-
+        
         return response()->json(["message" => "Profil adatainak módosítása sikeresen megtörtént!", "user" => $user], 200);
     } catch (\Exception $e) {
         \Log::error("Update profile error: " . $e->getMessage());
