@@ -27,7 +27,7 @@ export default function CreateContest() {
     const selectedCategories = {};
 
     checkedRadios.forEach((radio) => {
-      const category = radio.className.split(" ")[0];
+      const category = radio.className;
       selectedCategories[category] = parseInt(radio.id);
     });
 
@@ -207,53 +207,53 @@ export default function CreateContest() {
         <div className="flex justify-center gap-16">
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <input type="checkbox" id="1" className="Nyílt-Páros" />
+              <input type="checkbox" id="1" className="Nyílt Páros" />
               <label htmlFor="1">Nyílt Páros</label>
             </div>
             <div className="flex items-center gap-2">
-              <input type="checkbox" id="2" className="Nyílt-Egyéni" />
+              <input type="checkbox" id="2" className="Nyílt Egyéni" />
               <label htmlFor="2">Nyílt Egyéni</label>
             </div>
             <div className="flex items-center gap-2">
-              <input type="checkbox" id="3" className="Semi-pro-Páros" />
+              <input type="checkbox" id="3" className="Semi_pro Páros" />
               <label htmlFor="3">Semi-pro Páros</label>
             </div>
             <div className="flex items-center gap-2">
-              <input type="checkbox" id="4" className="Rookie-Páros" />
+              <input type="checkbox" id="4" className="Rookie Páros" />
               <label htmlFor="4">Rookie Páros</label>
             </div>
             <div className="flex items-center gap-2">
-              <input type="checkbox" id="5" className="Vegyes-Páros" />
+              <input type="checkbox" id="5" className="Vegyes Páros" />
               <label htmlFor="5">Vegyes Páros</label>
             </div>
             <div className="flex items-center gap-2">
-              <input type="checkbox" id="6" className="Rookie-Egyéni" />
+              <input type="checkbox" id="6" className="Rookie Egyéni" />
               <label htmlFor="6">Rookie Egyéni</label>
             </div>
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <input type="checkbox" id="7" className="Amatőr-Páros" />
+              <input type="checkbox" id="7" className="Amatőr Páros" />
               <label htmlFor="7">Amatőr Páros</label>
             </div>
             <div className="flex items-center gap-2">
-              <input type="checkbox" id="8" className="Női-Páros" />
+              <input type="checkbox" id="8" className="Női Páros" />
               <label htmlFor="8">Női Páros</label>
             </div>
             <div className="flex items-center gap-2">
-              <input type="checkbox" id="9" className="Női-Egyéni" />
+              <input type="checkbox" id="9" className="Női Egyéni" />
               <label htmlFor="9">Női Egyéni</label>
             </div>
             <div className="flex items-center gap-2">
-              <input type="checkbox" id="10" className="Junior-Páros" />
+              <input type="checkbox" id="10" className="Junior Páros" />
               <label htmlFor="10">Junior Páros</label>
             </div>
             <div className="flex items-center gap-2">
-              <input type="checkbox" id="11" className="Junior-Egyéni" />
+              <input type="checkbox" id="11" className="Junior Egyéni" />
               <label htmlFor="11">Junior Egyéni</label>
             </div>
             <div className="flex items-center gap-2">
-              <input type="checkbox" id="12" className="Sorsolásos-Páros" />
+              <input type="checkbox" id="12" className="Sorsolásos Páros" />
               <label htmlFor="12">Sorsolásos Páros</label>
             </div>
           </div>

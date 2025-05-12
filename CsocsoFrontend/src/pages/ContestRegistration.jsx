@@ -33,10 +33,20 @@ export default function ContestRegistration() {
       ...prev,
       [key]: {
         ...prev[key],
-        name: value, // Csak a név mezőt frissítjük
+        name: value,
       },
     }));
+  };
+
+  const handleFocus = (key) => {
     setShowDropdowns((prev) => ({ ...prev, [key]: true }));
+  };
+
+  const handleBlur = (key) => {
+    // Opció: 200ms késleltetés, hogy a felhasználó a legördülő menüre kattintva is tudjon választani
+    setTimeout(() => {
+      setShowDropdowns((prev) => ({ ...prev, [key]: false }));
+    }, 200);
   };
 
   const handleSelectPlayer = (
@@ -57,30 +67,47 @@ export default function ContestRegistration() {
 
     // Az objektum frissítése
     const updatedRegistration = { ...registration };
+
+    // Ha a második játékos lett kiválasztva, akkor a második versenyző adatainak frissítése
     if (key === `${key}_second`) {
       updatedRegistration.contestant2 = playerData;
     } else {
       updatedRegistration.contestant1 = playerData;
     }
 
-    setRegistration(updatedRegistration);
-  };
-  const gatherSelectedCategories = async () => {
-    const res = await fetch("http://127.0.0.1:8000/api/categories", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(contestInformation.categories),
-    });
+    // Regisztrációs díj beállítása: csak az első játékos besorolása számít
+    const firstContestantCategory = updatedRegistration.contestant1?.rating;
 
-    const data = await res.json();
 
-    const categoryMap = {};
-    for (const category of data) {
-      categoryMap[category.name] = category.ranklist_reference;
+    if (firstContestantCategory) {
+      // Cseréljük a szóközöket kötőjelekre a kategória nevében
+      const fee = contestInformation.ratings_and_fees[firstContestantCategory];
+      updatedRegistration.registration_fee = fee ?? null;
     }
 
-    return categoryMap;
+    setRegistration(updatedRegistration);
   };
+
+const gatherSelectedCategories = async () => {
+  const res = await fetch("http://127.0.0.1:8000/api/categories", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(contestInformation.categories),
+  });
+
+  const data = await res.json();
+
+  const categoryMap = {};
+  
+  for (const category of data) {
+    // Csak akkor adjuk hozzá, ha még nem létezik a kategória neve
+    if (!categoryMap.hasOwnProperty(category.name)) {
+      categoryMap[category.name] = category.ranklist_reference;
+    }
+  }
+
+  return categoryMap;
+};
 
   const fetchExcel = async (categoryMap) => {
     const res = await fetch(
@@ -127,12 +154,13 @@ export default function ContestRegistration() {
           categorie: parseInt(value),
           contestant1,
           contestant2,
-          registration_fee: null,
+          registration_fee: registration.registration_fee,
           competition_id: contestInformation.id,
         };
       });
 
     console.log("Beküldendő adatok:", selectedData);
+
   };
 
   const enableRegisterButton = (user) => {
@@ -173,9 +201,8 @@ export default function ContestRegistration() {
                       className="w-56 border-2 p-1 border-gray-500"
                       value={searchTerms[key]?.name || ""} // Csak a név legyen az input értéke
                       onChange={(e) => handleInputChange(key, e.target.value)}
-                      onFocus={() =>
-                        setShowDropdowns((prev) => ({ ...prev, [key]: true }))
-                      }
+                      onFocus={() => handleFocus(key)} // A fókusz esemény kezelése
+                      onBlur={() => handleBlur(key)} // A blur esemény kezelése
                     />
                     {showDropdowns[key] && searchTerms[key] && (
                       <div className="absolute top-full left-0 w-60 bg-white border border-gray-300 rounded max-h-60 overflow-y-auto z-10 shadow-md">
@@ -220,16 +247,12 @@ export default function ContestRegistration() {
                         type="text"
                         placeholder="Versenyző neve"
                         className="w-56 border-2 p-1 border-gray-500"
-                        value={searchTerms[`${key}_second`]?.name || ""} // Partner név
+                        value={searchTerms[`${key}_second`]?.name || ""} // Csak a név legyen az input értéke
                         onChange={(e) =>
                           handleInputChange(`${key}_second`, e.target.value)
-                        } // Használj különböző kulcsot
-                        onFocus={() =>
-                          setShowDropdowns((prev) => ({
-                            ...prev,
-                            [`${key}_second`]: true,
-                          }))
                         }
+                        onFocus={() => handleFocus(`${key}_second`)} // A fókusz esemény kezelése
+                        onBlur={() => handleBlur(`${key}_second`)} // A blur esemény kezelése
                       />
                       {showDropdowns[`${key}_second`] &&
                         searchTerms[`${key}_second`] && (
