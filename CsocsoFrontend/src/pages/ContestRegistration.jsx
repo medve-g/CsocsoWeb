@@ -33,7 +33,6 @@ export default function ContestRegistration() {
     competition_id: contestInformation.id,
   });
 
-  // Popup állapot
   const [showPopup, setShowPopup] = useState(false);
 
   let displayError = (errorMessage) => {
@@ -222,14 +221,13 @@ export default function ContestRegistration() {
           competition_id: contestInformation.id,
         };
       });
+    console.log(selectedData);
     let res = await fetch("http://127.0.0.1:8000/api/registrationSender", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(selectedData),
     });
     let data = await res.json();
-
-    console.log(selectedData);
 
     if (!res.ok) {
       setErrorMessage(data.message);
@@ -344,7 +342,9 @@ export default function ContestRegistration() {
                             {availablePlayers[key]
                               ?.filter((player) =>
                                 player?.Név?.toLowerCase().includes(
-                                  searchTerms[`${key}_second`]?.name?.toLowerCase()
+                                  searchTerms[
+                                    `${key}_second`
+                                  ]?.name?.toLowerCase()
                                 )
                               )
                               .map((player, idx) => (
@@ -357,7 +357,7 @@ export default function ContestRegistration() {
                                       player.Név,
                                       player["Besorolás"] || "Nincs besorolás",
                                       player["Össz pontszám"] ||
-                                      "Nincs pontszám"
+                                        "Nincs pontszám"
                                     )
                                   }
                                 >
@@ -383,7 +383,7 @@ export default function ContestRegistration() {
         })}
 
         {displayError(errorMessage)}
-        <div className="w-full flex justify-center mt-8 gap-4">
+        <div className="w-full flex justify-center mt-8 gap-4 flex-col sm:flex-row">
           {isPreRegistrationBeforeDeadline && (
             <button
               onClick={testRegistrationData}
@@ -394,9 +394,9 @@ export default function ContestRegistration() {
           )}
 
           {Boolean(user?.contest_admin) && (
-            <div className="gap-4 flex">
+            <div className="gap-4 flex flex-col sm:flex-row">
               <button
-                onClick={() => setShowPopup(true)} // popup megjelenítése
+                onClick={() => setShowPopup(true)} 
                 className="bg-red-500 rounded-md font-bold text-white text-base sm:text-lg p-3 hover:bg-red-600"
               >
                 Verseny Törlése
@@ -420,12 +420,14 @@ export default function ContestRegistration() {
     );
   };
 
-  // Popup ablak megjelenítése
+
   const ShowPopup = () => {
     return (
       <div className="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
         <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-          <h2 className="text-xl font-semibold mb-4">Biztos, hogy törölni szeretnéd a versenyt?</h2>
+          <h2 className="text-xl font-semibold mb-4">
+            Biztos, hogy törölni szeretnéd a versenyt?
+          </h2>
           <div className="flex justify-center gap-4">
             <button
               onClick={() => {
@@ -472,7 +474,7 @@ export default function ContestRegistration() {
 
         {showPopup && <ShowPopup />}
 
-       <div className="text-center mt-6 sm:mt-10">
+        <div className="text-center mt-6 sm:mt-10">
           {enableRegisterButton(user)}
         </div>
       </div>

@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import { UserContext } from "../App";
-import { useNavigate } from "react-router-dom";
 
 let enableButton = (user) => {
     if (user.contest_admin == 1) {
