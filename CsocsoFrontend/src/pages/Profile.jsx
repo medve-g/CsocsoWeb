@@ -5,8 +5,9 @@ import { useState, useContext, useEffect } from "react";
 export default function Profile() {
   const navigate = useNavigate();
   const [user, setUser] = useContext(UserContext);
-  const [showPopup, setShowPopup] = useState(false);
+  const [showPopup, setShowPopup] = useState(false); //Új jelszó popup
   const [showDeletePopup, setShowDeletePopup] = useState(false); // Nevezés törlés popup
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false); //Sikeres jelszóváltoztatás popup
   const [errors, setErrors] = useState({});
   const [userRegistrations, setUserRegistrations] = useState([]); // Nevezések tárolása
   const [currentRegistrationId, setCurrentRegistrationId] = useState(null); // Törölni kívánt nevezés ID-ja
@@ -135,9 +136,8 @@ export default function Profile() {
       }
 
       if (response.ok) {
-        alert("Jelszó sikeresen megváltoztatva! Kérlek lépj be újra!");
         setShowPopup(false);
-        navigate("/login");
+        setShowSuccessPopup(true);
         localStorage.removeItem("user");
         setUser({});
       } else {
@@ -335,6 +335,27 @@ export default function Profile() {
                 Mentés
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/*Jelszó sikeresen megváltozott popup*/}
+      {showSuccessPopup && (
+        <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm text-center">
+            <h2 className="text-xl font-semibold mb-4 text-green-600">
+              Jelszó sikeresen megváltoztatva!
+            </h2>
+            <p className="mb-6">Kérlek lépj be újra.</p>
+            <button
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+              onClick={() => {
+                setShowSuccessPopup(false);
+                navigate("/login");
+              }}
+            >
+              Rendben
+            </button>
           </div>
         </div>
       )}
