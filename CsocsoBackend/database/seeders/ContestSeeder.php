@@ -12,7 +12,7 @@ class ContestSeeder extends Seeder
     {
         DB::table("competition")->insert([
             [
-                "competition_name" => "Giga verseny",
+                "competition_name" => "Viharsarki csocsó liga",
                 "location" => "Békéscsaba, Széchenyi u. 4, 5600",
                 "competition_start" => "2025-05-10 14:00:00",
                 "end_of_pre_registration" => "2025-05-09 14:00:00",
@@ -24,14 +24,14 @@ class ContestSeeder extends Seeder
                 "ratings_and_fees" => json_encode([
                     "Rookie (junior)" => 500,
                     "Rookie" => 1500,
-                    "Semi-pro (junior)" => 1000,
-                    "Semi-pro" => 2500,
+                    "Semi pro (junior)" => 1000,
+                    "Semi pro" => 2500,
                     "Pro" => 3000,
                     "Master" => 4000
                 ])
             ],
             [
-                "competition_name" => "Kicsi verseny",
+                "competition_name" => "Viaharsarki csocsó országos bajnokság",
                 "location" => "Békéscsaba, Széchenyi u. 4, 5600",
                 "competition_start" => "2025-06-10 14:00:00",
                 "end_of_pre_registration" => "2025-06-09 14:00:00",
@@ -43,8 +43,8 @@ class ContestSeeder extends Seeder
                 "ratings_and_fees" => json_encode([
                     "Rookie (junior)" => 500,
                     "Rookie" => 1500,
-                    "Semi-pro (junior)" => 1000,
-                    "Semi-pro" => 2500,
+                    "Semi pro (junior)" => 1000,
+                    "Semi pro" => 2500,
                     "Pro" => 3000,
                     "Master" => 4000
                 ])

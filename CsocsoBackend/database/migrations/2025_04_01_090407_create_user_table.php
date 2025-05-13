@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string("phonenumber",12);
             $table->string("gender");
             $table->boolean("contest_admin");
-            $table->timestamps();
         });
 
         Schema::create('categories', function (Blueprint $table) {
@@ -27,7 +26,6 @@ return new class extends Migration
             $table->string("name");
             $table->string("ranklist_reference");
             $table->enum('type', ['egyéni', 'páros']);
-            $table->timestamps();
         });
 
         Schema::create('competition', function (Blueprint $table) {
@@ -38,7 +36,6 @@ return new class extends Migration
             $table->dateTime("end_of_pre_registration");
             $table->json("categories");
             $table->json("ratings_and_fees");
-            $table->timestamps();
         });
 
         Schema::create('registration', function (Blueprint $table) {
@@ -49,7 +46,6 @@ return new class extends Migration
             $table->json('contestant2')->nullable();
             $table->integer("registration_fee");
             $table->foreignId("competition_id")->constrained("competition")->onDelete('cascade');
-            $table->timestamps();
         });
 
         Schema::create('news', function (Blueprint $table) {
