@@ -52,7 +52,7 @@ return new class extends Migration
             $table->id();
             $table->string("imagepath", length: 255);
             $table->string("title");
-            $table->string("content");
+            $table->longText("content");
         });
     }
 
