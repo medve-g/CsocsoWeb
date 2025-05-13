@@ -402,12 +402,6 @@ export default function ContestRegistration() {
                 Verseny Törlése
               </button>
               <button
-                onClick={deleteCurrentContest}
-                className="bg-blue-500 rounded-md font-bold text-white text-base sm:text-lg p-3 hover:bg-blue-600"
-              >
-                Regisztrációk megtekintése
-              </button>
-              <button
                 onClick={downloadExcel}
                 className="bg-gray-500 rounded-md font-bold text-white text-base sm:text-lg p-3 hover:bg-gray-600"
               >

@@ -1,6 +1,6 @@
-# 🚀 Projekt Neve
+# CsocsoWeb
 
-Ez egy [Laravel](https://laravel.com/) backend + [React](https://react.dev/) frontend alkalmazás, amely a [Vite](https://vitejs.dev/) fejlesztői szervert használja. A projekt célja: _rövid projektleírás itt_.
+Ez egy [Laravel](https://laravel.com/) backend + [React](https://react.dev/) frontend alkalmazás, amely a [Vite](https://vitejs.dev/) fejlesztői szervert használja. A projekt célja: Egy weboldal a Viharsarki Csocso Egyesületnek, amiben kezelni lehet a versenyek kiírását és a nevezéseket.
 
 ---
 
@@ -9,10 +9,9 @@ Ez egy [Laravel](https://laravel.com/) backend + [React](https://react.dev/) fro
 - PHP 8.1 vagy újabb
 - Composer
 - Node.js 18.x vagy újabb
-- npm (Node.js telepítéssel együtt jön)
-- MySQL vagy más adatbázis (ha szükséges)
+- MySQL
 - Laravel 10.x
-- Ajánlott: XAMPP / Laravel Valet / Docker a lokális környezethez
+- XAMPP
 
 ---
 
@@ -20,20 +19,28 @@ Ez egy [Laravel](https://laravel.com/) backend + [React](https://react.dev/) fro
 
 ```bash
 # Kód klónozása
-git clone https://github.com/felhasznalo/projekt.git
-cd projekt
+git clone https://github.com/medve-g/CsocsoWeb.git
+cd .\CsocsoWeb\
 
 # Backend csomagok telepítése
+cd .\CsocsoBackend\
 composer install
 
+# Adatbázis létrehozása
+php artisan migrate
+php artisan db:seed
+
+# Backend futtatása
+php artisan serve
+
 # Frontend csomagok telepítése
+cd .\CsocsoFrontend\
 npm install
 
-# Környezeti fájl létrehozása
-cp .env.example .env
+# Frontend futtatása
+npm run dev
+# http://localhost:5173/
 
-# Laravel kulcs generálása
-php artisan key:generate
 
-# Adatbázis migrációk (ha szükséges)
-php artisan migrate
+
+

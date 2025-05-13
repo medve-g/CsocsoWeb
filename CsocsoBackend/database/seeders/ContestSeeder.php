@@ -14,8 +14,8 @@ class ContestSeeder extends Seeder
             [
                 "competition_name" => "Viharsarki csocsó liga",
                 "location" => "Békéscsaba, Széchenyi u. 4, 5600",
-                "competition_start" => "2025-05-10 14:00:00",
-                "end_of_pre_registration" => "2025-05-09 14:00:00",
+                "competition_start" => "2025-06-10 14:00:00",
+                "end_of_pre_registration" => "2025-06-09 14:00:00",
                 "categories" => json_encode([
                     "Nyílt Páros" => 1,
                     "Nyílt Egyéni" => 2,
@@ -33,8 +33,8 @@ class ContestSeeder extends Seeder
             [
                 "competition_name" => "Viaharsarki csocsó országos bajnokság",
                 "location" => "Békéscsaba, Széchenyi u. 4, 5600",
-                "competition_start" => "2025-06-10 14:00:00",
-                "end_of_pre_registration" => "2025-06-09 14:00:00",
+                "competition_start" => "2025-07-10 14:00:00",
+                "end_of_pre_registration" => "2025-07-09 14:00:00",
                 "categories" => json_encode([
                     "Nyílt Páros" => 1,
                     "Nyílt Egyéni" => 2,
