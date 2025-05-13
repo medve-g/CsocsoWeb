@@ -13,8 +13,6 @@ class RegistrationModel extends Model
 
     protected $fillable = ["id", "registration_submitter", "categorie", "contestant1", "contestant2", "registration_fee", "competition_id"];
 
-    public $timestamps = false;
-
     protected $casts = [
         'contestant1' => 'array',
         'contestant2' => 'array',

@@ -13,5 +13,4 @@ class NewsModel extends Model
 
     protected $fillable = ['imagepath', 'title', 'content'];
 
-    public $timestamps = false;
 }

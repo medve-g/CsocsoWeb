@@ -15,5 +15,4 @@ class UserModel extends Authenticatable
 
     protected $fillable = ["username", "email", "password","phonenumber","gender", "contest_admin"];
 
-    public $timestamps = false;
 }
