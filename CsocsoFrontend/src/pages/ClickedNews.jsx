@@ -95,7 +95,7 @@ export function ClickedNewsPage() {
         <div className="w-full flex justify-center items-center my-20">
             <div className="bg-white w-full max-w-[1000px] px-5 sm:px-10 py-10 sm:py-20 rounded-xl drop-shadow-lg mx-auto">
                 {enableDeleteButton(user, deleteNews)}
-                <h1 className="mb-5 text-2xl sm:text-3xl md:text-4xl lg:text-[45px] text-center font-semibold">
+                <h1 className="mb-5 text-2xl sm:text-3xl md:text-4xl lg:text-[45px] text-center font-semibold lg:leading-[60px]">
                     {currentNews?.title}
                 </h1>
                 <div className="w-full max-w-[800px] mx-auto">
@@ -108,11 +108,11 @@ export function ClickedNewsPage() {
 
                 <div className="mt-5 text-base sm:text-lg pl-3 sm:pl-5">
                     {currentNews?.content.split(/\r\n/).filter(line => line.trim() !== "").map((line, index) => (
-                        <p key={index}>{line}</p>
+                        <p className="text-justify" key={index}>{line}</p>
                     ))}
                 </div>
 
-                <div className="relative flex justify-between items-center px-6 py-3">
+                <div className="relative flex justify-between items-center px-6 py-3 flex-col sm:flex-row gap-4">
                     <button
                         id="ClickedNews-Prev"
                         onClick={goToPrevious}
