@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export function Footer() {
     return (
         <>
-            <footer className="bg-[#16a34a] text-center text-white">
+            <footer className="bg-[#16a34a] text-center text-white mt-20">
                 <div class="mx-6 py-10 text-center md:text-left">
                     <div class="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-2 place-items-center">
                         <div class="">
