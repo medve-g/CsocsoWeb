@@ -13,4 +13,11 @@ class NewsModel extends Model
 
     protected $fillable = ['imagepath', 'title', 'content'];
 
+    protected $casts = [
+        'content' => 'string',
+    ];
+    
+    public $timestamps = false;
+
+
 }

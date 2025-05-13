@@ -18,4 +18,7 @@ class ContestModel extends Model
         'ratings_and_fees' => 'array',  
         'categories' => 'array'
     ];
+
+    public $timestamps = false;
+
 }

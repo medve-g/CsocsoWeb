@@ -17,4 +17,6 @@ class RegistrationModel extends Model
         'contestant1' => 'array',
         'contestant2' => 'array',
     ];
+    public $timestamps = false;
+
 }
