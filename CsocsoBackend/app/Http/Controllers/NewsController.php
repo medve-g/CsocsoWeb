@@ -55,8 +55,5 @@ public function deletenews($id)
     
     return response()->json(['message' => 'Hír sikeresen törölve!'], 200);
 }
-
-
-    
 }
 
