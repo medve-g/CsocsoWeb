@@ -78,15 +78,21 @@ class EmptyCategorySheetExport implements FromArray, WithHeadings, WithTitle, Sh
 
 
             $counter = 1;
+            $alreadyDisplayed = [];
             foreach ($results as $row) {
-                $this->data[] = [
-                    $counter++,
-                    $row->name,
-                    $row->points,
-                    $row->name2,
-                    $row->points2,
-                    $row->total_points
-                ];
+                $pairKey = implode('|', collect([$row->name, $row->name2])->sort()->values()->toArray());
+
+                if (!in_array($pairKey, $alreadyDisplayed)) {
+                    $this->data[] = [
+                        $counter++,
+                        $row->name,
+                        $row->points,
+                        $row->name2,
+                        $row->points2,
+                        $row->total_points
+                    ];
+                    $alreadyDisplayed[] = $pairKey;
+                }
             }
         }
     }
@@ -107,6 +113,6 @@ class EmptyCategorySheetExport implements FromArray, WithHeadings, WithTitle, Sh
 
     public function title(): string
     {
-        return mb_substr($this->categoryName, 0, 31); // Excel munkalap név maximum hossza
+        return mb_substr($this->categoryName, 0, 31);
     }
 }

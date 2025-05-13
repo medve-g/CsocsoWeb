@@ -15,7 +15,6 @@ Route::delete("/deleteContest/{id}", [ContestController::class, "destroy"]);
 Route::post("/register", [AuthController::class, "register"]);
 Route::post("/login", [AuthController::class, "logIn"]);
 Route::post("/logout", [AuthController::class, "logOut"]);
-Route::delete("/deleteRegister/{id}", [RegistrationController::class, "destroy"]);
 Route::middleware('auth:sanctum')->put('/user/update', [AuthController::class, 'updateProfile']);
 Route::middleware('auth:sanctum')->put('/user/changePassword', [AuthController::class, 'changePassword']);
 
@@ -26,5 +25,6 @@ Route::delete('/newsApi/{id}', [NewsController::class, 'deletenews']);
 Route::post("/categories", [CategorieController::class, "sendRequestedCategories"]);
 
 Route::post('/registrationSender', [RegistrationController::class, 'store']);
+Route::delete("/deleteRegister/{id}", [RegistrationController::class, "destroy"]);
 Route::get('/useRregistrationGetter/{id}', [RegistrationController::class, 'showUserRegistrations']);
 Route::get('/registration/export/{id}', [RegistrationController::class, 'exportExcel']);

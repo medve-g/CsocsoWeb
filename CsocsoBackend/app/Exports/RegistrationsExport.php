@@ -71,7 +71,7 @@ class RegistrationsExport implements FromArray, WithHeadings, ShouldAutoSize, Wi
     {
         return $this->data;
     }
-
+    
     public function headings(): array
     {
         return $this->headings;
