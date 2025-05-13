@@ -59,7 +59,8 @@ class RegistrationController extends Controller
 
             $validated = $validator->validated();
 
-            $existingRegistration = DB::table("registration")->where("competition_id", $validated["competition_id"])->where("categorie", $validated["categorie"])->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(contestant1, '$.name')) = ?", [$validated["contestant1"]["name"]])->exists();
+            $existingRegistration = DB::table("registration")->where("competition_id", $validated["competition_id"])
+            ->where("categorie", $validated["categorie"])->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(contestant1, '$.name')) = ?", [$validated["contestant1"]["name"]])->exists();
 
             if ($existingRegistration) {
                 return response()->json([
@@ -93,20 +94,20 @@ class RegistrationController extends Controller
     }
 
     public function destroy(string $id)
-{
-    $registration = RegistrationModel::find($id);
+    {
+        $registration = RegistrationModel::find($id);
 
-    if ($registration) {
-        $registration->delete();
-        return response()->json([
-            "message" => "Sikeres törlés"
-        ], 200);
-    } else {
-        return response()->json([
-            "message" => "Nincs ilyen nevezés"
-        ], 404);
+        if ($registration) {
+            $registration->delete();
+            return response()->json([
+                "message" => "Sikeres törlés"
+            ], 200);
+        } else {
+            return response()->json([
+                "message" => "Nincs ilyen nevezés"
+            ], 404);
+        }
     }
-}
 
     public function showUserRegistrations(string $id)
     {
