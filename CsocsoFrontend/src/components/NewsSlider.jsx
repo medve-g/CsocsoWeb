@@ -40,7 +40,6 @@ function ApiConnect({ setAdat }) {
     return null;
 }
 
-// News Slider arrow customization
 function NextArrow(props) {
     const { className, style, onClick } = props;
     return (
