@@ -22,7 +22,7 @@ Ez egy [Laravel](https://laravel.com/) backend + [React](https://react.dev/) fro
 git clone https://github.com/medve-g/CsocsoWeb.git
 cd .\CsocsoWeb\
 
-# Backend csomagok telepítése
+# Backend csomagok telepítése (php.ini módosítása a dokumentációban)
 cd .\CsocsoBackend\
 composer install
 
