@@ -8,7 +8,7 @@ import { UserContext } from "../App";
 let enableButton = (user) => {
     if (user.contest_admin == 1) {
         return (
-            <div id="Add-News-Button" className="w-full flex justify-end">
+            <div id="Add-News-Button" className="w-full flex justify-end mb-6">
                 <Link to="/AddNews">
                     <button className="bg-green-500 rounded-md font-bold text-white text-2xl p-3 border-2 hover:bg-white hover:border-green-500 hover:text-green-500">
                         Új Hír
@@ -21,7 +21,6 @@ let enableButton = (user) => {
     }
 };
 
-// API Fetch 
 function ApiConnect({ setAdat }) {
     useEffect(() => {
         fetch("http://127.0.0.1:8000/api/newsApi")
@@ -45,7 +44,7 @@ function NextArrow(props) {
     return (
         <div
             className={className}
-            style={{ ...style, display: "block", background: "green-100" }}
+            style={{ ...style, display: "block", background: "green" }}
             onClick={onClick}
         />
     );
@@ -56,7 +55,7 @@ function PrevArrow(props) {
     return (
         <div
             className={className}
-            style={{ ...style, display: "block", background: "green-100" }}
+            style={{ ...style, display: "block", background: "green" }}
             onClick={onClick}
         />
     );
@@ -70,16 +69,16 @@ export function NewsSlider() {
         <>
             <ApiConnect setAdat={setAdat} />
 
-            <section id="News-Slider-Box" className="pt-10 px-6 md:px-12 lg:px-24 text-green-900">
+            <section className="pt-10 px-6 md:px-12 lg:px-24 text-green-900">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-4xl font-bold text-green-700 mb-6">Hírek</h2>
                 </div>
             </section>
 
-            <div id="News-Slider-Box" className="h-[400px] pt-10">
+            <div className="py-10 px-4">
                 {enableButton(user)}
 
-                <div className="h-[400px] w-3/4 m-auto">
+                <div className="w-full max-w-screen-xl mx-auto">
                     <Slider
                         dots={false}
                         infinite={adat.length > 2}
@@ -97,16 +96,17 @@ export function NewsSlider() {
                         prevArrow={<PrevArrow />}
                     >
                         {adat.map((item, index) => (
-                            <div key={index} className="bg-white rounded-2xl shadow-xl shadow-black-500/50 w-80 text-center">
-                                <div className="flex justify-center items-center h-40">
-                                    <img src={item.image} className="w-full h-full object-cover block" alt={item.title} />
+                            <div key={index} className="flex justify-center">
+                                <div className="bg-white rounded-2xl shadow-xl w-full max-w-xs flex flex-col overflow-hidden">
+                                    <div className="h-40">
+                                        <img src={item.image} className="w-full h-full object-cover" alt={item.title} />
+                                    </div>
+                                    <div className="p-6 bg-green-600 text-white text-center overflow-hidden text-ellipsis whitespace-nowrap">
+                                        <Link to="/clickednews" state={{ title: item.title }}>
+                                            <p className="font-semibold truncate">{item.title}</p>
+                                        </Link>
+                                    </div>
                                 </div>
-                                <div className="p-10 bg-green-600 rounded-b-lg">
-                                    <Link to="/clickednews" state={{ title: item.title }}>
-                                        <p className="font-semibold text-white">{item.title}</p>
-                                    </Link>
-                                </div>
-
                             </div>
                         ))}
                     </Slider>
